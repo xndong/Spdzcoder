@@ -1,0 +1,76 @@
+'''*
+tags::
+
+input:
+def entropy(y):
+    """
+    Compute the entropy of the given array
+    """
+    import numpy as np
+    import math
+    n = len(y)
+    sum_ = 0
+    for i in np.unique(y):
+        v = len(y[y==i])
+        sum_ += -((v/n) * math.log2(v/n))
+    return sum_
+
+output:
+def entropy(y):
+    """
+    Compute the entropy of the given array
+    """
+    from Compiler import mpc_math
+    n = len(y)
+    sum_ = sfix(0)
+    @for_range(len(y))
+    def _(i):
+        exist = sint(0)
+        @for_range(i)
+        def _(j):
+            exist.update(exist.bit_or(y[j]==y[i]))
+        count = sfix(0)
+        @for_range(len(y))
+        def _(j):
+            count.update((y[j]==y[i]).if_else(count+1,count))
+        sum_.update(exist.if_else(sum_, sum_-count/n*mpc_math.log2_fx(count/n)))
+    return sum_
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(y):
+    """
+    Compute entropy of the given array
+    """
+    import numpy as np
+    import math
+    n = len(y)
+    sum_ = 0
+    for i in np.unique(y):
+        v = len(y[y==i])
+        sum_ += -((v/n) * math.log2(v/n))
+    return sum_
+
+arr = [4,2,3,3,4,4,5]
+sarr = sfix.Array(len(arr))
+for i in range(len(sarr)):
+    sarr[i] = arr[i]
+
+expected_out = standard(np.array(arr))
+out = entropy(sarr)
+flag = abs(out-expected_out)<0.05
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

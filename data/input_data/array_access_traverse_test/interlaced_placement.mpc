@@ -1,0 +1,57 @@
+'''*
+tags::for
+
+input:
+def interlaced_placement(a,b):
+    """
+    Interleave the elements in two sequences.
+    The two input arrays are guaranteed to have the same length. 
+    """
+    ret = [0 for i in range(len(a)*2)]
+    for i in range(len(a)*2):
+        if i%2:
+            ret[i] = b[(i-1)//2]
+        else:
+            ret[i] = a[i//2]
+    return ret
+
+output:
+def interlaced_placement(a,b):
+    """
+    Interleave the elements in two sequences.
+    The two input arrays are guaranteed to have the same length. 
+    """
+    ret = sfix.Array(len(a)*2)
+    @for_range(len(a)*2)
+    def _(i):
+        ret[i] = (i%2).if_else(b[(i-1)/2],a[i/2])
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,2,3]
+arr2 = [4,5,6]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+    
+out = interlaced_placement(sarr1,sarr2)
+out.reveal()
+
+flag = (out[0]==1).bit_and(out[1]==4).bit_and(out[2]==2).bit_and(out[3]==5).bit_and(out[4]==3).bit_and(out[5]==6)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,51 @@
+'''*
+tags::for
+
+input:
+def inc_array(num):
+    """
+    Return an array with length num and elements 1 to num. 
+    The input is guaranteed to be a cleartext positive integer.
+    """
+    return [i+1 for i in range(num)]
+
+output:
+def inc_array(num):
+    """
+    Return an array with length num and elements 1 to num. 
+    The input is guaranteed to be a cleartext positive integer.
+    """
+    ret = sfix.Array(num)
+    @for_range(num)
+    def _(i):
+        ret[i] = i+1
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(num):
+    """
+    Return an array with length num and elements 1 to num. 
+    The input is guaranteed to be a plaintext positive integer.
+    """
+    return [i+1 for i in range(num)]
+
+arr = standard(18)
+sarr = inc_array(18)
+sarr.reveal()
+
+flag = sint(1)
+for i in range(len(arr)):
+    flag.update(flag.bit_and(sarr[i]==arr[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

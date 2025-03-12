@@ -1,0 +1,56 @@
+'''*
+tags::for, if_else
+
+input:
+def array_intersect(p,q):
+    """
+    Return whether the two arrays share any common element. 
+    """
+    for i in range(len(p)):
+        for j in range(len(q)):
+            if p[i] == q[j]:
+                return True
+    return False
+
+output:
+def array_intersect(p,q):
+    """
+    Return whether the two arrays share any common element. 
+    """
+    ret = sint(0)
+    @for_range(len(p))
+    def _(i):
+        @for_range(len(q))
+        def _(j):
+            ret.update(ret.bit_or(p[i]==q[j]))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,2,0,9]
+arr2 = [3,2,8,11.4]
+arr3 = [3,3.1415,19.1981]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+sarr3 = sfix.Array(len(arr3))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+
+flag = (array_intersect(sarr1,sarr2)).bit_and(array_intersect(sarr2,sarr3)).bit_and(array_intersect(sarr3,sarr1).bit_not())
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

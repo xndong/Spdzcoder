@@ -1,0 +1,50 @@
+'''*
+tags::for
+
+input:
+def count_satisfied(arr,predicator):
+    """
+    Count the number of elements in the array satisfies the predicator. 
+    """
+    sum = 0
+    for i in range(len(arr)):
+        if predicator(arr[i]):
+            sum = sum + 1
+    return sum
+
+output:
+def count_satisfied(arr,predicator):
+    """
+    Count the number of elements in the array satisfies the predicator. 
+    """
+    sum = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        sum.update(predicator(arr[i]).if_else(sum+1,sum))
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def p(x):
+    return (x%2).bit_and(x>1)
+
+arr = [1,2,0,9,4,7,-9]
+sarr = sint.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+out = count_satisfied(sarr,p)
+out.reveal()
+flag = out == 2
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

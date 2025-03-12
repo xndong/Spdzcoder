@@ -1,0 +1,75 @@
+'''*
+tags::
+
+input:
+def compare_and_return(arr,brr):
+    """
+    Compare the elements in arrays `arr` and `brr`, and return the first index `i` with arr[i]==brr[i]
+    """
+    ret = -1
+    for i in range(len(arr)):
+        if arr[i]==brr[i]:
+            ret = i
+            break
+    return ret
+
+output:
+def compare_and_return(arr,brr):
+    """
+    Compare the elements in arrays `arr` and `brr`, and return the first index `i` with arr[i]==brr[i]
+    """
+    ret = sint(-1)
+    break_sign = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        ret.update(break_sign.if_else(ret,(arr[i]==brr[i]).if_else(i,ret)))
+        break_sign.update(break_sign.bit_or(arr[i]==brr[i]))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr,brr):
+    """
+    Compare the elements in arrays `arr` and `brr`, and return the first index `i` with arr[i]==brr[i]
+    """
+    ret = -1
+    for i in range(len(arr)):
+        if arr[i]==brr[i]:
+            ret = i
+            break
+    return ret
+
+arr1 = [11,-4,5,-14,-191,-98,10]
+brr1 = [121,4,0,-14,-191,-9,120]
+sarr1 = sfix.Array(len(arr1))
+sbrr1 = sfix.Array(len(brr1))
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+    sbrr1[i] = brr1[i]
+
+arr2 = [11,-4,5,-4,121,-98,10]
+brr2 = [121,4,0,-14,-191,-9,120]
+sarr2 = sfix.Array(len(arr2))
+sbrr2 = sfix.Array(len(brr2))
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+    sbrr2[i] = brr2[i]
+
+expected_ind1 = standard(arr1,brr1)
+expected_ind2 = standard(arr2,brr2)
+output_ind1 = compare_and_return(sarr1,sbrr1)
+output_ind2 = compare_and_return(sarr2,sbrr2)
+
+flag = (expected_ind1==output_ind1).bit_and(expected_ind2==output_ind2)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

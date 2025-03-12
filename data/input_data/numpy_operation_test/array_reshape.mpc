@@ -1,0 +1,37 @@
+'''*
+tags::
+
+input:
+import numpy as np
+a = np.arange(15).reshape(3,5)
+
+annotation:
+Creating an 3-by-5 array with elements from 0 to 14.
+
+output:
+a = MultiArray([3,5],sint)
+@for_range(3)
+def _(i):
+    @for_range(5)
+    def _(j):
+        a[i][j] = sint(i*5+j)
+*'''
+
+####################################################################
+
+# insert here #
+
+
+####################################################################
+
+flag = sint(1)
+for i in range(3):
+    for j in range(5):
+        flag = flag.bit_and(a[i][j]==i*5+j)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

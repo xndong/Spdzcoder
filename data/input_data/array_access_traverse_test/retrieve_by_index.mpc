@@ -1,0 +1,51 @@
+'''*
+tags::array_access
+
+input:
+def retrieve_by_index(arr,index):
+    """
+    Retrieve the element in the array by index.
+    The input index is guaranteed to be legal.
+    """
+    return arr[index]
+
+output:
+def retrieve_by_index(arr,index):
+    """
+    Retrieve the element in the array by index.
+    The input index is guaranteed to be legal.
+    """
+    ret = sfix(0)
+    @for_range(len(arr))
+    def _(i):
+        ret.update((index==i).if_else(arr[i],ret))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr,index):
+    """
+    Retrieve the element in the array by index.
+    The input index is guaranteed to be legal.
+    """
+    return arr[index]
+
+arr = [11,4,5,14,191,98,10]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+# flag = (retrieve_by_index(sarr,sint(4))==standard(arr,4)).bit_and(retrieve_by_index(sarr,sint(0))==standard(arr,0)).bit_and(retrieve_by_index(sarr,sint(1))==standard(arr,1))
+flag = (retrieve_by_index(sarr,regint(4))==standard(arr,4)).bit_and(retrieve_by_index(sarr,regint(0))==standard(arr,0)).bit_and(retrieve_by_index(sarr,regint(1))==standard(arr,1))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

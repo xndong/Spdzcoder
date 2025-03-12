@@ -1,0 +1,58 @@
+'''*
+tags::for, if_else
+
+input:
+def sum_between(arr, l, u):
+    """
+    Return the sum of elements in arr within range [l,u].
+    """
+    sum = 0
+    for item in arr:
+        if l<=item<=u:
+            sum = sum + item
+    return sum
+
+output:
+def sum_between(arr, l, u):
+    """
+    Return the sum of elements in arr within range [l,u].
+    """
+    sum = sfix(0)
+    @for_range(len(arr))
+    def _(i):
+        sum.update(((l<=arr[i]).bit_and(arr[i]<=u)).if_else(sum+arr[i],sum))
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [100,99,98,97]
+arr2 = [100,0,40,10,121]
+arr3 = [100,0,40,10,120,30]
+arr4 = [100,0,120,10,120,30]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+sarr3 = sint.Array(len(arr3))
+sarr4 = sint.Array(len(arr4))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+for i in range(len(arr4)):
+    sarr4[i] = arr4[i]
+
+flag = (sum_between(sarr1,1,15)==0).bit_and(sum_between(sarr2,10,50)==50).bit_and(sum_between(sarr3,-5,100)==180).bit_and(sum_between(sarr4,-5,-100)==0)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

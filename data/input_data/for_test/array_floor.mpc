@@ -1,0 +1,50 @@
+'''*
+tags::for, math
+
+input:
+def array_floor(arr):
+    """
+    Apply Gaussian floor function to all elements in the input array. 
+    """
+    import math
+    ret = [0 for i in range(len(arr))]
+    for i in range(len(arr)):
+        ret[i] = math.floor(arr[i])
+    return ret
+
+output:
+def array_floor(arr):
+    """
+    Apply Gaussian floor function to all elements in the input array. 
+    """
+    from Compiler import mpc_math
+    ret = sfix.Array(len(arr))
+    @for_range(len(arr))
+    def _(i):
+        ret[i] = mpc_math.floor_fx(arr[i])
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+array = [-7000,1.1,-45.1,4,0.01,-1919,810]
+sarr = sfix.Array(len(array))
+
+for i in range(len(array)):
+    sarr[i] = array[i]
+
+output = array_floor(sarr)
+output.reveal()
+
+flag = (output[0]==-7000).bit_and(output[1]==1).bit_and(output[2]==-46).bit_and(output[3]==4).bit_and(output[4]==0).bit_and(output[5]==-1919).bit_and(output[6]==810)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

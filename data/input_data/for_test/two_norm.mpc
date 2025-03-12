@@ -1,0 +1,67 @@
+'''*
+tags::for, math
+
+input:
+def two_norm(vec):
+    """
+    Return the two-norm of the vector.
+    """
+    import math
+    sum = 0
+    for item in vec:
+        sum = sum + item**2
+    return math.sqrt(sum)
+
+output:
+def two_norm(vec):
+    """
+    Return the two-norm of the vector.
+    """
+    from Compiler import mpc_math
+    sum = sfix(0)
+    @for_range(len(vec))
+    def _(i):
+        sum.update(sum+vec[i]**2)
+    return mpc_math.sqrt_simplified_fx(sum)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(vec):
+    """
+    Return the two-norm of the vector.
+    """
+    import math
+    sum = 0
+    for item in vec:
+        sum = sum + item**2
+    return math.sqrt(sum)
+
+numbers = [4,16,1,7]
+sfix_array = sfix.Array(len(numbers))
+for i in range(len(numbers)):
+    sfix_array[i] = sfix(numbers[i])
+
+standard_output = standard(numbers)
+func_output = two_norm(sfix_array)
+
+result = abs((func_output.reveal()-standard_output)/standard_output)
+
+flag = sint(1)
+@if_e(result < 0.01)
+def _():
+    pass
+@else_
+def _():
+    flag.update(sint(0))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

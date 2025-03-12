@@ -1,0 +1,77 @@
+'''*
+tags::
+
+input:
+def sum_odd_and_odd(arr):
+    """
+    A strange sum function
+    """
+    sum = 0
+    for i in range(len(arr)):
+        if i%2==0:
+            continue
+        for j in range(i):
+            if j%2==0:
+                continue
+            sum += arr[j]
+    return sum
+
+output:
+def sum_odd_and_odd(arr):
+    """
+    A strange sum function
+    """
+    sum = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        outer_skip = i%2==0
+        @for_range(i)
+        def _(j):
+            inner_skip = j%2==0
+            sum.iadd(outer_skip.bit_or(inner_skip).if_else(0,arr[j]))
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    A strange sum function
+    """
+    sum = 0
+    for i in range(len(arr)):
+        if i%2==0:
+            continue
+        for j in range(i):
+            if j%2==0:
+                continue
+            sum += arr[j]
+    return sum
+
+arr1 = [1,1,-4,9,5]
+sarr1 = sint.Array(len(arr1))
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+
+arr2 = [1,2,3,88,100]
+sarr2 = sint.Array(len(arr2))
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+
+expected1 = standard(arr1)
+output1 = sum_odd_and_odd(sarr1)
+expected2 = standard(arr2)
+output2 = sum_odd_and_odd(sarr2)
+
+flag = (output1==expected1).bit_and(output2==expected2)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

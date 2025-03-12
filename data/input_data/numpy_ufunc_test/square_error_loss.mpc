@@ -1,0 +1,54 @@
+'''*
+tags::
+
+input:
+def squre_error(y,y_pred):
+    """
+    Compute the square error loss.
+    """
+    import numpy as np
+    return 0.5 * np.linalg.norm(y_pred - y) ** 2
+
+output:
+def squre_error(y,y_pred):
+    """
+    Compute the square error loss.
+    """
+    import numpy as np
+    return 0.5 * sum((y-y_pred)**2)
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(y,y_pred):
+    """
+    Compute the square error loss.
+    """
+    import numpy as np
+    return 0.5 * np.linalg.norm(y_pred - y) ** 2
+
+arr1 = [2,3,4,5]
+arr2 = [2.5,4,2,4]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+for i in range(len(sarr1)):
+    sarr1[i] = arr1[i]
+    sarr2[i] = arr2[i]
+
+expected_out = standard(np.array(arr1),np.array(arr2))
+out = square_error(sarr1,sarr2)
+flag = abs(out-expected_out)<0.05
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,50 @@
+'''*
+tags::
+
+input:
+def more_positive(arr):
+    """
+    Return whether there are more positive numbers in the given array.
+    """
+    import numpy as np
+    signs = np.sign(arr)
+    count = sum(signs)
+    return count>0
+
+annotation:
+Return whether there are more positive numbers in the given 1D array.
+
+output:
+def more_positive(arr):
+    """
+    Return whether there are more positive numbers in the given array.
+    """
+    arr_vec = arr.get_vector()
+    signs = (arr_vec>0).if_else(1,(arr_vec<0).if_else(-1,0))
+    count = sum(signs)
+    return count>0
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,2,-3,-10,2]
+arr2 = [-4,0,9,100,-5,-16,17]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+
+flag = (more_positive(sarr1)).bit_and((more_positive(sarr2)).bit_not())
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

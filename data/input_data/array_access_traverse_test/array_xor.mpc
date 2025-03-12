@@ -1,0 +1,65 @@
+'''*
+tags::for
+
+input:
+def array_xor(a,b):
+    """
+    Compute the elementwise XOR of the two input vectors.  
+    """
+    ret = [0 for i in range(len(a))]
+    for i in range(len(ret)):
+        ret[i] = a[i]^b[i]
+    return ret
+
+output:
+def array_xor(a,b):
+    """
+    Compute the elementwise XOR of the two input vectors. 
+    """
+    ret = sfix.Array(len(a))
+    @for_range(len(ret))
+    def _(i):
+        ret[i] = a[i].bit_xor(b[i])
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a,b):
+    """
+    Compute the elementwise XOR of the two input vectors. 
+    Check first whether the two vectors are of the same length. 
+    """
+    if len(a) != len(b):
+        raise ValueError("Two input vectors must be of the same length!")
+    ret = [0 for i in range(len(a))]
+    for i in range(len(ret)):
+        ret[i] = a[i]^b[i]
+    return ret
+
+arr1 = [1,0,1,0]
+arr2 = [1,1,0,0]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+    sarr2[i] = arr2[i]
+
+output = array_xor(sarr1,sarr2)
+output.reveal()
+expected = standard(arr1,arr2)
+
+flag = sint(1)
+for i in range(len(output)):
+    flag.update(flag.bit_and(output[i]==expected[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

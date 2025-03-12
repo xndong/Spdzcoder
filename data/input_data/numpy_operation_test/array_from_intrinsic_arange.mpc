@@ -1,0 +1,38 @@
+'''*
+tags::
+
+input:
+import numpy as np
+n = 10
+a = np.arange(n)
+
+annotation:
+Create 1-dim ascending array with length n.
+
+output:
+n = 10
+a = sint.Array(n)
+@for_range(n)
+def _(i):
+    a[i] = sint(i)
+
+*'''
+
+####################################################################
+
+# insert here #
+
+
+####################################################################
+
+l = list(range(n))
+flag = sint(1)
+for i in range(len(l)):
+    flag = flag.bit_and(a[i]==l[i])
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,48 @@
+'''*
+tags::for, if_else
+
+input:
+def choppy_plus_minus(arr):
+    """
+    Return the array with the following modification of the input array:
+    For the element with odd index, increment the element by 1,
+    for the element with even index, decrement the element by 1.
+    """
+    arr = [e+1 if i%2 else e-1 for i,e in enumerate(arr)]
+    return arr
+
+output:
+def choppy_plus_minus(arr):
+    """
+    Return the array with the following modification of the input array:
+    For the element with odd index, increment the element by 1,
+    for the element with even index, decrement the element by 1.
+    """
+    @for_range(len(arr))
+    def _(i):
+        arr[i] = (i%2).if_else(arr[i]+1,arr[i]-1)
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = [1,4,-0.7,-3,9]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+out = choppy_plus_minus(sarr)
+out.reveal()
+flag = (out[0]==0).bit_and(out[1]==5).bit_and(out[2]==-1.7).bit_and(out[3]==-2).bit_and(out[4]==8)
+
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

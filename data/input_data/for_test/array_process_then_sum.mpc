@@ -1,0 +1,54 @@
+'''*
+tags::for
+
+input:
+def array_process_then_sum(arr,func):
+    """
+    Process all elements in the input array with given function, 
+    then sum up the processed elements.
+    """
+    sum = 0
+    for i in range(len(arr)):
+        arr[i] = func(arr[i])
+        sum = sum + arr[i]
+    return sum
+
+output:
+def array_process_then_sum(arr,func):
+    """
+    Process all elements in the input array with given function, 
+    then sum up the processed elements.
+    """
+    sum = sfix(0)
+    @for_range(len(arr))
+    def _(i):
+        arr[i] = func(arr[i])
+        sum.update(sum+arr[i])
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def p(x):
+    return x**2-11
+
+def q(x):
+    return x+1
+
+arr = [1,2,4,3,10]
+sarr = sint.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+flag = (array_process_then_sum(sarr,p)==75).bit_and(array_process_then_sum(sarr,q)==80)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

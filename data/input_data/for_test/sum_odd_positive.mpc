@@ -1,0 +1,52 @@
+'''*
+tags::for, if_else
+
+input:
+def sum_odd_positive(arr):
+    """
+    Return the sum of all the odd positive numbers in the array.
+    """
+    sum = 0
+    for item in arr:
+        if item%2 and item>0:
+            sum = sum + item
+    return sum
+
+output:
+def sum_odd_positive(arr):
+    """
+    Return the sum of all the odd positive numbers in the array.
+    """
+    sum = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        sum.update(((arr[i]%2).bit_and(arr[i]>0)).if_else(sum+arr[i],sum))
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = sint.Array(10)
+@for_range(len(arr1))
+def _(i):
+    arr1[i] = i
+
+arr2 = sint.Array(5)
+arr2[0] = 1
+arr2[1] = -1145
+arr2[2] = -4
+arr2[3] = 6
+arr2[4] = 17
+
+flag = (sum_odd_positive(arr1)==25).bit_and(sum_odd_positive(arr2)==18)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

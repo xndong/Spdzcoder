@@ -1,0 +1,63 @@
+'''*
+tags::for, if_else
+
+input:
+def range(arr):
+    """
+    Return the range of the array.
+    """
+    max_value = arr[0]
+    min_value = arr[0]
+    for item in arr:
+        max_value = max_value if max_value>=item else item
+        min_value = min_value if min_value<=item else item
+    return max_value-min_value
+
+output:
+def range(arr):
+    """
+    Return the range of the array.
+    """
+    max_value = arr[0]
+    min_value = arr[0]
+    @for_range(len(arr))
+    def _(i):
+        max_value.update((max_value>=arr[i]).if_else(max_value,arr[i]))
+        min_value.update((min_value<=arr[i]).if_else(min_value,arr[i]))
+    return max_value-min_value
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = sint.Array(6)
+arr1[0] = -7
+arr1[1] = 114
+arr1[2] = 51
+arr1[3] = 4
+arr1[4] = 1919
+arr1[5] = 810
+expected1 = 1926
+
+arr2 = sfix.Array(5)
+arr2[0] = 2
+arr2[1] = -99.2
+arr2[2] = 18.46
+arr2[4] = 7.22
+expected2 = 117.66
+
+out1 = range(arr1)
+out2 = range(arr2)
+out1.reveal()
+out2.reveal()
+
+flag = (out1==expected1).bit_and(out2==expected2)
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

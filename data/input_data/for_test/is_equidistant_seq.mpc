@@ -1,0 +1,68 @@
+'''*
+tags::for, if_else
+
+input:
+def is_equidistant_seq(arr):
+    """
+    Return whether or not the array is an equidistant sequence. 
+    If the array has length 1 or 0, return True.
+    """
+    d = 0
+    for i in range(len(arr)-1):
+        if i>0 and arr[i+1]-arr[i]!=d:
+            return False
+        d = arr[i+1]-arr[i]
+    return True
+
+output:
+def is_equidistant_seq(arr):
+    """
+    Return whether or not the array is an equidistant sequence. 
+    If the array has length 1 or 0, return True.
+    """
+    d = sfix(0)
+    ret = sint(1)
+    @for_range(len(arr)-1)
+    def _(i):
+        ret.update(ret.if_else(((i>0).bit_and(arr[i+1]-arr[i]!=d)).bit_not(),ret))
+        d.update(arr[i+1]-arr[i])
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,2,3,4]
+arr2 = [114]
+arr3 = [10,4,-2,-8]
+arr4 = [1,5,8,12,16]
+arr5 = [1,16]
+
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+sarr3 = sint.Array(len(arr3))
+sarr4 = sint.Array(len(arr4))
+sarr5 = sint.Array(len(arr5))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+for i in range(len(arr4)):
+    sarr4[i] = arr4[i]
+for i in range(len(arr5)):
+    sarr5[i] = arr5[i]
+
+flag = (is_equidistant_seq(sarr1)).bit_and(is_equidistant_seq(sarr2)).bit_and(is_equidistant_seq(sarr3)).bit_and(is_equidistant_seq(sarr4).bit_not()).bit_and(is_equidistant_seq(sarr5))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

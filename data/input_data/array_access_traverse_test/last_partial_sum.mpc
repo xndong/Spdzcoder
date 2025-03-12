@@ -1,0 +1,67 @@
+'''*
+tags::for, array_access
+
+input:
+def last_partial_sum(arr,n):
+    """
+    Return the sum of the last n elements in the input array.
+    n is guaranteed to be legal.
+    """
+    ret = 0
+    for i in range(len(arr)-n,len(arr)):
+        ret = ret + arr[i]
+    return ret
+
+output:
+def last_partial_sum(arr,n):
+    """
+    Return the sum of the last n elements in the input array.
+    n is guaranteed to be legal.
+    """
+    ret = sfix(0)
+    @for_range(len(arr))
+    def _(i):
+        ret.update((i>=len(arr)-n).if_else(ret+arr[i], ret))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr,n):
+    """
+    Return the sum of the last n elements in the input array.
+    n is guaranteed to be legal.
+    """
+    ret = 0
+    for i in range(len(arr)-n,len(arr)):
+        ret = ret + arr[i]
+    return ret
+
+arr = [0, 1, 2, 3, 4, 5, 6, 7]
+sarr = sint.Array(len(arr))
+indices = [0, 1, 3, 7]
+sindices = sint.Array(len(indices))
+
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+for i in range(len(indices)):
+    sindices[i] = indices[i]
+
+flag = sint(1)
+
+for i in range(len(indices)):
+    out = last_partial_sum(sarr, sindices[i])
+    expected = standard(arr, indices[i])
+    out.reveal()
+    flag.update(flag.bit_and(out==expected))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

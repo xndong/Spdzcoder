@@ -1,0 +1,43 @@
+'''*
+tags::
+
+input:
+import numpy as np
+start = 0
+end = 99
+num = 10
+a = np.linspace(start, end, num)
+
+annotation:
+Create an evenly-distributed 1-dim array with length num, start value `start` and end value `end`.
+
+output:
+start = 0
+end = 99
+num = 10
+step = (end - start) // (num-1)
+a = sint.Array(num)
+@for_range(num)
+def _(i):
+    a[i] = sint(start+i*step)
+
+*'''
+
+####################################################################
+
+# insert here #
+
+
+####################################################################
+
+standard = [0,11,22,33,44,55,66,77,88,99]
+flag = sint(1)
+for i in range(len(standard)):
+    flag = flag.bit_and(abs(a[i]-standard[i])<sfix(0.05))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

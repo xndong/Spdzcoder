@@ -1,0 +1,59 @@
+# 2023-09-24 22:10:19
+'''*
+tags::if_else
+
+input:
+def leaky_relu(x, alpha):
+    """
+    ReLU function with a leaking factor alpha. 
+    """
+    if x>0:
+        return x
+    else:
+        return x*alpha
+
+output:
+def leaky_relu(x, alpha):
+    """
+    ReLU function with a leaking factor alpha. 
+    """
+    return (x>0).if_else(x, x*alpha)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = sint(1)
+
+a = sfix(-1)
+b = sfix(17.5)
+c = sfix(0.001)
+d = sfix(-0.7)
+
+a_outcome = leaky_relu(a,0.013)
+b_outcome = leaky_relu(b,0.31415)
+c_outcome = leaky_relu(c,0.114)
+d_outcome = leaky_relu(d,0.3)
+a_outcome.reveal()
+b_outcome.reveal()
+c_outcome.reveal()
+d_outcome.reveal()
+
+bit = (abs((a_outcome+0.013)/0.013)<0.01).if_else(True,False)
+flag = flag.bit_and(bit)
+bit = (abs((b_outcome-b)/b)<0.01).if_else(True,False)
+flag = flag.bit_and(bit)
+bit = (abs((c_outcome-c)/c)<0.01).if_else(True,False)
+flag = flag.bit_and(bit)
+bit = (abs((d_outcome+0.21)/0.21)<0.01).if_else(True,False)
+flag = flag.bit_and(bit)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,54 @@
+'''*
+tags::for
+
+input:
+def inner_product(vec1,vec2):
+    """
+    Compute the inner product of the two arrays.
+    """
+    summation = 0
+    for x,y in zip(vec1, vec2):
+        summation += x*y
+    return summation
+
+output:
+def inner_product(vec1,vec2):
+    """
+    Compute the inner product of the two arrays.
+    """
+    sum = sfix(0)
+    @for_range(len(vec1))
+    def _(i):
+        sum.update(sum+vec1[i]*vec2[i])
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = sint.Array(5)
+arr2 = sint.Array(5)
+@for_range(5)
+def _(i):
+    arr1[i] = i
+    arr2[i] = 5-i
+
+expected1 = sint(30)
+expected2 = sint(55)
+expected3 = sint(20)
+
+out1 = inner_product(arr1,arr1)
+out2 = inner_product(arr2,arr2)
+out3 = inner_product(arr1,arr2)
+
+flag = (out1==expected1).bit_and(out2==expected2).bit_and(out3==expected3)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

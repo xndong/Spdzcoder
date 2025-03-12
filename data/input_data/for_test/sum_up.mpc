@@ -1,0 +1,67 @@
+'''*
+tags::for
+
+input:
+def sum_up(array):
+    """
+    The sum_up function
+    """
+    sum = 0
+    for num in array:
+        sum = sum + num
+    return sum
+
+output:
+def sum_up(array):
+    """
+    The sum_up function
+    """
+    count = sint(0)
+    @for_range(len(array))
+    def add(i):
+        count.update(count+array[i])
+    return count
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = sint(1)
+
+arr = sint.Array(5)
+arr[0]=7
+arr[1]=2
+arr[2]=3
+arr[3]=-1
+arr[4]=6
+sum = sum_up(arr)
+
+@if_e(sum.reveal()==17)
+def _():
+    pass
+@else_
+def _():
+    flag = False
+
+arr = sint.Array(100)
+@for_range(100)
+def _(i):
+    arr[i] = sint(i)
+sum = sum_up(arr)
+
+@if_e(sum.reveal()==4950)
+def _():
+    pass
+@else_
+def _():
+    flag.update(sint(0))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

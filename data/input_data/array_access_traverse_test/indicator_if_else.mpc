@@ -1,0 +1,83 @@
+'''*
+tags::for, if_else
+
+input:
+def indicator_if_else(a,b,ind):
+    """
+    Return an array c with the same length of a and b. 
+    The element of c is set to be the corresponding element of a if the indicator is 1, 
+    and is set to be the corresponding element of b if the indicator is 0.
+    """
+    c = [0 for i in range(len(ind))]
+    for i in range(len(ind)):
+        if ind[i]:
+            c[i] = a[i]
+        else:
+            c[i] = b[i]
+    return c
+
+output:
+def indicator_if_else(a,b,ind):
+    """
+    Return an array c with the same length of a and b. 
+    The element of c is set to be the corresponding element of a if the indicator is 1, 
+    and is set to be the corresponding element of b if the indicator is 0.
+    """
+    c = sfix.Array(len(ind))
+    @for_range(len(ind))
+    def _(i):
+        c[i] = ind[i].if_else(a[i],b[i])
+    return c
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a,b,ind):
+    """
+    Return an array c with the same length of a and b. 
+    The element of c is set to be the corresponding element of a if the indicator is 1, 
+    and is set to be the corresponding element of b if the indicator is 0.
+    Check first if a, b and ind have the same length. 
+    """
+    if not len(a)==len(b)==len(ind):
+        raise ValueError("The two input arrays and the indicator must have the same length!")
+    c = [0 for i in range(len(ind))]
+    for i in range(len(ind)):
+        if ind[i]:
+            c[i] = a[i]
+        else:
+            c[i] = b[i]
+    return c
+
+arr1 = [1,12,3,15]
+arr2 = [-3,36,2,-57]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+for i in range(len(arr1)):
+    sarr1[i] = sint(arr1[i])
+    sarr2[i] = sint(arr2[i])
+ind = [0 for i in range(len(arr1))]
+sind = sint.Array(len(arr1))
+ind[1] = 1
+ind[2] = 1
+sind[1] = 1
+sind[2] = 1
+
+standard_output = standard(arr1,arr2,ind)
+func_output = indicator_if_else(sarr1,sarr2,sind)
+func_output.reveal()
+
+flag = sint(1)
+for i in range(len(arr1)):
+    flag.update(flag.bit_and(standard_output[i]==func_output[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

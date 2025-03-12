@@ -1,0 +1,53 @@
+'''*
+tags::
+
+input:
+def QR_decomposition(mat):
+    """
+    Return the Q matrix of the QR-decomposition of the input matrix
+    """
+    import numpy as np
+    q, _ = np.linalg.qr(mat)
+    return q
+
+output:
+# How to write QR-decomposition under mp-spdz framework?
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(mat):
+    """
+    Return the Q matrix of the QR-decomposition of the input matrix
+    """
+    import numpy as np
+    q, _ = np.linalg.qr(mat)
+    return q
+
+arr = [[2,3],[4,5]]
+sarr = sfix.Matrix(2,2)
+for i in range(2):
+    for j in range(2):
+        sarr[i][j] = arr[i][j]
+
+expected_out = standard(np.array(arr))
+out = QR_decomposition(sarr)
+
+flag = sint(1)
+for i in range(2):
+    for j in range(2):
+        flag = flag.bit_and(abs(out[i][j]-expected_out[i][j])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,69 @@
+'''*
+tags::
+
+input:
+def sum_till_negative(array):
+    """
+    Sum from the first element in the array until a negative one occurs
+    """
+    sum = 0
+    for i in range(len(array)):
+        if array[i]<0:
+            break
+        sum += array[i]
+    return sum
+
+output:
+def sum_till_negative(array):
+    """
+    Sum from the first element in the array until a negative one occurs
+    """
+    sum = sint(0)
+    if_sum = sint(1)
+    @for_range(len(array))
+    def _(i):
+        if_sum.update(if_sum.bit_and(array[i]>=0))
+        sum.iadd(if_sum.if_else(array[i],0))
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(array):
+    """
+    Sum from the first element in the array until a negative one occurs
+    """
+    sum = 0
+    for i in range(len(array)):
+        if array[i]<0:
+            break
+        sum += array[i]
+    return sum
+
+arr1 = [11,4,5,-14,-191,-98,10]
+sarr1 = sint.Array(len(arr1))
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+
+arr2 = [11,0,5,0,191,-98,10]
+sarr2 = sint.Array(len(arr2))
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+
+expected1 = standard(arr1)
+output1 = sum_till_negative(sarr1)
+expected2 = standard(arr2)
+output2 = sum_till_negative(sarr2)
+
+flag = (output1==expected1).bit_and(output2==expected2)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

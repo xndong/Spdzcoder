@@ -1,0 +1,65 @@
+'''*
+tags::array arange
+
+input:
+# plain text variables: start, stop, step
+def arange(start, stop=None, step=1):
+    """
+    create a 1-d numpy array by calling intrinsic numpy function numpy.arange
+    """
+    if stop is None :
+        stop = start
+        start = 0
+
+    import numpy as np
+    array = np.arange(start, stop, step)
+    return array
+
+output:
+def arange(start, stop=None, step=1): # cint or cfix
+    """
+    create a 1-d Array
+    """
+    import math
+    if stop is None :
+        stop = start
+        start = 0
+    alist = [cfix(start+step*i) for i in range(round(math.ceil(stop-start)/step))]
+    array = Array.create_from(alist)
+
+    return array
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import math
+
+start, stop, step = 1,10,2.4
+
+alist = [cfix(start+step*i) for i in range(round(math.ceil((stop-start)/step)))]
+array = Array.create_from(alist)
+vector = array.get_vector()
+
+spdzarray = arange(start, stop, step)
+spdzvector = spdzarray.get_vector()
+
+
+sintbit_vec = (abs(vector - spdzvector) < cfix(0.01)) # vector
+sintbit_arr = Array.create_from(sintbit_vec) # array
+
+flag = sint(1)
+@for_range(len(alist))
+def _(i):
+    flag.update(flag.bit_and(sintbit_arr[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    print_ln("Fail the test")
+    pass

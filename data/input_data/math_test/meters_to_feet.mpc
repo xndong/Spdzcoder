@@ -1,0 +1,38 @@
+'''*
+tags::math
+
+input:
+def meters_to_feet(m):
+    """
+    Convert the length in meters to the length in feet.
+    """
+    return m * 3.2808
+
+output:
+def meters_to_feet(m):
+    """
+    Convert the length in meters to the length in feet.
+    """
+    return m * sfix(3.2808)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(m):
+    """
+    Convert the length in meters to the length in feet.
+    """
+    return m * 3.2808
+
+flag = (abs(meters_to_feet(sint(10))-standard(10))<0.005).bit_and(abs(meters_to_feet(sfix(77.7))-standard(77.7))<0.005)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

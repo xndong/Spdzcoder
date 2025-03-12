@@ -1,0 +1,62 @@
+'''*
+tags::
+
+input:
+def sum_only_positive_to_ten(array):
+    """
+    Compute partial sum of the array with only the positive elements until the sum becomes no smaller than 10.
+    """
+    sum = 0
+    for i in range(len(array)):
+        if array[i]<=0:
+            continue
+        if sum >= 10:
+            break
+        sum = sum + array[i]
+    return sum
+
+output:
+def sum_only_positive_to_ten(array):
+    """
+    Compute partial sum of the array with only the positive elements until the sum becomes no smaller than 10.
+    """
+    sum = sint(0)
+    @for_range(len(array))
+    def _(i):
+        sum.iadd(((sum<10).bit_and(array[i]>0)).if_else(array[i],0))
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,1,-4,9,5]
+sarr1 = sint.Array(len(arr1))
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+
+arr2 = [1,2,3,88,100]
+sarr2 = sint.Array(len(arr2))
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+
+arr3 = [-1,2,-3,88,-85]
+sarr3 = sint.Array(len(arr3))
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+
+output1 = sum_only_positive_to_ten(sarr1)
+output2 = sum_only_positive_to_ten(sarr2)
+output3 = sum_only_positive_to_ten(sarr3)
+
+flag = (output1==11).bit_and(output2==94).bit_and(output3==90)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

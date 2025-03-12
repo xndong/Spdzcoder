@@ -1,0 +1,56 @@
+# 2023-09-24 22:10:10
+'''*
+tags::if_else, math
+
+input:
+def indicated_sin_or_cos(x,ind):
+    """
+    If the indicator is True, return the sine value of the input, 
+    otherwise return the cosine value of the input. 
+    """
+    import math
+    if ind:
+        return math.sin(x)
+    return math.cos(x)
+
+output:
+def indicated_sin_or_cos(x,ind):
+    """
+    If the indicator is True, return the sine value of the input, 
+    otherwise return the cosine value of the input. 
+    """
+    from Compiler import mpc_math
+    return ind.if_else(mpc_math.sin(x),mpc_math.cos(x))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x,ind):
+    """
+    If the indicator is True, return the sine value of the input, 
+    otherwise return the cosine value of the input. 
+    """
+    import math
+    if ind:
+        return math.sin(x)
+    return math.cos(x)
+
+numbers = [3,4,-5]
+indicators = [1,0,0]
+
+flag=sint(1)
+for i in range(len(numbers)):
+    out = indicated_sin_or_cos(sfix(numbers[i]),sint(indicators[i]))
+    out.reveal()
+    flag.update(flag.bit_and(abs(out-standard(numbers[i],indicators[i]))<0.005))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

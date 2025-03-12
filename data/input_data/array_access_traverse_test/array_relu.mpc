@@ -1,0 +1,66 @@
+'''*
+tags::for, if_else
+
+input:
+def array_relu(arr):
+    """
+    Apply ReLU function elementwisely to the input array.
+    """
+    ret = [0 for i in range(len(arr))]
+    for i in range(len(arr)):
+        ret[i] = arr[i] if arr[i]>=0 else 0
+    return ret
+
+output:
+def array_relu(arr):
+    """
+    Apply ReLU function elementwisely to the input array.
+    """
+    ret = sfix.Array(len(arr))
+    @for_range(len(arr))
+    def _(i):
+        ret[i] = (arr[i]>=0).if_else(arr[i],0)
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Apply ReLU function elementwisely to the input array.
+    """
+    ret = [0 for i in range(len(arr))]
+    for i in range(len(arr)):
+        ret[i] = arr[i] if arr[i]>=0 else 0
+    return ret
+
+array = [-7000,1.1,-45.1,4,0.01,-1919,810]
+sarr = sfix.Array(len(array))
+
+for i in range(len(array)):
+    sarr[i] = array[i]
+
+output = array_relu(sarr)
+expected = standard(array)
+
+try:
+    output.reveal()
+    flag = sint(1)
+    for i in range(len(output)):
+        flag.update(flag.bit_and(output[i]==expected[i]))
+except Exception as e:
+    flag = sint(1)
+    for i in range(len(output)):
+        flag.update(flag.bit_and(output[i].reveal()==expected[i]))
+
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

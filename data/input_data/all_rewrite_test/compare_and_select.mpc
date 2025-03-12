@@ -1,0 +1,72 @@
+'''*
+tags::for, if_else
+
+input:
+def compare_and_select(a,b):
+    """
+    Compare the two arrays elementwise,
+    and save the larger value into the returned array.
+    """
+    ret_array = [x if x > y else y for x,y in zip(a,b)]
+    return ret_array
+
+output:
+def compare_and_select(a,b):
+    """
+    Compare the two arrays elementwise,
+    and save the larger value into the returned array.
+    """
+    lst = [ (a[i]>b[i]).if_else(a[i],b[i]) for i in range(len(a))]
+    output = Array.create_from(iter(lst))
+
+    return output
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+from Compiler import mpc_math
+
+length = 10
+a = sfix.Array(length)
+b = sfix.Array(length)
+
+@for_range(length)
+def assign(i):
+    a[i] = i**2-50
+    b[i] = 4*(-(i-5)**2+10)
+
+c = compare_and_select(a,b)
+c.reveal()
+
+flag = sint(1)
+b = (c[0]==-50).if_else(True,False)
+flag = flag.bit_and(b)
+b = (c[1]==-24).if_else(True,False)
+flag = flag.bit_and(b)
+b = (c[2]==4).if_else(True,False)
+flag = flag.bit_and(b)
+b = (c[3]==24).if_else(True,False)
+flag = flag.bit_and(b)
+b = (c[4]==36).if_else(True,False)
+flag = flag.bit_and(b)
+b = (c[5]==40).if_else(True,False)
+flag = flag.bit_and(b)
+b = (c[6]==36).if_else(True,False)
+flag = flag.bit_and(b)
+b = (c[7]==24).if_else(True,False)
+flag = flag.bit_and(b)
+b = (c[8]==14).if_else(True,False)
+flag = flag.bit_and(b)
+b = (c[9]==31).if_else(True,False)
+flag = flag.bit_and(b)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

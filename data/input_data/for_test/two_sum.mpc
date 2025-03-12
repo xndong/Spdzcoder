@@ -1,0 +1,52 @@
+'''*
+tags::for, if_else
+
+input:
+def two_sum(arr, target):
+    """
+    Return whether the input array contains two elements (can be the same) whose sum equals to the target value. 
+    """
+    for i in range(len(arr)):
+        for j in range(len(arr)):
+            if arr[i] + arr[j] == target:
+                return True
+    return False
+
+output:
+def two_sum(arr, target):
+    """
+    Return whether the input array contains two elements (can be the same) whose sum equals to the target value. 
+    """
+    ret = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        @for_range(len(arr))
+        def _(j):
+            ret.update(ret.bit_or(arr[i]+arr[j]==target))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,1,4,5,1,4]
+arr2 = [1,9,1,9,8,1,0]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+
+for i in range(len(arr1)):
+    sarr1[i] = sfix(arr1[i])
+for i in range(len(arr2)):
+    sarr2[i] = sfix(arr2[i])
+
+flag = (two_sum(sarr1,2)).bit_and(two_sum(sarr1,5)).bit_and(two_sum(sarr1,7).bit_not()).bit_and(two_sum(sarr2,7).bit_not()).bit_and(two_sum(sarr2,8))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

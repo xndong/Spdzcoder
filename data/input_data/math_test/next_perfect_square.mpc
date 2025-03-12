@@ -1,0 +1,36 @@
+'''*
+tags::math
+
+input:
+def next_perfect_square(x):
+    """
+    Return the smallest perfect square number bigger than x. 
+    The input x is guaranteed to be a positive integer. 
+    """
+    import math
+    return (math.floor(math.sqrt(x))+1)**2
+
+output:
+def next_perfect_square(x):
+    """
+    Return the smallest perfect square number bigger than x. 
+    The input x is guaranteed to be a positive integer. 
+    """
+    from Compiler import mpc_math
+    return (mpc_math.floor_fx(mpc_math.sqrt_simplified_fx(sfix(x)))+1)**2
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+    
+flag = (next_perfect_square(sint(1))==4).bit_and(next_perfect_square(sint(10))==16).bit_and(next_perfect_square(sint(16))==25).bit_and(next_perfect_square(sint(37))==49)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

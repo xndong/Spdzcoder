@@ -1,0 +1,72 @@
+'''*
+tags::for, math
+
+input:
+def normalize(vec):
+    """
+    Normalize the vector.
+    """
+    import math
+    sum = 0
+    for item in vec:
+        sum = sum + item**2
+    base = math.sqrt(sum)
+    for i in range(len(vec)):
+        vec[i] = vec[i]/base
+    return vec
+
+output:
+def normalize(vec):
+    """
+    Normalize the vector.
+    """
+    from Compiler import mpc_math
+    sum = sfix(0)
+    @for_range(len(vec))
+    def _(i):
+        sum.update(sum+vec[i]**2)
+    base = mpc_math.sqrt_simplified_fx(sum)
+    @for_range(len(vec))
+    def _(i):
+        vec[i] = vec[i]/base
+    return vec
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(vec):
+    """
+    Normalize the vector.
+    """
+    import math
+    sum = 0
+    for item in vec:
+        sum = sum + item**2
+    base = math.sqrt(sum)
+    for i in range(len(vec)):
+        vec[i] = vec[i]/base
+    return vec
+
+arr = [4,16,7,-4]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = sfix(arr[i])
+
+out = standard(arr)
+sout = normalize(sarr)
+sout.reveal()
+
+flag = sint(1)
+for i in range(len(arr)):
+    flag.update(flag.bit_and(abs(out[i]-sout[i])<0.01))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

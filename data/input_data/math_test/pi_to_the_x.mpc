@@ -1,0 +1,48 @@
+'''*
+tags::math
+
+input:
+def pi_to_the_x(x):
+    """
+    Return the value of pi^x.
+    """
+    import math
+    return math.pow(math.pi,x)
+
+output:
+def pi_to_the_x(x):
+    """
+    Return the value of pi^x.
+    """
+    import math
+    from Compiler import mpc_math
+    return mpc_math.pow_fx(math.pi,x)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    Return the value of pi^x.
+    """
+    import math
+    return math.pow(math.pi,x)
+
+numbers = [3,4,-1]
+
+flag=sint(1)
+for number in numbers:
+    out = pi_to_the_x(sfix(number))
+    out.reveal()
+    flag.update(flag.bit_and(abs(out-standard(number))<0.005))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

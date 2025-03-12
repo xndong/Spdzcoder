@@ -1,0 +1,45 @@
+# 2023-09-24 22:10:41
+'''*
+tags::if_else
+
+input:
+def pass_or_not(score):
+    """
+    You are a professor, and your student asks you whether she has passed the exam. 
+    If she passed (score>=60), you should return her actual score and True (indicating that she has passed). 
+    If she did not pass, you should return that her score is 59 and False. 
+    """
+    score = score if score>=60 else 59
+    passed = True if score>=60 else False
+    return score, passed
+
+output:
+def pass_or_not(score):
+    """
+    You are a professor, and your student asks you whether she has passed the exam. 
+    If she passed (score>=60), you should return her actual score and True (indicating that she has passed). 
+    If she did not pass, you should return that her score is 59 and False. 
+    """
+    score = (score>=60).if_else(score,59)
+    passed = score>=60
+    return score, passed
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+score1, passed1 = pass_or_not(sint(98))
+score2, passed2 = pass_or_not(sint(60))
+score3, passed3 = pass_or_not(sint(34))
+
+flag = ((score1==98).bit_and(passed1)).bit_and((score2==60).bit_and(passed2)).bit_and((score3==59).bit_and(passed3.bit_not()))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

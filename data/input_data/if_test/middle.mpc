@@ -1,0 +1,56 @@
+# 2023-09-24 22:12:37
+'''*
+tags::multi_if_else
+
+input:
+def middle(a,b,c):
+    """
+    Return the value in the middle among the three inputs. 
+    """
+    if a>=b:
+        temp = a
+        a = b
+        b = temp
+    if b>=c:
+        temp = b
+        b = c
+        c = temp
+    if a>=b:
+        temp = a
+        a = b
+        b = temp
+    return b
+
+output:
+def middle(a,b,c):
+    """
+    Return the value in the middle among the three inputs. 
+    """
+    first_predicate = a>=b
+    temp = first_predicate.if_else(a,0)
+    a = first_predicate.if_else(b,a)
+    b = first_predicate.if_else(temp,b)
+    second_predicate = b>=c
+    temp = second_predicate.if_else(b,0)
+    b = second_predicate.if_else(c,b)
+    c = second_predicate.if_else(temp,c)
+    third_predicate = a>=b
+    temp = third_predicate.if_else(a,0)
+    a = third_predicate.if_else(b,a)
+    b = third_predicate.if_else(temp,b)
+    return b
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (middle(sint(1),2,3)==2).bit_and(middle(sint(1),3,2)==2).bit_and(middle(sint(2),3,1)==2).bit_and(middle(sint(2),1,3)==2).bit_and(middle(sint(3),1,2)==2).bit_and(middle(sint(3),2,1)==2)
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

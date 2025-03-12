@@ -1,0 +1,51 @@
+'''*
+tags:: compute base-2 logarithm
+
+input:
+import numpy
+def compute_log2(array):
+    """This function calculate base-2 logarithm of x in the input array."""
+    log2 = numpy.log2(array)
+    return log2
+
+output:
+from Compiler import mpc_math
+def compute_log2(spdzarray):
+    log2 = mpc_math.log2_fx(spdzarray.get_vector())
+    log2 = Array.create_from(log2)
+    return log2
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(array):
+    """This function calculate natural logarithm for all p in the input array."""
+    log = np.log2(array)
+    return log
+
+a = np.array([0.5,1.2,10.7,5.0,7.2])
+sa = sfix.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+out = standard(a)
+sout = compute_log2(sa)
+
+flag = sint(1)
+
+for i in range(len(sout)):
+    flag = flag.bit_and(abs(sout[i]-out[i])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

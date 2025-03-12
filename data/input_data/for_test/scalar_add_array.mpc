@@ -1,0 +1,44 @@
+'''*
+tags::for
+
+input:
+def scalar_add_array(s,l):
+    """
+    Add all the elements in the array to the scalar and return the result. 
+    """
+    for item in l:
+        s = s + item
+    return s
+
+output:
+def scalar_add_array(s,l):
+    """
+    Add all the elements in the array to the scalar and return the result. 
+    """
+    @for_range(len(l))
+    def _(i):
+        s.update(s+l[i])
+    return s
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = [11,4,5,14]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+output = scalar_add_array(sfix(1.7),sarr)
+output.reveal()
+flag = output == 35.7
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

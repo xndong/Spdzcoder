@@ -1,0 +1,95 @@
+'''*
+tags::
+
+input:
+import numpy as np
+class CrossEntropy():
+    def loss(self, y, y_pred):
+        """
+        Compute the cross-entropy (log) loss.
+        """
+        cross_entropy = -np.sum(y * np.log2(y_pred))
+        return cross_entropy
+    def grad(self, y, y_pred):
+        """
+        Compute the gradient of the cross entropy loss
+        """
+        n = len(y)
+        grad = y_pred - y
+        grad /= n
+        return grad
+
+annotation:
+`y` and `y_pred` are 1D arrays
+
+output:
+class CrossEntropy():
+    def loss(self, y, y_pred):
+        """
+        Compute the cross-entropy (log) loss.
+        """
+        from Compiler import mpc_math
+        y_vec = y.get_vector()
+        y_pred_vec = y_pred.get_vector()
+        cross_entropy = -sum(y_vec*mpc_math.log2_fx(y_pred_vec))
+        return cross_entropy
+    def grad(self, y, y_pred):
+        """
+        Compute the gradient of the cross entropy loss
+        """
+        n = len(y)
+        grad = y_pred - y
+        grad /= n
+        return grad
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+class Standard():
+    def loss(self, y, y_pred):
+        """
+        Compute the cross-entropy (log) loss.
+        """
+        cross_entropy = -np.sum(y * np.log2(y_pred))
+        return cross_entropy
+    def grad(self, y, y_pred):
+        """
+        Compute the gradient of the cross entropy loss
+        """
+        n = len(y)
+        grad = y_pred - y
+        grad /= n
+        return grad
+
+arr1 = [1,2,3,4]
+arr2 = [2,2.4,4.5,5]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+for i in range(len(sarr1)):
+    sarr1[i] = arr1[i]
+    sarr2[i] = arr2[i]
+
+standard_instance = Standard()
+actual_instance = CrossEntropy()
+
+expected_loss = standard_instance.loss(np.array(arr1),np.array(arr2))
+loss = actual_instance.loss(sarr1,sarr2)
+expected_grad = standard_instance.grad(np.array(arr1),np.array(arr2))
+grad = actual_instance.grad(sarr1,sarr2)
+
+flag = abs(loss-expected_loss)<0.05
+for i in range(len(grad)):
+    flag = flag.bit_and(abs(grad[i]-expected_grad[i])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

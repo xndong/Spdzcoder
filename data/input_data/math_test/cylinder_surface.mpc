@@ -1,0 +1,41 @@
+'''*
+tags::math
+
+input:
+def cylinder_surface(r,h):
+    """
+    Given the radius and the height of a cylinder, return its surface area. 
+    """
+    import math
+    return 2 * math.pi * r**2 + 2 * math.pi * r * h
+
+output:
+def cylinder_surface(r,h):
+    """
+    Given the radius and the height of a cylinder, return its surface area. 
+    """
+    import math
+    return 2 * math.pi * r**2 + 2 * math.pi * r * h
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(r,h):
+    """
+    Given the radius and the height of a cylinder, return its surface area. 
+    """
+    import math
+    return 2 * math.pi * r**2 + 2 * math.pi * r * h
+
+flag = (abs(cylinder_surface(sfix(2),sfix(3))-standard(2,3))<0.005).bit_and(abs(cylinder_surface(sfix(5),sfix(7))-standard(5,7))<0.005).bit_and(abs(cylinder_surface(sfix(1.5),sfix(2.1))-standard(1.5,2.1))<0.005)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

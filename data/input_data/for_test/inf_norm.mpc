@@ -1,0 +1,67 @@
+'''*
+tags::for, math
+
+input:
+def inf_norm(vec):
+    """
+    Return the infinite-norm of the vector.
+    """
+    sum = 0
+    for item in vec:
+        sum = sum if sum>=abs(item) else abs(item)
+    return sum
+
+output:
+def inf_norm(vec):
+    """
+    Return the infinite-norm of the vector.
+    """
+    sum = sfix(0)
+    @for_range(len(vec))
+    def _(i):
+        sum.update((sum>=abs(vec[i])).if_else(sum,abs(vec[i])))
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(vec):
+    """
+    Return the infinite-norm of the vector.
+    """
+    sum = 0
+    for item in vec:
+        sum = sum if sum>=abs(item) else abs(item)
+    return sum
+
+numbers = [4,16,1,7,-222,1,1919,0]
+sint_Array = sint.Array(len(numbers))
+for i in range(len(numbers)):
+    sint_Array[i] = sint(numbers[i])
+
+standard_output = standard(numbers)
+func_output = inf_norm(sint_Array)
+
+result1 = func_output==standard_output
+
+numbers = [4,-7,-2,90]
+sint_Array = sint.Array(len(numbers))
+for i in range(len(numbers)):
+    sint_Array[i] = sint(numbers[i])
+
+standard_output = standard(numbers)
+func_output = inf_norm(sint_Array)
+result2 = func_output==standard_output
+
+flag = result1.bit_and(result2)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,51 @@
+'''*
+tags::array indexing, array slicing
+
+input:
+import numpy as np
+def array_dimensional_indexing(ndarray, row_index):
+    """
+    NumPy program to index i-th row from 2-D arrays.
+    """
+    array = ndarray[row_index, :]
+    return array
+    
+annotation:
+Function to index i-th row from 2-D arrays.
+
+output:
+def array_dimensional_indexing(spdzArray, row_index):
+    """
+    MP-SPDZ program to index i-th row from 2-D spdz arrays.
+    """
+    row, column = spdzArray.sizes
+    array = sint.Array(column)
+    @for_range(column)
+    def _(i):
+        array[i] = spdzArray.get_column(i)[row_index]
+    return array
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+a = sint.Tensor([2,2])
+a[0][0] = 1
+a[0][1] = 2
+a[1][0] = 3
+a[1][1] = 4
+
+out1 = array_dimensional_indexing(a,0)
+out2 = array_dimensional_indexing(a,1)
+
+flag = (out1[0]==1).bit_and(out1[1]==2).bit_and(out2[0]==3).bit_and(out2[1]==4)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

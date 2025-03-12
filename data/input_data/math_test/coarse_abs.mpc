@@ -1,0 +1,34 @@
+'''*
+tags::math
+
+input:
+def coarse_abs(x):
+    """
+    Return the absolute value of x, and round it to zero.
+    """
+    import math
+    return math.floor(abs(x))
+
+output:
+def coarse_abs(x):
+    """
+    Return the absolute value of x, and round it to zero.
+    """
+    from Compiler import mpc_math
+    return mpc_math.floor_fx(abs(x))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (coarse_abs(sfix(1.7))==1).bit_and(coarse_abs(sfix(-1.9))==1).bit_and(coarse_abs(sfix(-122.9))==122).bit_and(coarse_abs(sfix(73.2))==73)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,67 @@
+'''*
+tags::for, if_else
+
+input:
+def positive_count_negative_sum(arr):
+    """
+    Traverse the array, return the number of all positive elements and the sum of all negative elements.
+    """
+    count = 0
+    sum = 0
+    for item in arr:
+        if item>0:
+            count = count + 1
+        if item<0:
+            sum = sum + item
+    return count, sum
+
+output:
+def positive_count_negative_sum(arr):
+    """
+    Traverse the array, return the number of all positive elements and the sum of all negative elements.
+    """
+    count = sint(0)
+    sum = sfix(0)
+    @for_range(len(arr))
+    def _(i):
+        count.update((arr[i]>0).if_else(count+1,count))
+        sum.update((arr[i]<0).if_else(sum+arr[i],sum))
+    return count, sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Traverse the array, return the number of all positive elements and the sum of all negative elements.
+    """
+    count = 0
+    sum = 0
+    for item in arr:
+        if item>0:
+            count = count + 1
+        if item<0:
+            sum = sum + item
+    return count, sum
+
+arr = [11, -45, 14, -19, 98, 0, -3, 65, -472]
+sarr = sint.Array(len(arr))
+
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+out_1, out_2 = positive_count_negative_sum(sarr)
+expected_1, expected_2 = standard(arr)
+
+flag = (out_1==expected_1).bit_and(out_2==expected_2)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

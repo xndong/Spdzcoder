@@ -1,0 +1,68 @@
+'''*
+tags::for, if_else
+
+input:
+def more_distinct_nonnegative(arr):
+    """
+    Return whether the array has more distinct nonnegative elements than distinct negative elements. 
+    """
+    nonnegative_counter = 0
+    negative_counter = 0
+    for i in range(len(arr)):
+        unique = True
+        for j in range(i):
+            if arr[j] == arr[i]:
+                unique = False
+        if unique:
+            if arr[i] >= 0:
+                nonnegative_counter = nonnegative_counter + 1
+            else:
+                negative_counter = negative_counter + 1
+    return nonnegative_counter > negative_counter
+
+output:
+def more_distinct_nonnegative(arr):
+    """
+    Return whether the array has more distinct nonnegative elements than distinct negative elements. 
+    """
+    nonnegative_counter = sint(0)
+    negative_counter = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        unique = sint(1)
+        @for_range(i)
+        def _(j):
+            unique.update((arr[j]==arr[i]).if_else(False,unique))
+        nonnegative_counter.update((unique.bit_and(arr[i]>=0)).if_else(nonnegative_counter+1,nonnegative_counter))
+        negative_counter.update((unique.bit_and(arr[i]<0)).if_else(negative_counter+1,negative_counter))
+    return nonnegative_counter > negative_counter
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [0,1,-2,-4,16]
+arr2 = [1,1,-1,4,1,-3,-5,-3]
+arr3 = [1,-3,-3,1,-1,4,-3,5,9,-3,1,-3,-5,-3]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+sarr3 = sfix.Array(len(arr3))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+
+flag = (more_distinct_nonnegative(sarr1)).bit_and(more_distinct_nonnegative(sarr2).bit_not()).bit_and(more_distinct_nonnegative(sarr3))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,42 @@
+'''*
+tags::multi_if_else
+
+input:
+def how_many_roots(a,b,c):
+    """
+    Given coefficients a, b and c of a quadratic function,
+    return the number of its roots.
+    a, b and c can be zero, but they will not all be zero.
+    """
+    if a==0:
+        return 0 if b==0 else 1
+    else:
+        return 2 if b**2-4*a*c > 0 else (1 if b**2-4*a*c == 0 else 0)
+    
+annotation:
+Return the number of roots of quadratic function ax^2+bx+c=0.
+
+output:
+def how_many_roots(a,b,c):
+    """
+    Given coefficients a, b and c of a quadratic function,
+    return the number of its roots.
+    a, b and c can be zero, but they will not all be zero.
+    """
+    return (a==0).if_else((b==0).if_else(0,1),(b**2-4*a*c>0).if_else(2,(b**2-4*a*c==0).if_else(1,0)))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (how_many_roots(sint(0),sint(1),17)==1).bit_and(how_many_roots(sint(0),sint(0),-17)==0).bit_and(how_many_roots(sint(1),sint(4),4)==1).bit_and(how_many_roots(sint(1),sint(5),47)==0).bit_and(how_many_roots(sint(1),sint(5),-2)==2)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

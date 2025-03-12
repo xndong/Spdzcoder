@@ -1,0 +1,68 @@
+'''*
+tags::array_access
+
+input:
+def interchange_by_indices(arr,index1,index2):
+    """
+    Interchange the two elements in the array with given indices.
+    The input indices are guaranteed to be legal.
+    """
+    temp = arr[index1]
+    arr[index1] = arr[index2]
+    arr[index2] = temp
+    return arr
+
+output:
+def interchange_by_indices(arr,index1,index2):
+    """
+    Interchange the two elements in the array with given indices.
+    The input indices are guaranteed to be legal.
+    """
+    element1 = sfix(0)
+    element2 = sfix(0)
+    @for_range(len(arr))
+    def _(i):
+        element1.update((i==index1).if_else(arr[i],element1))
+        element2.update((i==index2).if_else(arr[i],element2))
+    @for_range(len(arr))
+    def _(i):
+        arr[i] = (i==index1).if_else(element2,arr[i])
+        arr[i] = (i==index2).if_else(element1,arr[i])
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr,index1,index2):
+    """
+    Interchange the two elements in the array with given indices.
+    The input indices are guaranteed to be legal.
+    """
+    temp = arr[index1]
+    arr[index1] = arr[index2]
+    arr[index2] = temp
+    return arr
+
+arr = [11,4,5,14,191,98,10]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+expected = standard(arr,2,5)
+output = interchange_by_indices(sarr,5,2) # sint(5),sint(2)
+output.reveal()
+
+flag = sint(1)
+for i in range(len(arr)):
+    flag.update(flag.bit_and(output[i]==expected[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

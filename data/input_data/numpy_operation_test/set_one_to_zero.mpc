@@ -1,0 +1,47 @@
+'''*
+tags::
+
+input:
+def set_one_to_zero(y):
+    """
+    Set the ones in the array into zeros.
+    """
+    y[y==1] = 0
+    return y
+
+annotation:
+Set the 1's in the array into 0's.
+
+output:
+def set_one_to_zero(y):
+    """
+    Set the ones in the array into zeros.
+    """
+    y_vec = y.get_vector()
+    y_vec = (y_vec==1).if_else(0,y_vec)
+    y.assign_vector(y_vec)
+    return y
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = [2,1,-4,5,-1,1]
+sarr = sint.Array(len(arr))
+for i in range(len(sarr)):
+    sarr[i] = arr[i]
+
+out = set_one_to_zero(sarr)
+
+flag = (out[0]==2).bit_and(out[1]==0).bit_and(out[2]==-4).bit_and(out[3]==5).bit_and(out[4]==-1).bit_and(out[5]==0)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

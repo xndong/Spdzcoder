@@ -1,0 +1,52 @@
+'''*
+tags:: compute natural logarithm
+
+input:
+import numpy
+def compute_log(array):
+    """This function calculate natural logarithm for all p in the input array."""
+    nlog = numpy.log(array)
+    return nlog
+
+output:
+import math
+from Compiler import mpc_math
+def compute_log(spdzarray):
+    nlog = mpc_math.log_fx(spdzarray.get_vector(), math.e)
+    nlog = Array.create_from(nlog)
+    return nlog
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(array):
+    """This function calculate natural logarithm for all p in the input array."""
+    nlog = np.log(array)
+    return nlog
+
+a = np.array([0.5,1.2,10.7,5.0,7.2])
+sa = sfix.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+out = standard(a)
+sout = compute_log(sa)
+
+flag = sint(1)
+
+for i in range(len(sout)):
+    flag = flag.bit_and(abs(sout[i]-out[i])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

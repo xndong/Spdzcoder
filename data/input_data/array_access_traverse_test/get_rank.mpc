@@ -1,0 +1,57 @@
+'''*
+tags::array_access, for
+
+input:
+def get_rank(arr,index):
+    """
+    Get the rank in the array of the element (how many elements are smaller than the element) with given index.
+    """
+    rank = 0
+    for item in arr:
+        if item < arr[index]:
+            rank = rank + 1
+    return rank
+
+output:
+def get_rank(arr,index):
+    """
+    Get the rank in the array of the element (how many elements are smaller than the element) with given index.
+    """
+    def retrieve(l,j):
+        """
+        Retrieve the element in the array by index.
+        """
+        ret = sfix(0)
+        @for_range(len(l))
+        def _(i):
+            ret.update((i==j).if_else(l[i],ret))
+        return ret
+
+    target = retrieve(arr, index)
+    rank = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        rank.update((arr[i]<target).if_else(rank+1,rank))
+    return rank
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = [1,1,4,5,1,4]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+# flag = (get_rank(sarr,sint(0))==0).bit_and(get_rank(sarr,sint(1))==0).bit_and(get_rank(sarr,sint(3))==5).bit_and(get_rank(sarr,sint(5))==3)
+flag = (get_rank(sarr,regint(0))==0).bit_and(get_rank(sarr,regint(1))==0).bit_and(get_rank(sarr,regint(3))==5).bit_and(get_rank(sarr,regint(5))==3)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

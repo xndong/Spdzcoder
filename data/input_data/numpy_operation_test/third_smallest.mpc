@@ -1,0 +1,48 @@
+'''*
+tags::
+
+input:
+def third_smallest(arr):
+    """
+    Return the third smallest element in the array
+    """
+    import numpy as np
+    sorted = np.sort(arr)
+    return sorted[2]
+
+output:
+def third_smallest(arr):
+    """
+    Return the third smallest element in the array
+    """
+    brr = sint.Array(len(arr))
+    @for_range(len(arr))
+    def _(i):
+        brr[i] = arr[i]
+    brr.sort()
+    return brr[2]
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,10,4,3,9]
+arr2 = [3,2,15,-9,10]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+for i in range(len(sarr1)):
+    sarr1[i] = arr1[i]
+    sarr2[i] = arr2[i]
+
+flag = (third_smallest(sarr1)==4).bit_and(third_smallest(sarr2)==3)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,57 @@
+'''*
+tags::array_access
+
+input:
+def set_to_zero(arr,index):
+    """
+    Set the element in the input array with given index to zero.
+    The input index is guaranteed to be legal.
+    """
+    arr[index] = 0
+    return arr
+
+output:
+def set_to_zero(arr,index):
+    """
+    Set the element in the input array with given index to zero.
+    The input index is guaranteed to be legal.
+    """
+    @for_range(len(arr))
+    def _(i):
+        arr[i] = (index==i).if_else(0,arr[i])
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr,index):
+    """
+    Set the element in the input array with given index to zero.
+    The input index is guaranteed to be legal.
+    """
+    arr[index] = 0
+    return arr
+
+arr = [1,1,4,5,1,4]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+arr = standard(arr,3)
+sarr = set_to_zero(sarr,3) # sint(3)
+sarr.reveal()
+
+flag = sint(1)
+for i in range(len(arr)):
+    flag.update(flag.bit_and(sarr[i]==arr[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

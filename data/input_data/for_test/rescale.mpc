@@ -1,0 +1,71 @@
+'''*
+tags::for, math
+
+input:
+def rescale(brr):
+    """
+    To rescale the array such that the array can be fitted into [-1,1]
+    The input is guaranteed to be nonempty with nonzero element.
+    """
+    max_abs = 0
+    for item in brr:
+        if abs(item)>max_abs:
+            max_abs = abs(item)
+    for i in range(len(brr)):
+        brr[i] = brr[i]/max_abs
+    return brr
+
+output:
+def rescale(brr):
+    """
+    To rescale the array such that the array can be fitted into [-1,1]
+    The input is guaranteed to be nonempty with nonzero element.
+    """
+    max_abs = sfix(0)
+    @for_range(len(brr))
+    def _(i):
+        max_abs.update((abs(brr[i])>max_abs).if_else(abs(brr[i]),max_abs))
+    @for_range(len(brr))
+    def _(i):
+        brr[i] = brr[i]/max_abs
+    return brr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(brr):
+    """
+    To rescale the array such that the array can be fitted into [-1,1]
+    The input is guaranteed to be nonempty with nonzero element.
+    """
+    max_abs = 0
+    for item in brr:
+        if abs(item)>max_abs:
+            max_abs = abs(item)
+    for i in range(len(brr)):
+        brr[i] = brr[i]/max_abs
+    return brr
+
+arr = [1,4,-9,7,-4.5,9]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = sfix(arr[i])
+
+out = standard(arr)
+sout = rescale(sarr)
+sout.reveal()
+
+flag = sint(1)
+for i in range(len(arr)):
+    flag.update(flag.bit_and(abs(out[i]-sout[i])<0.001))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

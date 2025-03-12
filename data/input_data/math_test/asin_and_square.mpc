@@ -1,0 +1,59 @@
+'''*
+tags::math
+
+input:
+def asin_and_square(x):
+    """
+    Take arcsin to the input, then compute the square of the outcome. 
+    """
+    import math
+    return math.pow(math.asin(x),2)
+
+output:
+def asin_and_square(x):
+    """
+    Take arcsin to the input, then compute the square of the outcome. 
+    """
+    from Compiler import mpc_math
+    return mpc_math.pow_fx(mpc_math.asin(x),2)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    Take arcsin to the input, then compute the square of the outcome. 
+    """
+    import math
+    return math.pow(math.asin(x),2)
+
+flag = sint(1)
+
+numbers = [0.4,0.16,0.999,-0.7,-0.1024,0.9]
+for number in numbers:
+    a = sfix(number)
+    a_outcome = asin_and_square(a)
+    a_expected = standard(number)
+    a_outcome.reveal()
+    result = abs((a_expected-a_outcome.reveal())/a_expected)
+    
+    @if_e(result < 0.01)
+    def _():
+        pass
+    @else_
+    def _():
+        print_ln('%s',result)
+        print_ln('%s',a_outcome.reveal())
+        print_ln(a_expected)
+        flag.update(sint(0))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,35 @@
+# 2023-09-04 09:27:43
+'''*
+tags::if_else, math
+
+input:
+def is_close(a,b):
+    """
+    Return wether or not the two inputs are close: 
+    their absolute difference is no larger than 1. 
+    """
+    return abs(a-b)<=1
+
+output:
+def is_close(a,b):
+    """
+    Return wether or not the two inputs are close: 
+    their absolute difference is no larger than 1. 
+    """
+    return abs(a-b)<=1
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (is_close(sfix(1),sfix(2))).bit_and(is_close(sfix(-1.4),sfix(-1.8))).bit_and(is_close(sfix(-0.4),sfix(1.1)).bit_not())
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

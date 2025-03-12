@@ -1,0 +1,56 @@
+'''*
+tags:: power
+
+input:
+import numpy
+def power(arrayA, arrayB):
+    """This function computes the power of x^y one by one, where x and y are from two arrays."""
+    array = numpy.power(arrayA, arrayB)
+    return array
+
+output:
+from Compiler import mpc_math
+def power(spdzarrayA, spdzarrayB):
+    exponential_res = mpc_math.pow_fx(spdzarrayA.get_vector(), spdzarrayB.get_vector())
+    array = Array.create_from(exponential_res)
+    return array
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(arrayA, arrayB):
+    """This function computes the power of x^y one by one, where x and y are from two arrays."""
+    array = np.power(arrayA, arrayB)
+    return array
+
+a = np.array([1.0,2.0,10.0,5.0,7.0])
+sa = sfix.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+b = np.array([3.0,2.0,2.0,1.5,0.5])
+sb = sfix.Array(len(b))
+for i in range(len(sb)):
+    sb[i] = b[i]
+
+out = standard(a,b)
+sout = power(sa,sb)
+
+flag = sint(1)
+
+for i in range(len(sout)):
+    flag = flag.bit_and(abs(sout[i]-out[i])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

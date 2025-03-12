@@ -1,0 +1,39 @@
+# 2023-09-04 09:54:26
+'''*
+tags::if_else
+
+input:
+def CNOT(control_bit, flip_bit):
+    """
+    Simulate the CNOT gate in a quantum circuit. 
+    """
+    return (not flip_bit) if control_bit else flip_bit
+
+output:
+def CNOT(control_bit, flip_bit):
+    """
+    Simulate the CNOT gate in a quantum circuit. 
+    """
+    return control_bit.if_else(flip_bit.bit_not(),flip_bit)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(control_bit, flip_bit):
+    """
+    Simulate the CNOT gate in a quantum circuit. 
+    """
+    return (not flip_bit) if control_bit else flip_bit
+
+flag = (CNOT(sint(1),sint(1))==standard(True,True)).bit_and(CNOT(sint(1),sint(0))==standard(True,False)).bit_and(CNOT(sint(0),sint(1))==standard(False,True)).bit_and(CNOT(sint(0),sint(0))==standard(False,False))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

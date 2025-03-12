@@ -1,0 +1,85 @@
+'''*
+tags::for, if_else
+
+input:
+def impatient_merchant(days):
+    """
+    You are given the prices of some goods in consecutive days. 
+    Here's an impatient merchant who will buy the good at the first days, 
+    and sell it until its price becomes higher than its original cost. 
+    Then he will buy the good in the next day and repeat the above process. 
+    The good left in the hand of the merchant in the last day will worth nothing.
+    You should calculate the net value the impatient merchant can earn.
+    """
+    can_buy = True
+    net = 0
+    orig_price = 0
+    for i in range(len(days)):
+        if can_buy:
+            net = net - days[i]
+            orig_price = days[i]
+            can_buy = False
+        else:
+            if days[i]>orig_price:
+                net = net + days[i]
+                can_buy = True
+    return net
+
+output:
+def impatient_merchant(days):
+    """
+    You are given the prices of some goods in consecutive days. 
+    Here's an impatient merchant who will buy the good at the first days, 
+    and sell it until its price becomes higher than its original cost. 
+    Then he will buy the good in the next day and repeat the above process. 
+    The good left in the hand of the merchant in the last day will worth nothing.
+    You should calculate the net value the impatient merchant can earn.
+    """
+    can_buy = sint(1)
+    net = sfix(0)
+    orig_price = sfix(0)
+    @for_range(len(days))
+    def _(i):
+        net.update(can_buy.if_else(net-days[i],(days[i]>orig_price).if_else(net+days[i],net)))
+        orig_price.update(can_buy.if_else(days[i],orig_price))
+        can_buy.update(can_buy.if_else(False,(days[i]>orig_price).if_else(True,can_buy)))
+    return net
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [100] # -100
+arr2 = [100,0,40,10,121] # 21
+arr3 = [100,0,40,10,120,30] # -10
+arr4 = [100,0,120,10,120,30] # 100
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+sarr3 = sint.Array(len(arr3))
+sarr4 = sint.Array(len(arr4))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+for i in range(len(arr4)):
+    sarr4[i] = arr4[i]
+
+out1 = impatient_merchant(sarr1)
+out2 = impatient_merchant(sarr2)
+out3 = impatient_merchant(sarr3)
+out4 = impatient_merchant(sarr4)
+
+flag = (out1==-100).bit_and((out2==21)).bit_and((out3==-10)).bit_and((out4==100))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

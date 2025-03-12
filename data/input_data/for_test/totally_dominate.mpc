@@ -1,0 +1,76 @@
+'''*
+tags::for, if_else
+
+input:
+def totally_dominate(a,b):
+    """
+    Return whether array a "totally dominates" array b, 
+    which means, any element in a is no smaller than any element in b. 
+    """
+    amin = a[0]
+    bmax = b[0]
+    for i in range(len(a)):
+        if a[i]<amin:
+            amin = a[i]
+    for i in range(len(b)):
+        if b[i]>bmax:
+            bmax = b[i]
+    return amin>=bmax
+
+output:
+def totally_dominate(a,b):
+    """
+    Return whether array a "totally dominates" array b, 
+    which means, any element in a is no smaller than any element in b. 
+    """
+    amin = a[0]
+    bmax = b[0]
+    @for_range(len(a))
+    def _(i):
+        amin.update((a[i]<amin).if_else(a[i],amin))
+    @for_range(len(b))
+    def _(i):
+        bmax.update((b[i]>bmax).if_else(b[i],bmax))
+    return amin>=bmax
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [11, 45, 14, 19.1, 98, 10]
+brr1 = [10, 45, -7, 19.1, 0, -900]
+arr2 = [11, 45, 14, 19.1, 98, 10]
+brr2 = [100, 270, 99, 98]
+arr3 = [11, 45, 14, 19.1, 98, 10]
+brr3 = [-100, 10, 7, -9, 10, 10, 0]
+sarr1 = sfix.Array(len(arr1))
+sbrr1 = sfix.Array(len(brr1))
+sarr2 = sfix.Array(len(arr2))
+sbrr2 = sfix.Array(len(brr2))
+sarr3 = sfix.Array(len(arr3))
+sbrr3 = sfix.Array(len(brr3))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(brr1)):
+    sbrr1[i] = brr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(brr2)):
+    sbrr2[i] = brr2[i]
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+for i in range(len(brr3)):
+    sbrr3[i] = brr3[i]
+
+flag = (totally_dominate(sarr1,sbrr1).bit_not()).bit_and(totally_dominate(sarr2,sbrr2).bit_not()).bit_and(totally_dominate(sarr3,sbrr3))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

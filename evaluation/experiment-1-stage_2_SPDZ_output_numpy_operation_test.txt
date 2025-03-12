@@ -1,0 +1,81 @@
+array_from_intrinsic_linspace, True, True
+more_positive, True, True
+select, True, False
+np_relu, True, True
+cost_matrix, False, False
+np_zeros, True, True
+np_basic_dimensional_row_indexing, False, True
+np_zeros_2, True, True
+np_basic_slicing_stride, False, False
+QR_decomposition, False, False
+find_nearest_index, False, False
+np_concat_simple_row, True, True
+np_copy, True, True
+max_pooling, False, False
+array_reshape, True, True
+np_concat_simple_column, False, True
+np_basic_dimensional_column_indexing, True, True
+np_diagonal, False, False
+np_concat_special, False, False
+np_arange, False, False
+np_eye_2, True, True
+third_smallest, True, False
+np_basic_dimensional_row_indexing_3, False, True
+array_from_intrinsic_arange, True, True
+np_basic_dimensional_row_indexing_2, True, False
+array_from_python_structure, True, False
+np_reshape, True, True
+np_ones, True, True
+set_one_to_zero, True, True
+np_eye, True, True
+np_diag, True, True
+np_advanced_integer_indexing, True, False
+
+****************************************
+
+array_from_intrinsic_linspace  True       True      
+more_positive                  True       True      
+select                         True       False     
+np_relu                        True       True      
+cost_matrix                    False      False     
+np_zeros                       True       True      
+np_basic_dimensional_row_indexing False      True      
+np_zeros_2                     True       True      
+np_basic_slicing_stride        False      False     
+QR_decomposition               False      False     
+find_nearest_index             False      False     
+np_concat_simple_row           True       True      
+np_copy                        True       True      
+max_pooling                    False      False     
+array_reshape                  True       True      
+np_concat_simple_column        False      True      
+np_basic_dimensional_column_indexing True       True      
+np_diagonal                    False      False     
+np_concat_special              False      False     
+np_arange                      False      False     
+np_eye_2                       True       True      
+third_smallest                 True       False     
+np_basic_dimensional_row_indexing_3 False      True      
+array_from_intrinsic_arange    True       True      
+np_basic_dimensional_row_indexing_2 True       False     
+array_from_python_structure    True       False     
+np_reshape                     True       True      
+np_ones                        True       True      
+set_one_to_zero                True       True      
+np_eye                         True       True      
+np_diag                        True       True      
+np_advanced_integer_indexing   True       False     
+
+****************************************
+
+# of test cases : 32
+# of first generation correct : 21
+# of second generation correct : 19
+
+p1_counter : 21
+p2_counter : 24
+average_p1_counter : 40
+
+p1_acc : 65.62%
+p2_acc : 75.00%
+ave_p1_acc : 62.50%

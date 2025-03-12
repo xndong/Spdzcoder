@@ -1,0 +1,51 @@
+'''*
+tags::for
+
+input:
+def traverse_and_sum(arr1, arr2):
+    """
+    Traverse all pairs of elements from the two inputs, 
+    compute the product of the two elements and sum all of them up. 
+    """
+    sum = 0
+    for i in range(len(arr1)):
+        for j in range(len(arr2)):
+            sum = sum + arr1[i]*arr2[j]
+    return sum
+
+output:
+def traverse_and_sum(arr1, arr2):
+    """
+    Traverse all pairs of elements from the two inputs, 
+    compute the product of the two elements and sum all of them up. 
+    """
+    sum = sfix(0)
+    @for_range(len(arr1))
+    def _(i):
+        @for_range(len(arr2))
+        def _(j):
+            sum.update(sum+arr1[i]*arr2[j])
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = sint.Array(5)
+arr2 = sint.Array(5)
+@for_range(5)
+def _(i):
+    arr1[i] = i
+    arr2[i] = 5-i
+
+flag = (traverse_and_sum(arr1,arr1)==100).bit_and(traverse_and_sum(arr2,arr2)==225).bit_and(traverse_and_sum(arr1,arr2)==150)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

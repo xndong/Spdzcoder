@@ -1,0 +1,59 @@
+# 2023-09-24 22:13:31
+'''*
+tags::math, multi_if_else
+
+input:
+def hardswish(x):
+    """
+    Hardswish function.
+    """
+    if x<-3:
+        return 0
+    elif x>3:
+        return x
+    else:
+        return x*(x+3)/6
+
+output:
+def hardswish(x):
+    """
+    Hardswish function.
+    """
+    return (x<-3).if_else(0,(x>3).if_else(x,x*(x+3)/sfix(6)))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    Hardswish function.
+    """
+    if x<-3:
+        return 0
+    elif x>3:
+        return x
+    else:
+        return x*(x+3)/6
+
+inputs = [-5,-4,-2,0,1.5,9,10]
+sinputs = sfix.Array(len(inputs))
+for i in range(len(inputs)):
+    sinputs[i] = inputs[i]
+
+flag = sint(1)
+
+for i in range(len(inputs)):
+    out = hardswish(sinputs[i])
+    out.reveal()
+    flag.update(flag.bit_and(abs(out-standard(inputs[i]))<0.01))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

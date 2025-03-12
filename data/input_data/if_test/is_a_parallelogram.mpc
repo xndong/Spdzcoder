@@ -1,0 +1,62 @@
+# 2023-09-24 22:09:43
+'''*
+tags::multi_if_else
+
+input:
+def is_a_parallelogram(a,b,c,d):
+    """
+    Given four vertices, 
+    return whether the four vertices can form a parallelogram. 
+    """
+    def same(x,y):
+        return x[0]==y[0] and x[1]==y[1]
+    if same(a,b) or same(a,c) or same(a,d) or same(b,c) or same(b,d) or same(c,d):
+        return False
+    return (a[0]+b[0]==c[0]+d[0] and  a[1]+b[1]==c[1]+d[1]) or (a[0]+c[0]==b[0]+d[0] and  a[1]+c[1]==b[1]+d[1]) or (a[0]+d[0]==b[0]+c[0] and  a[1]+d[1]==b[1]+c[1])
+
+output:
+def is_a_parallelogram(a,b,c,d):
+    """
+    Given four vertices, 
+    return whether the four vertices can form a parallelogram. 
+    """
+    def same(x,y):
+        return (x[0]==y[0]).bit_and(x[1]==y[1])
+    same_predicate = same(a,b).bit_or(same(a,c)).bit_or(same(a,d)).bit_or(same(b,c)).bit_or(same(b,d)).bit_or(same(c,d))
+    return ((a[0]+b[0]==c[0]+d[0]).bit_and(a[1]+b[1]==c[1]+d[1])).bit_or((a[0]+c[0]==b[0]+d[0]).bit_and(a[1]+c[1]==b[1]+d[1])).bit_or((a[0]+d[0]==b[0]+c[0]).bit_and(a[1]+d[1]==b[1]+c[1])).bit_and(same_predicate.bit_not())
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+a = sfix.Array(2)
+b = sfix.Array(2)
+c = sfix.Array(2)
+d = sfix.Array(2)
+e = sfix.Array(2)
+f = sfix.Array(2)
+
+a[0] = 0
+a[1] = 0
+b[0] = 2
+b[1] = 0
+c[0] = 3
+c[1] = 5
+d[0] = 5
+d[1] = 5
+e[0] = 1
+e[1] = 0
+f[0] = -17
+f[1] = -1
+
+flag = (is_a_parallelogram(a,b,c,d)).bit_and(is_a_parallelogram(b,a,c,d)).bit_and(is_a_parallelogram(d,a,c,b)).bit_and(is_a_parallelogram(c,b,a,d)).bit_and(is_a_parallelogram(a,e,d,e).bit_not()).bit_and(is_a_parallelogram(b,a,c,f).bit_not())
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

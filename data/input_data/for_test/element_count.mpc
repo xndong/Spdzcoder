@@ -1,0 +1,60 @@
+'''*
+tags::for, if_else
+
+input:
+def element_count(arr, target):
+    """
+    Count the numer of times the target element occurs in the array. 
+    """
+    ret = 0
+    for item in arr:
+        if item == target:
+            ret = ret + 1
+    return ret
+
+output:
+def element_count(arr, target):
+    """
+    Count the numer of times the target element occurs in the array. 
+    """
+    ret = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        ret.update((arr[i]==target).if_else(ret+1,ret))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,1,4,5,1,4]
+arr2 = [1,9,1,9,8,1,0]
+arr3 = [6,5,4,7,2]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+sarr3 = sfix.Array(len(arr3))
+for i in range(len(arr1)):
+    sarr1[i] = sfix(arr1[i])
+for i in range(len(arr2)):
+    sarr2[i] = sfix(arr2[i])
+for i in range(len(arr3)):
+    sarr3[i] = sfix(arr3[i])
+
+count1 = element_count(sarr1,1)
+count2 = element_count(sarr2,9)
+count3 = element_count(sarr3,114)
+count1.reveal()
+count2.reveal()
+count3.reveal()
+
+flag = (count1==3).bit_and(count2==2).bit_and(count3==0)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

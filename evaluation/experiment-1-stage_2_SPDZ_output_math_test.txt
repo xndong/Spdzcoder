@@ -1,0 +1,93 @@
+next_integer, True, True
+father_and_son, False, True
+triangle_area, True, True
+sin_plus_cos, True, True
+sigmoid, True, False
+self_exponent, True, True
+silu, True, True
+Gaussian_bracket, True, True
+asin_and_square, True, True
+cylinder_surface, True, True
+radian_to_degree, True, True
+square_root, True, True
+cosine_theorem, True, True
+lights_states, True, True
+degree_to_radian, True, True
+Fah_to_Cel, False, True
+elliptic_area, True, False
+floor, False, True
+log_and_cube, True, True
+floor_and_square, True, False
+meters_to_feet, True, True
+sphere_area, True, True
+coarse_abs, False, True
+how_many_chickens, True, True
+interest_calculator, True, True
+circle_area, True, True
+cube_and_square_root, True, True
+round, False, True
+cryptic_adjustment, False, False
+specific_pow, True, True
+soft_plus, True, True
+ball_volume, True, False
+Heron, True, True
+next_perfect_square, False, False
+pi_to_the_x, True, False
+spring_rocket, False, False
+cone_volume, True, True
+how_many_rabbits, True, False
+
+****************************************
+
+next_integer                   True       True      
+father_and_son                 False      True      
+triangle_area                  True       True      
+sin_plus_cos                   True       True      
+sigmoid                        True       False     
+self_exponent                  True       True      
+silu                           True       True      
+Gaussian_bracket               True       True      
+asin_and_square                True       True      
+cylinder_surface               True       True      
+radian_to_degree               True       True      
+square_root                    True       True      
+cosine_theorem                 True       True      
+lights_states                  True       True      
+degree_to_radian               True       True      
+Fah_to_Cel                     False      True      
+elliptic_area                  True       False     
+floor                          False      True      
+log_and_cube                   True       True      
+floor_and_square               True       False     
+meters_to_feet                 True       True      
+sphere_area                    True       True      
+coarse_abs                     False      True      
+how_many_chickens              True       True      
+interest_calculator            True       True      
+circle_area                    True       True      
+cube_and_square_root           True       True      
+round                          False      True      
+cryptic_adjustment             False      False     
+specific_pow                   True       True      
+soft_plus                      True       True      
+ball_volume                    True       False     
+Heron                          True       True      
+next_perfect_square            False      False     
+pi_to_the_x                    True       False     
+spring_rocket                  False      False     
+cone_volume                    True       True      
+how_many_rabbits               True       False     
+
+****************************************
+
+# of test cases : 38
+# of first generation correct : 30
+# of second generation correct : 29
+
+p1_counter : 30
+p2_counter : 35
+average_p1_counter : 59
+
+p1_acc : 78.95%
+p2_acc : 92.11%
+ave_p1_acc : 77.63%

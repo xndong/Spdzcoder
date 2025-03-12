@@ -1,0 +1,33 @@
+'''*
+tags::array concatenation, array indexing, array slicing
+
+input:
+import numpy as np
+def array_concate(ndarrayA, ndarrayB):
+    """
+    NumPy program to concatnate elements from two 1-D arrays. Concretely, collect all the even index elements from the first array and collect all the odd index elements from the second array.
+    """
+    viewA = ndarrayA[::2]
+    viewB = ndarrayB[1:][::2]
+    array = np.concatenate((viewA,viewB)).copy()
+    return array
+
+output:
+def array_concate(spdzArrayA, spdzArrayB):
+    """
+    MP-SPDZ program to concatnate elements from two 1-D arrays. Concretely, collect all the even index elements from the first array and collect all the odd index elements from the second array.
+    """
+    vectorA = spdzArrayA[::2]
+    vectorB = spdzArrayB[1:][::2]
+    arrayA = Array.create_from(vectorA)
+    arrayB = Array.create_from(vectorB)
+    array = arrayA.concat(arrayB)
+    return array
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+#TODO:

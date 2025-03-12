@@ -1,0 +1,47 @@
+'''*
+tags::math
+
+input:
+def sphere_area(r):
+    """
+    Return the area of a sphere surface with given radius r.
+    """
+    import math
+    return 4*math.pi*r**2
+
+output:
+def sphere_area(r):
+    """
+    Return the area of a sphere surface with given radius r.
+    """
+    import math
+    return 4*math.pi*r**2
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(r):
+    """
+    Return the area of a sphere surface with given radius r.
+    """
+    import math
+    return 4*math.pi*r**2
+
+flag = sint(1)
+
+numbers = [4,8,12,7,4,9]
+for number in numbers:
+    out = sphere_area(sfix(number))
+    out.reveal()
+    flag.update(flag.bit_and(abs((standard(number)-out)/standard(number))<0.01))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

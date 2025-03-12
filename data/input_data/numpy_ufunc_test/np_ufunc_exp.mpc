@@ -1,0 +1,60 @@
+'''*
+tags:: compute exponential
+
+input:
+import numpy
+def compute_softmax(array):
+    """This function computes the softmax values in a 1-D numpy array."""
+    exp = numpy.exp(array)
+    summation = numpy.add.reduce(exp)
+    softmax = exp / summation
+    return softmax
+
+output:
+import math
+from Compiler import mpc_math
+import operator
+from functools import reduce
+def compute_softmax(spdzarray):
+    exp = mpc_math.pow_fx(math.e, spdzarray.get_vector())
+    summation = reduce(operator.add, exp)
+    softmax_vector = exp / summation
+    softmax = Array.create_from(softmax_vector)
+    return softmax
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(array):
+    """This function computes the softmax values in a 1-D numpy array."""
+    exp = np.exp(array)
+    summation = np.add.reduce(exp)
+    softmax = exp / summation
+    return softmax
+
+a = np.array([0.5,-1.2,10.7,5.0,-7.2])
+sa = sfix.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+out = standard(a)
+sout = compute_softmax(sa)
+
+flag = sint(1)
+
+for i in range(len(sout)):
+    flag = flag.bit_and(abs(sout[i]-out[i])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

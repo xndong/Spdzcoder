@@ -1,0 +1,685 @@
+Compiler.types module
+=====================
+
+This module defines all types available in high-level programs.  
+These include basic types such as secret integers or floating-point numbers and container types. 
+
+Registers are used for computation, allocated on an ongoing basis, and thread-specific. 
+The memory is allocated statically and shared between threads. 
+This means that memory-based types such as "Array" can be used to transfer information between threads. 
+Note that creating memory-based types outside the main thread is not supported.
+
+
+Basic types
+-----------
+
+All basic can be used as vectors, that is one instance representing several values, with all operations being executed element-wise. 
+
+"sint": Secret integer in the protocol-specific domain.
+"cint": Clear integer in same domain as secure computation (depends on protocol).
+"sfix": Secret fixed-point number represented as secret integer, by multiplying with "2^f" and then rounding.
+"cfix": Clear fixed-point number represented as clear integer. 
+
+Container types
+---------------
+
+"MemValue": Single value in memory.
+"Array": Array accessible by public index. 
+"Matrix": Matrix
+"MultiArray": Multidimensional array.
+
+class Compiler.types.Array(length, value_type)
+
+   Array accessible by public index. That is, "a[i]" works for an array "a" and "i" being a Python integer.
+   The following operations works elementwisely on the array: "+, -, *", and the result will be a vector with the same size of the inputs. 
+   To convert the vector result back into the `Array` type, you can use the `create_from` method. 
+
+   Parameters:
+      * **length** -- compile-time integer (int) or "None" for unknown length
+      * **value_type** -- basic type
+
+   You can convert between arrays and register vectors by using slice indexing. 
+   This allows for element-wise operations as long as supported by the basic type. 
+   The following adds 10 secret integers from the first two parties:
+
+      a = sint.Array(10)
+      b = sint.Array(10)
+      a[:] += b[:]
+
+   Arrays aren't initialized on creation, you need to call "assign_all()" to initialize them to a constant value.
+
+   assign(other, base=0)
+
+      Assignment.
+
+      Parameters:
+         * **other** -- vector/Array/Matrix/MultiArray/iterable of compatible type and smaller size
+         * **base** -- index to start assignment at
+
+   assign_all(value)
+
+      Assign the same value to all entries.
+
+      Parameters:
+         **value** -- convertible to basic type
+
+   assign_vector(other, base=0)
+
+      Assignment.
+
+      Parameters:
+         * **other** -- vector/Array/Matrix/MultiArray/iterable of compatible type and smaller size
+         * **base** -- index to start assignment at
+
+   concat(other)
+
+      Concatenate two arrays.
+
+   classmethod create_from(l)
+
+      Convert Python iterator or vector to array. 
+      Basic type will be taken from first element, further elements must to be convertible to that.
+
+      Parameters:
+         **l** -- Python iterable or register vector
+
+      Returns:
+         "Array" of appropriate type containing the contents of "l"
+
+   get_part(base, size)
+
+      Part array.
+
+      Parameters:
+         * **base** -- start index (int)
+         * **size** -- integer
+
+      Returns:
+         Array of same type
+
+   get_reverse_vector()
+
+      Return vector with content in reverse order.
+
+   get_vector(base=0, size=None)
+
+      Return vector with content.
+
+      Parameters:
+         * **base** -- starting point (int)
+         * **size** -- length (compile-time int)
+
+   randomize(*args)
+
+      Randomize array according to data type. If it is "sfix", the following will sample an individual uniformly random entry of the array "M" roughly in the range [a,b]:
+
+         M.randomize(a, b)
+
+   same_shape()
+
+      Return Array of same length and type.
+
+   secure_shuffle()
+
+      Secure shuffle in place according to the security model. 
+
+   sort()
+
+      Sort in place using radix sort with complexity O(n log n) for "sint" and "sfix". 
+
+class Compiler.types.Matrix(rows, columns, value_type)
+
+   Matrix.
+
+   Parameters:
+      * **rows** -- compile-time (int)
+      * **columns** -- compile-time (int)
+      * **value_type** -- basic type of entries
+
+   Matrices aren't initialized on creation, you need to call "assign_all()" to initialize them to a constant value.
+
+   assign(other)
+
+      Assign container to content. Not implemented for floating-point.
+
+      Parameters:
+         **other** -- container of matching size and type
+
+   assign_all(value)
+
+      Assign the same value to all entries.
+
+      Parameters:
+         **value** -- convertible to relevant basic type
+
+   assign_vector(vector, base=0)
+
+      Assign vector from range of the first dimension, including all entries in further dimensions.
+
+      Parameters:
+         * **vector** -- updated entries
+         * **base** -- index in first dimension (int)
+
+   concat(other)
+
+      Concatenate two multi-arrays of matching dimension.
+
+   concat_columns(other)
+
+      Concatenate two matrices by columns.
+
+   diag()
+
+      Matrix diagonal.
+
+   dot(other)
+
+      Matrix-matrix and matrix-vector multiplication.
+
+      Parameters:
+         * **self** -- two-dimensional
+         * **other** -- Matrix or Array of matching size and type
+
+      Return type:
+         Matrix or Array of appropriate size and type
+
+   get_column(index)
+
+      Get column as vector.
+
+      Parameters:
+         **index** -- int
+
+   get_part(start, size)
+
+      Part multi-array.
+
+      Parameters:
+         * **start** -- first-dimension index (int)
+         * **size** -- int
+
+   get_vector(base=0, size=None)
+
+      Vector from range of the first dimension, including all entries in further dimensions.
+
+      Parameters:
+         * **base** -- public (int)
+         * **size** -- compile-time (int)
+
+   iadd(other)
+
+      Element-wise addition in place.
+
+      Parameters:
+         **other** -- container of matching size and type
+   
+   randomize(*args)
+
+      Randomize according to data type. 
+      If it is "sfix", the following will sample an individual uniformly random entry of the multi-array "M" roughly in the range [a,b]:
+
+         M.randomize(a, b)
+   
+   same_shape()
+
+      Returns:
+         new multidimensional array with same shape and basic type
+
+   schur(other)
+
+      Element-wise product.
+
+      Parameters:
+         **other** -- container of matching size and type
+
+      Returns:
+         container of same shape and type as "self"
+
+   secure_shuffle()
+
+      Securely shuffle rows (first index). 
+
+   set_column(index, vector)
+
+      Change column.
+
+      Parameters:
+         * **index** -- regint/cint/int
+         * **vector** -- short enought vector of compatible type
+
+   sort(key_indices=None)
+
+      Sort sub-arrays (different first index) in place.
+
+      Parameters:
+         * **key_indices** -- indices to sorting keys, for example
+           "(1, 2)" to sort three-dimensional array "a" by keys
+           "a[*][1][2]". Default is "(0, ..., 0)" of correct length.
+
+   trace()
+
+      Matrix trace.
+
+   transpose()
+
+      Return a transposed matrix.
+
+      Parameters:
+         **self** -- two-dimensional
+
+class Compiler.types.MemValue(value, address=None)
+
+   Single value in memory. This is useful to transfer information between threads.
+   You can use any operation with "MemValue" objects as if they were a basic type.
+
+   Parameters:
+      **value** -- basic types
+
+   iadd(other)
+
+      Addition assignment.
+
+   max(other)
+
+      Maximum.
+
+   min(other)
+
+      Minimum.
+
+class Compiler.types.MultiArray(sizes, value_type)
+
+   Multidimensional array. 
+   The access operator ("a[i]") allows to a multi-dimensional array of dimension one less or a simple array for a two-dimensional array.
+
+   Parameters:
+      * **sizes** -- shape (compile-time list of integers)
+      * **value_type** -- basic type of entries
+
+   You can convert between arrays and register vectors by using slice indexing. 
+   This allows for element-wise operations as long as supported by the basic type. 
+
+   Arrays aren't initialized on creation, you need to call "assign_all()" to initialize them to a constant value.
+
+   assign(other)
+
+   assign_all(value)
+
+   assign_vector(vector, base=0)
+
+   concat(other)
+
+   diag()
+
+   dot(other)
+
+   get_part(start, size)
+
+   get_vector(base=0, size=None)
+
+   iadd(other)
+
+   randomize(*args)
+
+   same_shape()
+
+   schur(other)
+
+   secure_shuffle()
+
+   sort(key_indices=None)
+
+   trace()
+
+   transpose()
+
+   All above methods are basically the same with the case in Matrix.
+
+class Compiler.types.sfix(**kwargs)
+
+   Secret fixed-point number represented as secret integer.
+
+   It supports basic arithmetic ("+, -, *, /"), returning "sfix", 
+   and comparisons ("==, !=, <, <=, >, >="), returning "sbitint" (can be converted to "sint"). 
+   The other operand can be any of sfix/sint.
+   It also supports "abs()" and "**".
+
+   classmethod Array(size, *args, **kwargs)
+
+      Type-dependent array. Example:
+         a = sint.Array(10)
+
+   classmethod Matrix(rows, columns, *args, **kwargs)
+
+      Type-dependent matrix. Example:
+         a = sint.Matrix(10, 10)
+
+   classmethod MemValue(value)
+
+   classmethod Tensor(shape)
+
+      Type-dependent tensor of any dimension:
+
+         a = sfix.Tensor([10, 10])
+
+   compute_reciprocal()
+
+      Secret fixed-point reciprocal.
+
+   classmethod get_random(*args, **kwargs)
+
+      Uniform secret random number around centre of bounds. Actual
+      range can be smaller but never larger.
+
+      Parameters:
+         * **lower** -- float
+         * **upper** -- float
+         * **size** -- vector size (int, default 1)
+
+   iadd(other)
+
+      Addition assignment. This uses "update()" internally.
+
+   max(other)
+
+      Maximum.
+
+   min(other)
+
+      Minimum.
+
+   update(other)
+
+      Update register. Useful in loops like "for_range()".
+
+class Compiler.types.cfix(**kwargs)
+
+   Clear fixed-point number represented as clear integer. 
+   It supports basic arithmetic ("+, -, *, /"), returning either "cfix" if the other operand is public (cfix/cint/int) or "sfix" if the other operand is an sfix. 
+   It also support comparisons ("==, !=, <, <=, >, >=").
+
+   classmethod Array(size, *args, **kwargs)
+
+      Type-dependent array. Similar to `sfix` version. 
+
+   classmethod Matrix(rows, columns, *args, **kwargs)
+
+      Type-dependent matrix. Similar to `sfix` version. 
+
+   classmethod MemValue(value)
+
+   classmethod Tensor(shape)
+
+      Type-dependent tensor of any dimension.Similar to `sfix` version. 
+
+   iadd(other)
+
+      Addition assignment. This uses "update()" internally.
+
+   max(other)
+
+      Maximum.
+
+   min(other)
+
+      Minimum.
+
+class Compiler.types.sint(**kwargs)
+
+   Secret integer in the protocol-specific domain. 
+   It supports operations with "sint", "cint" and Python integers.
+   Operations where one of the operands is an "sint" either result in an "sint" or an "sintbit", the latter for comparisons.
+
+   The following operations work as expected in the computation domain (modulo a prime or a power of two): "+, -, *". "/" denotes the field division modulo a prime. 
+   Comparisons operators ("==, !=, <, <=, >, >=") assume that the element in the computation domain represents a signed integer in a restricted range, see below. 
+   The same holds for "abs()", shift operators ("<<, >>"), modulo ("%"), and exponentation ("**").
+   Modulo only works if the right-hand operator is a compile-time power of two.
+
+   Parameters:
+      * **val** -- initialization (sint/int)
+      * **size** -- vector size (int), defaults to 1 or size of list
+
+   classmethod Array(size, *args, **kwargs)
+
+      Type-dependent array. Example: 
+         a = sint.Array(10)
+
+   classmethod Matrix(rows, columns, *args, **kwargs)
+
+      Type-dependent matrix. Example: 
+         a = sint.Matrix(10, 10)
+
+   classmethod MemValue(value)
+
+   classmethod Tensor(shape)
+
+      Type-dependent tensor of any dimension: 
+         a = sfix.Tensor([10, 10])
+
+   bit_and(other)
+
+      Single-bit AND in arithmetic circuits.
+
+      Parameters:
+         **self/other** -- 0 or 1 (any compatible type)
+
+      Return type:
+         depending on inputs (secret if any of them is)
+
+   bit_not()
+
+      Single-bit NOT in arithmetic circuits.
+
+   bit_or(other)
+
+      Single-bit OR in arithmetic circuits.
+
+      Parameters:
+         **self/other** -- 0 or 1 (any compatible type)
+
+      Returns:
+         type depends on inputs (secret if any of them is)
+
+   bit_xor(other)
+
+      Single-bit XOR in arithmetic circuits.
+
+      Parameters:
+         **self/other** -- 0 or 1 (any compatible type)
+
+      Returns:
+         type depends on inputs (secret if any of them is)
+
+   cond_swap(a, b)
+
+      Swapping in arithmetic circuits.
+
+      Parameters:
+         **a/b** -- any type supporting the necessary operations
+
+      Returns:
+         "(a, b)" if "self" is 0, "(b, a)" if "self" is 1, and undefined otherwise
+
+      Return type:
+         depending on operands, secret if any of them is
+
+   classmethod get_random(*args, **kwargs)
+
+      Secret random ring element according to security model.
+
+      Parameters:
+         **size** -- vector size (int, default 1)
+
+   classmethod get_random_bit(*args, **kwargs)
+
+      Secret random bit according to security model.
+
+      Returns:
+         0/1 50-50
+
+      Parameters:
+         **size** -- vector size (int, default 1)
+
+   iadd(other)
+
+      Addition assignment. This uses "update()" internally.
+
+   if_else(a, b)
+
+      MUX on bit in arithmetic circuits.
+
+      Returns:
+         a if "self" is 1, b if "self" is 0, undefined otherwise
+
+      Return type:
+         depending on operands, secret if any of them is
+
+   max(other)
+
+      Maximum.
+
+   min(other)
+
+      Minimum.
+
+   update(other)
+
+      Update register. Useful in loops like "for_range()".
+
+class Compiler.types.cint(**kwargs)
+
+   Clear integer in same domain as secure computation (depends on protocol). 
+   It supports operations with "sint", "cint" and Python integers.
+   
+   A number operators are supported ("+, -, *, /, //, **, ^, &, |, ~, ==, !=, <<, >>"), returning either "cint" if the other operand is public (cint/int) or "sint" if the other operand is "sint". 
+   Comparison operators ("==, !=, <, <=, >, >=") are also supported. 
+   Comparisons and "~" require that the value is within the global bit length. The same holds for "abs()". 
+   "/" runs field division if the modulus is a prime while "//" runs integer floor division. 
+   "**" requires the exponent to be compile-time integer or the base to be two.
+
+   Parameters:
+      * **val** – initialization (cint/regint/int/cgf2n or list
+        thereof)
+
+      * **size** – vector size (int), defaults to 1 or size of list
+
+   classmethod Array(size, *args, **kwargs)
+
+      Type-dependent array. Similar to `sint` version. 
+
+   classmethod Matrix(rows, columns, *args, **kwargs)
+
+      Type-dependent matrix. Similar to `sint` version. 
+
+   classmethod MemValue(value)
+
+   classmethod Tensor(shape)
+
+      Type-dependent tensor of any dimension. Similar to `sint` version. 
+
+   bit_and(other)
+
+      Single-bit AND in arithmetic circuits. Similar to `sint` version. 
+
+   bit_not()
+
+      Single-bit NOT in arithmetic circuits. Similar to `sint` version. 
+
+   bit_or(other)
+
+      Single-bit OR in arithmetic circuits. Similar to `sint` version. 
+
+   bit_xor(other)
+
+      Single-bit XOR in arithmetic circuits. Similar to `sint` version.
+
+   cond_swap(a, b)
+
+      Swapping in arithmetic circuits. Similar to `sint` version. 
+
+   iadd(other)
+
+      Addition assignment. This uses "update()" internally.
+
+   if_else(a, b)
+
+      MUX on bit in arithmetic circuits.
+
+      Returns:
+         a if "self" is 1, b if "self" is 0, undefined otherwise
+
+      Return type:
+         depending on operands, secret if any of them is
+
+   max(other)
+
+      Maximum.
+
+   min(other)
+
+      Minimum.
+
+   update(other)
+
+      Update register. Useful in loops like "for_range()".
+
+class Compiler.types.sintbit(**kwargs)
+
+   "sint" holding a bit, supporting binary operations ("&, |, ^").
+
+
+Compiler.GC.types module
+========================
+
+This modules contains basic types for binary circuits. The fixed-
+length types obtained by "get_type(n)" are the preferred way of using
+them, and in some cases required in connection with container types.
+
+Computation using these types will always be executed as a binary
+circuit. See Protocol Pairs for the exact protocols.
+
+class Compiler.GC.types.sbitint(*args, **kwargs)
+
+   Secret signed integer in one binary register.
+
+   classmethod Array(size, *args, **kwargs)
+
+      Type-dependent array. Example:
+         a = sint.Array(10)
+
+   classmethod MemValue(value)
+
+   bit_and(other)
+
+      AND in binary circuits.
+
+   bit_not()
+
+      NOT in binary circuits.
+
+   bit_or(other)
+
+      OR in binary circuits.
+
+   bit_xor(other)
+
+      XOR in binary circuits.
+
+   if_else(x, y)
+
+      Oblivious selection between x and y
+
+Compiler.library module
+=======================
+
+This module defines functions directly available in high-level programs.
+
+Compiler.library.tree_reduce(function, sequence)
+
+   Round-efficient binary reduction. The following computes the maximum of the list "l":
+
+      m = tree_reduce(lambda x, y: x.max(y), l)
+
+   Parameters:
+      * **function** -- reduction function taking two arguments
+      * **sequence** -- list, vector, or array

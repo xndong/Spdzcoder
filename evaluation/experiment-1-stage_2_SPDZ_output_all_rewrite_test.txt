@@ -1,0 +1,87 @@
+move_to_end, False, False
+second_largest, False, False
+exists_true, True, True
+array_indicator, True, True
+inner_product, False, False
+array_shift_2, True, False
+array_greater_than_scalar, True, False
+count_rises_2, True, True
+choppy_plus_minus, True, False
+how_many_roots, True, False
+count_satisfied, True, True
+traverse_and_sum, False, False
+array_round, False, False
+array_greater_eq, True, True
+indicate_negative, True, True
+array_subtract_2, False, False
+array_process, False, True
+array_shift, False, False
+compare_and_select, True, True
+array_subtract, True, False
+repeat_array, False, False
+zeros, True, True
+clip, False, True
+count_satisfied_2, True, True
+reverse_order_pair, True, True
+array_inc, True, True
+count_rises, True, True
+array_process_2, False, True
+two_norm, True, True
+totally_dominate, False, False
+inner_product_2, True, True
+get_subarr_by_indices, False, False
+exists_5_or_7, True, True
+remove_by_index, False, False
+average, True, True
+
+****************************************
+
+move_to_end                    False      False     
+second_largest                 False      False     
+exists_true                    True       True      
+array_indicator                True       True      
+inner_product                  False      False     
+array_shift_2                  True       False     
+array_greater_than_scalar      True       False     
+count_rises_2                  True       True      
+choppy_plus_minus              True       False     
+how_many_roots                 True       False     
+count_satisfied                True       True      
+traverse_and_sum               False      False     
+array_round                    False      False     
+array_greater_eq               True       True      
+indicate_negative              True       True      
+array_subtract_2               False      False     
+array_process                  False      True      
+array_shift                    False      False     
+compare_and_select             True       True      
+array_subtract                 True       False     
+repeat_array                   False      False     
+zeros                          True       True      
+clip                           False      True      
+count_satisfied_2              True       True      
+reverse_order_pair             True       True      
+array_inc                      True       True      
+count_rises                    True       True      
+array_process_2                False      True      
+two_norm                       True       True      
+totally_dominate               False      False     
+inner_product_2                True       True      
+get_subarr_by_indices          False      False     
+exists_5_or_7                  True       True      
+remove_by_index                False      False     
+average                        True       True      
+
+****************************************
+
+# of test cases : 35
+# of first generation correct : 21
+# of second generation correct : 19
+
+p1_counter : 21
+p2_counter : 24
+average_p1_counter : 40
+
+p1_acc : 60.00%
+p2_acc : 68.57%
+ave_p1_acc : 57.14%

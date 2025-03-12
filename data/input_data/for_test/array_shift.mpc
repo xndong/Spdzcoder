@@ -1,0 +1,68 @@
+'''*
+tags::for
+
+input:
+def array_shift(a):
+    """
+    Shift the array on index by 1. 
+    For example, [0,1,2] will be shifted to [1,2,0]
+    """
+    temp = a[len(a)-1]
+    for i in range(len(a)-1):
+        a[len(a)-i-1] = a[len(a)-i-2]
+    a[0] = temp
+    return a
+
+output:
+def array_shift(a):
+    """
+    Shift the array on index by 1. 
+    For example, [0,1,2] will be shifted to [1,2,0]
+    """
+    temp = a[len(a)-1]
+    @for_range(len(a)-1)
+    def _(i):
+        a[len(a)-i-1] = a[len(a)-i-2]
+    a[0] = temp
+    return a
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a):
+    """
+    Shift the array on index by 1. 
+    For example, [0,1,2] will be shifted to [1,2,0]
+    Check first whether the length of the array is zero. 
+    """
+    if len(a)==0:
+        raise ValueError("The input array should not be empty!")
+    temp = a[len(a)-1]
+    for i in range(len(a)-1):
+        a[len(a)-i-1] = a[len(a)-i-2]
+    a[0] = temp
+    return a
+
+array = [-7000,11,-451,4,0,-1919,810]
+sarr = sint.Array(len(array))
+for i in range(len(array)):
+    sarr[i] = array[i]
+
+output = array_shift(sarr)
+expected = standard(array)
+output.reveal()
+
+flag = sint(1)
+for i in range(len(array)):
+    flag.update(flag.bit_and(output[i]==expected[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

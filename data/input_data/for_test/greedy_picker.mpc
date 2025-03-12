@@ -1,0 +1,66 @@
+'''*
+tags::for, if_else
+
+input:
+def greedy_picker(items,captivity):
+    """
+    There is a greedy picker with a bag picking items. 
+    Once the picker sees an item that his bag has space for, he will pick up the item (which will take some space) and put it into his bag. 
+    You should compute how many items the greedy picker can finally get with the greedy strategy. 
+    """
+    num = 0
+    for item in items:
+        if item <= captivity:
+            captivity = captivity - item
+            num = num + 1
+    return num
+
+output:
+def greedy_picker(items,captivity):
+    """
+    There is a greedy picker with a bag picking items. 
+    Once the picker sees an item that his bag has space for, he will pick up the item (which will take some space) and put it into his bag. 
+    You should compute how many items the greedy picker can finally get with the greedy strategy. 
+    """
+    num = sint(0)
+    @for_range(len(items))
+    def _(i):
+        num.update((items[i]<=captivity).if_else(num+1,num))
+        captivity.update((items[i]<=captivity).if_else(captivity-items[i],captivity))
+    return num
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [7,20,14,3,5,2,6,100,2]
+sarr1 = sfix.Array(len(arr1))
+arr2 = [100,1,1,1,1,1,1,1]
+sarr2 = sfix.Array(len(arr2))
+arr3 = [17,2,2,2,1,3]
+sarr3 = sfix.Array(len(arr3))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+
+out1 = greedy_picker(sarr1,sint(46))
+out2 = greedy_picker(sarr2,sint(100))
+out3 = greedy_picker(sarr3,sint(18))
+out1.reveal()
+out2.reveal()
+out3.reveal()
+
+flag = (out1==5).bit_and(out2==1).bit_and(out3==2)
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,101 @@
+'''*
+tags::
+
+input:
+import numpy as np
+class Tanh():
+
+    def fn(self, z):
+        """
+        Compute the tanh function on the elements of input `z`.
+        """
+        return np.tanh(z)
+
+    def grad(self, x):
+        """
+        Evaluate the first derivative of the tanh function on the elements of input `x`.
+        """
+        return 1 - np.tanh(x) ** 2
+
+output:
+from Compiler import mpc_math
+class Tanh():
+    def tanh(self, x):
+        """
+        Compute the tanh function
+        """
+        import math
+        plus = mpc_math.pow_fx(math.e,x)
+        minus = mpc_math.pow_fx(math.e,-x)
+        return (plus-minus)/(plus+minus)
+
+    def fn(self, z):
+        """
+        Compute the tanh function on the elements of input `z`.
+        """
+        ret = sfix.Array(len(z))
+        z_vec = z.get_vector()
+        ret_vec = ret.get_vector()
+        ret_vec = self.tanh(z_vec)
+        ret.assign_vector(ret_vec)
+        return ret
+
+    def grad(self, x):
+        """
+        Evaluate the first derivative of the tanh function on the elements of input `x`.
+        """
+        ret = sfix.Array(len(x))
+        x_vec = x.get_vector()
+        ret_vec = ret.get_vector()
+        ret_vec = 1 - self.tanh(x)**2
+        ret.assign_vector(ret_vec)
+        return ret
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+class Standard():
+
+    def fn(self, z):
+        """
+        Compute the tanh function on the elements of input `z`.
+        """
+        return np.tanh(z)
+
+    def grad(self, x):
+        """
+        Evaluate the first derivative of the tanh function on the elements of input `x`.
+        """
+        return 1 - np.tanh(x) ** 2
+
+arr = [1,2,3,4]
+sarr = sfix.Array(len(arr))
+for i in range(len(sarr)):
+    sarr[i] = arr[i]
+
+standard_instance = Standard()
+actual_instance = Tanh()
+
+expected_fn = standard_instance.fn(np.array(arr))
+fn = actual_instance.fn(sarr)
+expected_grad = standard_instance.grad(np.array(arr))
+grad = actual_instance.grad(sarr)
+
+flag = sint(1)
+for i in range(len(fn)):
+    flag = flag.bit_and(abs(fn[i]-expected_fn[i])<0.05)
+for i in range(len(grad)):
+    flag = flag.bit_and(abs(grad[i]-expected_grad[i])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,36 @@
+'''*
+tags::math
+
+input:
+def floor_and_square(z):
+    """
+    Calculate the maximum integer no bigger than the input. 
+    Then return the square of the previous outcome. 
+    """
+    import math
+    return math.floor(z)**2
+
+output:
+def floor_and_square(z):
+    """
+    Calculate the maximum integer no bigger than the input. 
+    Then return the square of the previous outcome. 
+    """
+    from Compiler import mpc_math
+    return mpc_math.floor_fx(z)**2
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (floor_and_square(sfix(-1.7))==4).bit_and(floor_and_square(sfix(3.2))==9).bit_and(floor_and_square(sfix(-1))==1)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,61 @@
+'''*
+tags::array_access
+
+input:
+def increase_by(arr, index, k):
+    """
+    Increase the element arr[index] in the array arr by k.
+    """
+    arr[index] = arr[index] + k
+    return arr
+
+output:
+def increase_by(arr, index, k):
+    """
+    Increase the element arr[index] in the array arr by k.
+    """
+    @for_range(len(arr))
+    def _(i):
+        arr[i] = (i==index).if_else(arr[i]+k,arr[i])
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr, index, k):
+    """
+    Increase the element arr[index] in the array arr by k.
+    """
+    arr[index] = arr[index] + k
+    return arr
+
+arr = [1,1,4,5,1,4]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+arr = standard(arr,3,1145)
+sarr = increase_by(sarr, 3, 1145) # sint(3),sint(1145)
+
+try:
+    sarr.reveal()
+    flag = sint(1)
+    for i in range(len(arr)):
+        flag.update(flag.bit_and(sarr[i]==arr[i]))
+except Exception as e:
+    flag = sint(1)
+    for i in range(len(arr)):
+        flag.update(flag.bit_and(sarr[i].reveal()==arr[i]))
+
+
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

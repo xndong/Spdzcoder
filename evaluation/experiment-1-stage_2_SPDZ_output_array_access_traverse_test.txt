@@ -1,0 +1,103 @@
+indicate_positive, True, True
+array_xor, False, False
+interlaced_placement, True, True
+array_and, False, False
+array_indicator, False, True
+array_greater_than_scalar, True, True
+array_no_greater_than_scalar, True, False
+reverse_and_concat, False, True
+array_round, False, True
+array_greater_eq, True, True
+reverse, True, True
+indicate_negative, True, True
+max_sub_sequence, False, True
+compare_and_select, True, True
+count_element_frequency, True, True
+array_or, False, False
+stock_predicator, True, False
+len5_inc_array, True, False
+cut_first_five, True, True
+max_pooling_1d, True, True
+array_greater, True, True
+dumb_concat, True, True
+indicator_if_else, True, False
+elementwise_multiplication, True, False
+get_subarr_by_indices, True, True
+inc_array, True, True
+cut_last_five, True, True
+average_pooling_1d, True, True
+array_relu, True, True
+move_to_end, True, True
+set_to_zero, True, True
+last_partial_sum, False, False
+permute_by_indices, True, False
+get_rank, True, True
+interchange_by_indices, False, True
+increase_by, True, True
+retrieve_by_index, True, True
+scale_by, True, True
+take_opposite_to, True, True
+array_rank, True, True
+remove_by_index, False, True
+process_by_index, False, True
+sum_by_indices, True, True
+
+****************************************
+
+indicate_positive              True       True
+array_xor                      False      False
+interlaced_placement           True       True
+array_and                      False      False
+array_indicator                False      True
+array_greater_than_scalar      True       True
+array_no_greater_than_scalar   True       False
+reverse_and_concat             False      True
+array_round                    False      True
+array_greater_eq               True       True
+reverse                        True       True
+indicate_negative              True       True
+max_sub_sequence               False      True
+compare_and_select             True       True
+count_element_frequency        True       True
+array_or                       False      False
+stock_predicator               True       False
+len5_inc_array                 True       False
+cut_first_five                 True       True
+max_pooling_1d                 True       True
+array_greater                  True       True
+dumb_concat                    True       True
+indicator_if_else              True       False
+elementwise_multiplication     True       False
+get_subarr_by_indices          True       True
+inc_array                      True       True
+cut_last_five                  True       True
+average_pooling_1d             True       True
+array_relu                     True       True
+move_to_end                    True       True
+set_to_zero                    True       True
+last_partial_sum               False      False
+permute_by_indices             True       False
+get_rank                       True       True
+interchange_by_indices         False      True
+increase_by                    True       True
+retrieve_by_index              True       True
+scale_by                       True       True
+take_opposite_to               True       True
+array_rank                     True       True
+remove_by_index                False      True
+process_by_index               False      True
+sum_by_indices                 True       True
+
+****************************************
+
+# of test cases : 43
+# of first generation correct : 32
+# of second generation correct : 33
+
+p1_counter : 32
+p2_counter : 39
+average_p1_counter : 65
+
+p1_acc : 74.42%
+p2_acc : 90.70%
+ave_p1_acc : 75.58%

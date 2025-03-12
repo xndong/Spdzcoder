@@ -1,0 +1,40 @@
+'''*
+tags::for
+
+input:
+def len5_inc_array(init):
+    """
+    Return an increase-by-one array with given initial element and length 5.
+    """
+    ret = [init+i for i in range(5)]
+    return ret
+
+output:
+def len5_inc_array(init):
+    """
+    Return an increase-by-one array with given initial element and length 5.
+    """
+    ret = sfix.Array(5)
+    @for_range(5)
+    def _(i):
+        ret[i] = init + i
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+init = sint(-3)
+arr = len5_inc_array(init)
+arr.reveal()
+flag = (arr[0]==-3).bit_and(arr[1]==-2).bit_and(arr[2]==-1).bit_and(arr[4]==1)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

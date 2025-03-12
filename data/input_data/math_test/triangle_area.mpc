@@ -1,0 +1,38 @@
+'''*
+tags::math
+
+input:
+def triangle_area(side, height):
+    """
+    Given the length of on side and the corresponding height, compute the size of the triangle. 
+    """
+    return side*height/2
+
+output:
+def triangle_area(side, height):
+    """
+    Given the length of on side and the corresponding height, compute the size of the triangle. 
+    """
+    return side*height/sfix(2)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(side, height):
+    """
+    Given the length of on side and the corresponding height, compute the size of the triangle. 
+    """
+    return side*height/2
+
+flag = (abs(triangle_area(sfix(2),sfix(3))-standard(2,3))<0.001).bit_and(abs(triangle_area(sint(5),sint(7))-standard(5,7))<0.001).bit_and(abs(triangle_area(sfix(1.5),sfix(2.1))-standard(1.5,2.1))<0.001)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

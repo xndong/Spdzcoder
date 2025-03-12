@@ -1,0 +1,70 @@
+'''*
+tags::
+
+input:
+import numpy as np
+def logsumexp(log_probs):
+    """
+    Compute the logsumexp
+    """
+    _max = np.max(log_probs)
+    ds = log_probs - _max
+    exp_sum = np.exp(ds).sum()
+    return _max + np.log(exp_sum)
+
+annotation:
+The parameter `log_probs` of the function has the type of 1D array.
+The function `np.exp` computes the exponential function with base e (2.71828).
+The function `np.log` computes the natural logarithm with base e (2.71828).
+The return value of `logsumexp` should be a scalar.
+
+output:
+def logsumexp(log_probs):
+    """
+    Compute the logsumexp
+    """
+    import math
+    from Compiler import mpc_math
+    log_probs_vec = log_probs.get_vector()
+    _max = log_probs[0]
+    @for_range(len(log_probs))
+    def _(i):
+        _max.update((log_probs[i]>_max).if_else(log_probs[i],_max))
+    ds = log_probs_vec - _max
+    exp_sum = sum(mpc_math.pow_fx(math.e,ds))
+    return _max + mpc_math.log_fx(exp_sum,math.e)
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(log_probs):
+    """
+    Compute the logsumexp
+    """
+    _max = np.max(log_probs)
+    ds = log_probs - _max
+    exp_sum = np.exp(ds).sum()
+    return _max + np.log(exp_sum)
+
+arr = [2,3,4,5]
+sarr = sfix.Array(len(arr))
+for i in range(len(sarr)):
+    sarr[i] = arr[i]
+
+expected_out = standard(np.array(arr))
+out = logsumexp(sarr)
+flag = abs(out-expected_out)<0.05
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,56 @@
+'''*
+tags::for, if_else
+
+input:
+def seq_search(arr, target):
+    """
+    Do sequential search in the array for the target. 
+    Return the index of the target, return -1 if target not found.
+    The array is guaranteed to have all different elements. 
+    """
+    for i in range(len(arr)):
+        if arr[i]==target:
+            return i
+    return -1
+
+output:
+def seq_search(arr, target):
+    """
+    Do sequential search in the array for the target. 
+    Return the index of the target, return -1 if target not found.
+    The array is guaranteed to have all different elements. 
+    """
+    ret = sint(-1)
+    @for_range(len(arr))
+    def _(i):
+        ret.update((arr[i]==target).if_else(i,ret))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+array = [-1.414, 27, -0.3, 0, 11.45, 2.22, 2232, 5000, 65]
+sarray = sfix.Array(len(array))
+for i in range(len(array)):
+    sarray[i] = array[i]
+
+seq_search(sarray,-1.414).reveal()
+
+flag = sint(1)
+flag = flag.bit_and((seq_search(sarray,-1.414)==0).if_else(True,False))
+flag = flag.bit_and((seq_search(sarray,-0.3)==2).if_else(True,False))
+flag = flag.bit_and((seq_search(sarray,-114)==-1).if_else(True,False))
+flag = flag.bit_and((seq_search(sarray,366)==-1).if_else(True,False))
+flag = flag.bit_and((seq_search(sarray,2232)==6).if_else(True,False))
+flag = flag.bit_and((seq_search(sarray,5000)==7).if_else(True,False))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

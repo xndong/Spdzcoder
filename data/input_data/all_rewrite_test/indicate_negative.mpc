@@ -1,0 +1,69 @@
+'''*
+tags::for, if_else
+
+input:
+def indicate_negative(arr):
+    """
+    For the given array, return an array with the same size.
+    If one element in the input array is negative,
+    then the corresponding element in the returned array will be 1,
+    otherwise the element in the returned array will be 0.
+    """
+    ret = [1 if e < 0 else 0 for e in arr]
+    return ret
+
+output:
+def indicate_negative(arr):
+    """
+    For the given array, return an array with the same size.
+    If one element in the input array is negative,
+    then the corresponding element in the returned array will be 1,
+    otherwise the element in the returned array will be 0.
+    """
+    ret = sint.Array(len(arr))
+    @for_range(len(arr))
+    def _(i):
+        ret[i] = (arr[i]<0).if_else(1,0)
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    For the given array, return an array with the same size.
+    If one element in the input array is negative,
+    then the corresponding element in the returned array will be 1,
+    otherwise the element in the returned array will be 0.
+    """
+    ret = [0 for i in range(len(arr))]
+    for i in range(len(arr)):
+        if arr[i]<0:
+            ret[i] = 1
+        else:
+            ret[i] = 0
+    return ret
+
+array = [-7000,1.1,-45.1,4,0.0001,-1919,810,0,0]
+sarr = sfix.Array(len(array))
+for i in range(len(array)):
+    sarr[i] = array[i]
+
+output = indicate_negative(sarr)
+expected = standard(array)
+output.reveal()
+
+flag = sint(1)
+for i in range(len(array)):
+    flag.update(flag.bit_and(output[i]==expected[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

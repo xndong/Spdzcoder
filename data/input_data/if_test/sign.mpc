@@ -1,0 +1,45 @@
+# 2023-09-04 09:53:17
+'''*
+tags::if_else
+
+input:
+def sign(x):
+    """
+    If x is not zero, return 1 if x>0, and return -1 if x<0. 
+    If x is zero, return 0.
+    """
+    if x==0:
+        return 0
+    else:
+        return 1 if x>0 else -1
+
+output:
+def sign(x):
+    """
+    If x is not zero, return 1 if x>0, and return -1 if x<0. 
+    If x is zero, return 0.
+    """
+    zero = x==0
+    ret = zero.if_else(sint(0),(x>0).if_else(sint(1),sint(-1)))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+test_arr = sfix.Array(5)
+test_arr[0] = 114
+test_arr[1] = -51.4
+test_arr[2] = 6.5
+test_arr[4] = 0.472
+
+flag = (sign(test_arr[0])==1).bit_and(sign(test_arr[1])==-1).bit_and(sign(test_arr[2])==1).bit_and(sign(test_arr[3])==0).bit_and(sign(test_arr[4])==1)
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

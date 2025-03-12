@@ -1,0 +1,63 @@
+'''*
+tags::for
+
+input:
+def palindrome(arr):
+    """
+    Check whether the array is a palindrome.
+    """
+    flag = True
+    for i in range(len(arr)):
+        flag = flag and (arr[i]==arr[len(arr)-1-i])
+    return flag
+
+output:
+def palindrome(arr):
+    """
+    Check whether the array is a palindrome.
+    """
+    flag = sint(1)
+    @for_range(len(arr))
+    def _(i):
+        flag.update(flag.bit_and(arr[i]==arr[len(arr)-1-i]))
+    return flag
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Check whether the array is a palindrome.
+    """
+    flag = True
+    for i in range(len(arr)):
+        flag = flag and (arr[i]==arr[len(arr)-1-i])
+    return flag
+
+arr1 = [1,2,3,1]
+arr2 = [1,4,6,4,1]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+
+out1 = palindrome(sarr1)
+out2 = palindrome(sarr2)
+out1.reveal()
+out2.reveal()
+
+flag = (out1==standard(arr1)).bit_and(out2==standard(arr2))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,86 @@
+'''*
+tags::for, if_else
+
+input:
+def independent_robbery(houses):
+    """
+    Use dynamic programming to solve the "independent robbery" problem:
+    The robber wants to rob some houses align a street, each of which has some amount of money in it (guaranteed to be nonnegative). 
+    The robber cannot rob two consecutive houses, we want to know the max amount of money he can get. 
+    The number of houses is guaranteed to be no smaller than 3.
+    """
+    dp = [0 for i in range(len(houses))]
+    dp[0] = houses[0]
+    dp[1] = dp[1] if dp[1]>=dp[0] else dp[0]
+    for i in range(2,len(houses)):
+        if dp[i-2]+houses[i] >= dp[i-1]:
+            dp[i] = dp[i-2]+houses[i]
+        else:
+            dp[i] = dp[i-1]
+    return dp[len(houses)-1]
+
+output:
+def independent_robbery(houses):
+    """
+    Use dynamic programming to solve the "independent robbery" problem:
+    The robber wants to rob some houses align a street, each of which has some amount of money in it (guaranteed to be nonnegative). 
+    The robber cannot rob two consecutive houses, we want to know the max amount of money he can get. 
+    The number of houses is guaranteed to be no smaller than 3.
+    """
+    dp = sfix.Array(len(houses))
+    dp[0] = houses[0]
+    dp[1] = (dp[1]>=dp[0]).if_else(dp[1],dp[0])
+    @for_range(2,len(houses))
+    def _(i):
+        dp[i] = (dp[i-2]+houses[i]>=dp[i-1]).if_else(dp[i-2]+houses[i],dp[i-1])
+    return dp[len(houses)-1]
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(houses):
+    """
+    Use dynamic programming to solve the "independent robbery" problem:
+    The robber wants to rob some houses align a street, each of which has some amount of money in it (guaranteed to be nonnegative). 
+    The robber cannot rob two consecutive houses, we want to know the max amount of money he can get. 
+    The number of houses is guaranteed to be no smaller than 3.
+    """
+    dp = [0 for i in range(len(houses))]
+    dp[0] = houses[0]
+    dp[1] = dp[1] if dp[1]>=dp[0] else dp[0]
+    for i in range(2,len(houses)):
+        if dp[i-2]+houses[i] >= dp[i-1]:
+            dp[i] = dp[i-2]+houses[i]
+        else:
+            dp[i] = dp[i-1]
+    return dp[len(houses)-1]
+
+arr1 = [7,20,14,3,5,2,6,100,2]
+sarr1 = sint.Array(len(arr1))
+arr2 = [11,45,14,19,198,180]
+sarr2 = sint.Array(len(arr2))
+arr3 = [3,2,1,5,2,6,300]
+sarr3 = sint.Array(len(arr3))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+
+out1 = independent_robbery(sarr1)
+out2 = independent_robbery(sarr2)
+out3 = independent_robbery(sarr3)
+
+flag = (out1==standard(arr1)).bit_and(out2==standard(arr2)).bit_and(out3==standard(arr3))
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

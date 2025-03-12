@@ -1,0 +1,44 @@
+'''*
+tags::for
+
+input:
+def array_not(arr):
+    """
+    Take opposite to all elements in the input array.
+    """
+    for i in range(len(arr)):
+        arr[i] = not arr[i]
+    return arr
+
+output:
+def array_not(arr):
+    """
+    Take opposite to all elements in the input array.
+    """
+    @for_range(len(arr))
+    def _(i):
+        arr[i] = arr[i].bit_not()
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = [1,1,0,1]
+sarr = sint.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+out = array_not(sarr)
+out.reveal()
+flag = (out[0].bit_not()).bit_and(out[1].bit_not()).bit_and(out[2]).bit_and(out[3].bit_not())
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

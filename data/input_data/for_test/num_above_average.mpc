@@ -1,0 +1,72 @@
+'''*
+tags::for, if_else
+
+input:
+def num_above_average(arr):
+    """
+    Return the number of elements in the array larger than or equal to the average value. 
+    """
+    sum = 0
+    count = 0
+    for i in range(len(arr)):
+        sum = sum + arr[i]
+    avg = sum/len(arr)
+    for item in arr:
+        if item>=avg:
+            count = count + 1
+    return count
+
+output:
+def num_above_average(arr):
+    """
+    Return the number of elements in the array larger than or equal to the average value. 
+    """
+    sum = sfix(0)
+    count = sint(0)
+    @for_range(len(arr))
+    def add(i):
+        sum.update(sum+arr[i])
+    avg = sum/len(arr)
+    @for_range(len(arr))
+    def judge(i):
+        count.update((arr[i]>=avg).if_else(count+1,count))
+    return count
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Return the number of elements in the array larger than or equal to the average value. 
+    """
+    sum = 0
+    count = 0
+    for i in range(len(arr)):
+        sum = sum + arr[i]
+    avg = sum/len(arr)
+    for item in arr:
+        if item>=avg:
+            count = count + 1
+    return count
+
+numbers = [4,16.7,1,7,1024.9,9]
+sfix_array = sfix.Array(len(numbers))
+for i in range(len(numbers)):
+    sfix_array[i] = sfix(numbers[i])
+
+standard_output = standard(numbers)
+func_output = num_above_average(sfix_array)
+func_output.reveal()
+
+flag = func_output==standard_output
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

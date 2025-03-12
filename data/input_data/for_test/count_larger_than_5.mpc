@@ -1,0 +1,50 @@
+'''*
+tags::for, if_else
+
+input:
+def count_larger_than_5(arr):
+    """
+    Count the number of elements in the given array larger than 5. 
+    """
+    counter = 0
+    for item in arr:
+        if item > 5:
+            counter = counter + 1
+    return counter
+
+output:
+def count_larger_than_5(arr):
+    """
+    Count the number of elements in the given array larger than 5. 
+    """
+    counter = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        counter.update((arr[i]>5).if_else(counter+1,counter))
+    return counter
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,1,4,5,1,4]
+arr2 = [5,1,4,5,1,4,1,9,1,9,8,1,0]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]   
+
+flag = (count_larger_than_5(sarr1)==0).bit_and(count_larger_than_5(sarr2)==3)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

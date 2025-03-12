@@ -1,0 +1,63 @@
+'''*
+tags:: compute root mean square deviation
+
+input:
+import numpy
+def compute_RMSD(array):
+    """This function calculate the root mean square deviation."""
+    mean = np.mean(array)
+    deviation = array - mean
+    square = np.square(deviation)
+    square_mean = np.mean(square)
+    rmsd = np.sqrt(square_mean)
+    return rmsd
+
+output:
+import math
+from Compiler import mpc_math
+import operator
+from functools import reduce
+def compute_RMSD(spdzArray):
+    mean = reduce(operator.add, spdzArray.get_vector()) / len(spdzArray)
+    deviation = spdzArray.get_vector() - mean
+    square = deviation.square()
+    square_mean = reduce(operator.add, square) / len(square)
+    rmsd = mpc_math.sqrt(square_mean)
+    return rmsd
+
+*'''
+
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(array):
+    """This function calculate the root mean square deviation."""
+    mean = np.mean(array)
+    deviation = array - mean
+    square = np.square(deviation)
+    square_mean = np.mean(square)
+    rmsd = np.sqrt(square_mean)
+    return rmsd
+
+a = np.array([0.5,1.2,10.7,5.0,7.2])
+sa = sfix.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+out = standard(a)
+sout = compute_RMSD(sa)
+
+flag = abs(sout-out)<0.05
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,33 @@
+# 2023-09-24 22:13:01
+'''*
+tags::if_else
+
+input:
+def negative_plus1(y):
+    """
+    Return y+1 if y is negative, otherwise return y
+    """
+    return y+1 if y<0 else y
+
+output:
+def negative_plus1(y):
+    """
+    Return y+1 if y is negative, otherwise return y
+    """
+    return (y<0).if_else(y+1,y)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (negative_plus1(sfix(0))==0).bit_and(negative_plus1(sint(-7))==-6).bit_and(negative_plus1(sfix(-0.3))==0.7).bit_and(negative_plus1(sfix(11.3))==11.3)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

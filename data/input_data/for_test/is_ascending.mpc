@@ -1,0 +1,55 @@
+'''*
+tags::for, if_else
+
+input:
+def is_ascending(arr):
+    """
+    Return whether or not the array is in strictly ascending order.
+    If the length of input array is 1, you should return True.
+    """
+    for i in range(len(arr)-1):
+        if arr[i]>=arr[i+1]:
+            return False
+    return True
+
+output:
+def is_ascending(arr):
+    """
+    Return whether or not the array is in strictly ascending order.
+    If the length of input array is 1, you should return True.
+    """
+    ret = sint(1)
+    @for_range(len(arr)-1)
+    def _(i):
+        ret.update((arr[i]>=arr[i+1]).if_else(False,ret))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,14,51,419,19810]
+arr2 = [-22,-3,2,5,7,7,9,16]
+arr3 = [-2000,-3,-21,5,7,9,16]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+sarr3 = sint.Array(len(arr3))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+
+flag = is_ascending(sarr1).bit_and(is_ascending(sarr2).bit_not()).bit_and(is_ascending(sarr3).bit_not())
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

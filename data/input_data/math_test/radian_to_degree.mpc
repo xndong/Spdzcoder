@@ -1,0 +1,46 @@
+'''*
+tags::math
+
+input:
+def radian_to_degree(r):
+    """
+    Converting radian to degree
+    """
+    import math
+    return r/math.pi*180
+
+output:
+def radian_to_degree(r):
+    """
+    Converting radian to degree
+    """
+    import math
+    return r/math.pi*sfix(180)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(r):
+    """
+    Converting radian to degree
+    """
+    import math
+    return r/math.pi*180
+
+radians = [0.5, 1, 1.5, 2, 2.5, 3]
+flag = sint(1)
+for radian in radians:
+    out = radian_to_degree(radian)
+    out.reveal()
+    flag.update(flag.bit_and(abs((out-standard(radian))/standard(radian))<0.01))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

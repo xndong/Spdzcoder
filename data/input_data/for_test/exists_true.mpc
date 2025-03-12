@@ -1,0 +1,49 @@
+'''*
+tags::for
+
+input:
+def exists_true(arr):
+    """
+    Check whether the boolean array contains a True.
+    """
+    ret = False
+    for item in arr:
+        ret = ret or item
+    return ret
+
+output:
+def exists_true(arr):
+    """
+    Check whether the boolean array contains a True.
+    """
+    ret = sint(0)
+    @for_range(0,len(arr))
+    def _(i):
+        ret.update(ret.bit_or(arr[i]))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [0,1,1,0,1,0]
+arr2 = [0,0,0]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+
+flag = (exists_true(sarr1)).bit_and(exists_true(sarr2).bit_not())
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

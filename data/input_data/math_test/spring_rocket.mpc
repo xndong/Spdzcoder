@@ -1,0 +1,56 @@
+'''*
+tags::math
+
+input:
+def spring_rocket(height,m,k):
+    """
+    You want to use a spring with stiffness coefficient k to bounce an object with mass m to the given height. 
+    You should return the minimum length the spring should be compressed. 
+    Assume g = 9.8
+    """
+    import math
+    g = 9.8
+    return math.sqrt(2*m*g*height/k)
+
+output:
+def spring_rocket(height,m,k):
+    """
+    You want to use a spring with stiffness coefficient k to bounce an object with mass m to the given height. 
+    You should return the minimum length the spring should be compressed. 
+    Assume g = 9.8
+    """
+    from Compiler import mpc_math
+    g = sfix(9.8)
+    return mpc_math.sqrt_simplified_fx(2*m*g*height/k)
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(height,m,k):
+    """
+    You want to use a spring with stiffness coefficient k to bounce an object with mass m to the given height. 
+    You should return the minimum length the spring should be compressed. 
+    Assume g = 9.8
+    """
+    import math
+    g = 9.8
+    return math.sqrt(2*m*g*height/k)
+
+out1 = spring_rocket(sfix(10),1,1)
+out2 = spring_rocket(sfix(100),2,1.5)
+out1.reveal()
+out2.reveal()
+
+flag = (abs((out1-standard(10,1,1))/standard(10,1,1))<0.05).bit_and(abs((out2-standard(100,2,1.5))/standard(100,2,1.5))<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

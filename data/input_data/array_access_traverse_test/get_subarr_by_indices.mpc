@@ -1,0 +1,78 @@
+'''*
+tags::array_access, for
+
+input:
+def get_subarr_by_indices(a, indices):
+    """
+    Get the subarray of the input array indicated by the indices.
+    The inputs are guaranteed to be legal.
+    """
+    ret = [0 for i in range(len(indices))]
+    for i in range(len(indices)):
+        ret[i] = a[indices[i]]
+    return ret
+
+output:
+def get_subarr_by_indices(a, indices):
+    """
+    Get the subarray of the input array indicated by the indices.
+    The inputs are guaranteed to be legal.
+    """
+    def retrieve(arr,index):
+        """
+        Retrieve the element in the array by index.
+        """
+        ret = sfix(0)
+        @for_range(len(arr))
+        def _(i):
+            ret.update((index==i).if_else(arr[i],ret))
+        return ret
+
+    ret = sfix.Array(len(indices))
+    @for_range(len(indices))
+    def _(i):
+        ret[i] = retrieve(a,indices[i])
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a, indices):
+    """
+    Get the subarray of the input array indicated by the indices.
+    The inputs are guaranteed to be legal.
+    """
+    ret = [0 for i in range(len(indices))]
+    for i in range(len(indices)):
+        ret[i] = a[indices[i]]
+    return ret
+
+arr = [11,4,5,14,19,1,98,10]
+indices = [1,1,4,5,1,4]
+sarr = sint.Array(len(arr))
+sindices = sint.Array(len(indices))
+
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+for i in range(len(indices)):
+    sindices[i] = indices[i]
+
+out = get_subarr_by_indices(sarr,indices) # sindices
+expected = standard(arr,indices)
+out.reveal()
+
+flag = sint(1)
+for i in range(len(out)):
+    flag.update(flag.bit_and(out[i]==expected[i]))
+flag.update(flag.bit_and(len(out)==len(expected)))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

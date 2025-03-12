@@ -1,0 +1,48 @@
+'''*
+tags::math
+
+input:
+def self_exponent(k):
+    """
+    Return the self-exponent k^k.
+    """
+    import math
+    return math.pow(k,k)
+
+output:
+def self_exponent(k):
+    """
+    Return the self-exponent k^k.
+    """
+    from Compiler import mpc_math
+    return mpc_math.pow_fx(k,k)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(k):
+    """
+    Return the self-exponent k^k.
+    """
+    import math
+    return math.pow(k,k)
+
+out1 = self_exponent(sfix(2.5))
+out2 = self_exponent(sfix(4))
+out3 = self_exponent(sfix(1))
+out1.reveal()
+out2.reveal()
+out3.reveal()
+
+flag = (abs((out1-standard(2.5))/standard(2.5))<0.01).bit_and(abs((out2-standard(4))/standard(4))<0.01).bit_and(abs((out3-standard(1))/standard(1))<0.01)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

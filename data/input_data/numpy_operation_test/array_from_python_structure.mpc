@@ -1,0 +1,32 @@
+'''*
+tags::
+
+input:
+"""Create 1-dim array with length 5 by converting from python built-in strcutures."""
+a_l = [0,10,20,30,40]
+a = np.array(a_l)
+
+output:
+a_l = sint([0,10,20,30,40])
+a = Array.create_from(a_l)
+
+*'''
+
+####################################################################
+
+# insert here #
+
+
+####################################################################
+
+standard = [0,10,20,30,40]
+flag = sint(1)
+for i in range(len(standard)):
+    flag = flag.bit_and(a[i]==standard[i])
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,51 @@
+'''*
+tags::for, if_else
+
+input:
+def exists_5_or_7(arr):
+    """
+    Check whether the array contains 5 or 7.
+    """
+    flag = [True if item == 5 or item == 7 else False for item in arr]
+    return any(flag)
+
+output:
+def exists_5_or_7(arr):
+    """
+    Check whether the array contains 5 or 7.
+    """
+    ret = sint(0)
+    @for_range(0,len(arr))
+    def _(i):
+        ret.update(ret.bit_or((arr[i]==5).bit_or(arr[i]==7)))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,1,4,5,1,4]
+arr2 = [6,6,4,7,2]
+arr3 = [1,4,2,8,6,1,4,6,6,4]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+sarr3 = sint.Array(len(arr3))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+
+flag = (exists_5_or_7(sarr1)).bit_and(exists_5_or_7(sarr2)).bit_and(exists_5_or_7(sarr3).bit_not())
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

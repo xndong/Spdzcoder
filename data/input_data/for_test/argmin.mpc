@@ -1,0 +1,66 @@
+'''*
+tags::for, if_else
+
+input:
+def argmin(a):
+    """
+    Return the index of the min velue of an array. 
+    """
+    current = a[0]
+    index = 0
+    for i in range(len(a)):
+        index = index if current<=a[i] else i
+        current = current if current<=a[i] else a[i]
+    return index
+
+output:
+def argmin(a):
+    """
+    Return the index of the min value of an array. 
+    """
+    current = a[0]
+    index = sint(0)
+    @for_range(len(a))
+    def compare_and_save(i):
+        index.update((current<=a[i]).if_else(index,i))
+        current.update((current<=a[i]).if_else(current,a[i]))
+    return index
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a):
+    """
+    Return the index of the min velue of an array. 
+    Check first whether the array is empty
+    """
+    if len(a)==0:
+        raise ValueError("The length of the array is 0!")
+    current = a[0]
+    index = 0
+    for i in range(len(a)):
+        index = index if current<=a[i] else i
+        current = current if current<=a[i] else a[i]
+    return index
+
+
+numbers = [4,16.7,1,7,1024.9,9,-1145]
+sfix_array = sfix.Array(len(numbers))
+for i in range(len(numbers)):
+    sfix_array[i] = sfix(numbers[i])
+
+standard_output = standard(numbers)
+func_output = argmin(sfix_array)
+func_output.reveal()
+flag = standard_output==func_output
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

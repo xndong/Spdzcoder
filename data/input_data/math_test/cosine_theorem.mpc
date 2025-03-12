@@ -1,0 +1,44 @@
+'''*
+tags::math
+
+input:
+def cosine_theorem(a,b,rad):
+    """
+    Given the two edges a, b and the angle rad between them, 
+    use cosine theorem to compute the length of the third edge.
+    """
+    import math
+    return math.sqrt(a**2+b**2-2*a*b*math.cos(rad))
+
+output:
+def cosine_theorem(a,b,rad):
+    """
+    Given the two edges a, b and the angle rad between them, 
+    use cosine theorem to compute the length of the third edge.
+    """
+    from Compiler import mpc_math
+    return mpc_math.sqrt_simplified_fx(a**2+b**2-2*a*b*mpc_math.cos(rad))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a,b,rad):
+    """
+    Given the two edges a, b and the angle rad between them, 
+    use cosine theorem to compute the length of the third edge.
+    """
+    import math
+    return math.sqrt(a**2+b**2-2*a*b*math.cos(rad))
+
+flag = (abs(cosine_theorem(3,4,sfix(1.57))-standard(3,4,1.57))<0.01).bit_and(abs(cosine_theorem(4,5,sfix(1))-standard(4,5,1))<0.01)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

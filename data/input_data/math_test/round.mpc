@@ -1,0 +1,52 @@
+'''*
+tags::math, if_else
+
+input:
+def round(x):
+    """
+    Round x to the nearest integer. 
+    """
+    import math
+    x_int = math.floor(x)
+    return x_int if (x-x_int)<0.5 else x_int+1
+
+output:
+def round(x):
+    """
+    Round x to the nearest integer. 
+    """
+    from Compiler import mpc_math
+    x_int = mpc_math.floor_fx(x)
+    return ((x-x_int)<0.5).if_else(x_int,x_int+1)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    Round x to the nearest integer. 
+    """
+    import math
+    x_int = math.floor(x)
+    return x_int if (x-x_int)<0.5 else x_int+1
+
+flag = sint(1)
+
+numbers = [4.8,-16.2,-1,7.001,1024.3,9.9]
+for number in numbers:
+    a = sfix(number)
+    a_outcome = round(a)
+    a_expected = standard(number)
+    a_outcome.reveal()
+    flag.update(flag.bit_and(a_outcome==a_expected))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,75 @@
+'''*
+tags::for
+
+input:
+def average_pooling_1d(vec,step):
+    """
+    Do 1-dimensional average pooling on vec with step. 
+    Ignoring the remaining elements in the vector.
+    """
+    ret_length = len(vec)//step
+    ret = [0 for i in range(ret_length)]
+    for i in range(len(ret)):
+        avg = 0
+        for j in range(step):
+            avg = avg + vec[i*step+j]/step
+        ret[i] = avg
+    return ret
+
+output:
+def average_pooling_1d(vec,step):
+    """
+    Do 1-dimensional average pooling on vec with step. 
+    Ignoring the remaining elements in the vector.
+    """
+    ret_length = len(vec)//step
+    ret = sfix.Array(ret_length)
+    @for_range(len(ret))
+    def _(i):
+        avg = sfix(0)
+        @for_range(step)
+        def _(j):
+            avg.update(avg+vec[i*step+j]/step)
+        ret[i] = avg
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(vec,step):
+    """
+    Do 1-dimensional average pooling on vec with step. 
+    Ignoring the remaining elements in the vector.
+    """
+    ret_length = len(vec)//step
+    ret = [0 for i in range(ret_length)]
+    for i in range(len(ret)):
+        avg = 0
+        for j in range(step):
+            avg = avg + vec[i*step+j]/step
+        ret[i] = avg
+    return ret
+
+array = [-7000,11,-451,4,0,-1919,810,11,24]
+sarr = sint.Array(len(array))
+for i in range(len(array)):
+    sarr[i] = array[i]
+
+output = average_pooling_1d(sarr,2)
+expected = standard(array,2)
+
+flag = sint(1)
+for i in range(len(output)):
+    flag.update(flag.bit_and(abs((output[i]-expected[i])/expected[i])<0.1))
+flag.update(flag.bit_and(len(output)==len(expected)))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

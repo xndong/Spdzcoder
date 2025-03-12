@@ -1,0 +1,80 @@
+'''*
+tags::for, if_else
+
+input:
+def clip(arr, upper_bound=1, lower_bound=-1):
+    """
+    For the given array, clip the elements to the range [lower_bound, upper_bound]
+    """
+    def helper_func(x):
+        return upper_bound if x >= upper_bound else (x if x > lower_bound else lower_bound)
+
+    arr = list(map(helper_func, arr))
+    return arr
+
+annotation:
+`arr` is an array. 
+This function clip the elements of `arr` into the scope of `[lower_bound, upper_bound]` and return the result array.
+
+output:
+def clip(arr, upper_bound=1, lower_bound=-1):
+    """
+    For the given array, clip the elements to the range [lower_bound, upper_bound]
+    """
+    @for_range(len(arr))
+    def clip(i):
+        arr[i] = (arr[i]<lower_bound).if_else(lower_bound,arr[i])
+        arr[i] = (arr[i]>upper_bound).if_else(upper_bound,arr[i])
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr, upper_bound=1, lower_bound=-1):
+    """
+    For the given array, clip the elements to the range [lower_bound, upper_bound]
+    """
+    for i in range(len(arr)):
+        if arr[i] < lower_bound:
+            arr[i] = lower_bound
+        if arr[i] > upper_bound:
+            arr[i] = upper_bound
+    return arr
+
+arr1 = [114,514,-191,98,10,-65,472]
+sarr1 = sint.Array(len(arr1))
+u1 = 113
+l1 = 14
+arr2 = [31,41,5,92,-65,-35,89,793]
+sarr2 = sint.Array(len(arr2))
+u2 = 80
+l2 = 20
+
+for i in range(len(arr1)):
+    sarr1[i] = sint(arr1[i])
+for i in range(len(arr2)):
+    sarr2[i] = sint(arr2[i])
+
+arr1 = standard(arr1, upper_bound=u1, lower_bound=l1)
+sarr1 = clip(sarr1, upper_bound=u1, lower_bound=l1)
+arr2 = standard(arr2, upper_bound=u2, lower_bound=l2)
+sarr2 = clip(sarr2, upper_bound=u2, lower_bound=l2)
+sarr1.reveal()
+sarr2.reveal()
+
+flag = sint(1)
+for i in range(len(arr1)):
+    flag.update(flag.bit_and((abs((sarr1[i].reveal()-arr1[i])/arr1[i])<0.01).if_else(True,False)))
+for i in range(len(arr2)):
+    flag.update(flag.bit_and((abs((sarr2[i].reveal()-arr2[i])/arr2[i])<0.01).if_else(True,False)))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

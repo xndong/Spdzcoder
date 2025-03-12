@@ -1,0 +1,50 @@
+'''*
+tags::
+
+input:
+def diag(array):
+    import numpy as np
+    diag = np.diagonal(array)
+    return diag
+
+annotation:
+Obtain the diagonal elements in a multiarray or matrix.
+The input is a matrix and the output should be an array.
+
+output:
+def diag(array):
+    diag = array.diag()
+    return diag
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+
+alist = [[1,2,3],[4,5,6],[7,8,9]]
+spdzarray = sfix.Tensor([3,3])
+spdzarray[0] = sfix.Array(3).assign([1,2,3])
+spdzarray[1] = sfix.Array(3).assign([4,5,6])
+spdzarray[2] = sfix.Array(3).assign([7,8,9])
+
+diagonal = diag(spdzarray)
+
+vector = sfix.Array(3).assign([1,5,9]).get_vector()
+
+sintbit_vec = (vector == diagonal) # vector
+sintbit_arr = Array.create_from(sintbit_vec) # array
+
+flag = sint(1)
+@for_range(3)
+def _(i):
+    flag.update(flag.bit_and(sintbit_arr[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

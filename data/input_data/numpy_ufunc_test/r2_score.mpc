@@ -1,0 +1,60 @@
+'''*
+tags::
+
+input:
+def r2_score(y_hat, y_test):
+    """
+    Compute the r2 score.
+    """
+    total_sum_squares = np.sum((y_test - np.mean(y_test))**2)
+    residual_sum_squares = np.sum((y_test - y_hat)**2)
+    return 1 - residual_sum_squares/total_sum_squares
+
+output:
+def r2_score(y_hat, y_test):
+    """
+    Compute the r2 score.
+    """
+    y_hat_vec = y_hat.get_vector()
+    y_test_vec = y_test.get_vector()
+    avg = sum(y_test_vec)/len(y_test_vec)
+    total_sum_squares = sum((y_test_vec-avg)**2)
+    residual_sum_squares = sum((y_test_vec - y_hat_vec)**2)
+    return 1 - residual_sum_squares/total_sum_squares
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(y_hat, y_test):
+    """
+    Compute the r2 score.
+    """
+    total_sum_squares = np.sum((y_test - np.mean(y_test))**2)
+    residual_sum_squares = np.sum((y_test - y_hat)**2)
+    return 1 - residual_sum_squares/total_sum_squares
+
+arr1 = [2,3,4,5]
+arr2 = [2.5,4,2,4]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+for i in range(len(sarr1)):
+    sarr1[i] = arr1[i]
+    sarr2[i] = arr2[i]
+
+expected_out = standard(np.array(arr1),np.array(arr2))
+out = r2_score(sarr1,sarr2)
+flag = abs(out-expected_out)<0.05
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

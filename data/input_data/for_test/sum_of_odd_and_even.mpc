@@ -1,0 +1,72 @@
+'''*
+tags::for, if_else
+
+input:
+def sum_of_odd_and_even(arr):
+    """
+    Return the sum of odd number and even number in the array.
+    The elements in the input array are guaranteed to be integers. 
+    """
+    odd_sum = 0
+    even_sum = 0
+    for item in arr:
+        if item%2:
+            odd_sum = odd_sum + item
+        else:
+            even_sum = even_sum + item
+    return odd_sum, even_sum
+
+output:
+def sum_of_odd_and_even(arr):
+    """
+    Return the sum of odd number and even number in the array.
+    The elements in the input array are guaranteed to be integers. 
+    """
+    odd_sum = sint(0)
+    even_sum = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        odd_sum.update((arr[i]%2).if_else(odd_sum+arr[i],odd_sum))
+        even_sum.update(((arr[i]%2).bit_not()).if_else(even_sum+arr[i],even_sum))
+    return odd_sum, even_sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Return the sum of odd number and even number in the array.
+    The elements in the input array are guaranteed to be integers. 
+    """
+    odd_sum = 0
+    even_sum = 0
+    for item in arr:
+        if item%2:
+            odd_sum = odd_sum + item
+        else:
+            even_sum = even_sum + item
+    return odd_sum, even_sum
+
+arr = [11, -45, 14, -19, 98, 0, -3, 65, -472]
+sarr = sint.Array(len(arr))
+
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+out_1, out_2 = sum_of_odd_and_even(sarr)
+expected_1, expected_2 = standard(arr)
+out_1.reveal()
+out_2.reveal()
+
+flag = (out_1==expected_1).bit_and(out_2==expected_2)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

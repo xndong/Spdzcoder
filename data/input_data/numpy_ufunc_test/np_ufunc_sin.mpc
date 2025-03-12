@@ -1,0 +1,51 @@
+'''*
+tags:: compute sine function.
+
+input:
+import numpy
+def compute_sine(array):
+    """This function calculate trigonometric sine, element-wise."""
+    sin_res = numpy.sin(array)
+    return sin_res
+
+output:
+from Compiler import mpc_math
+def compute_sine(spdzarray):            # sfix
+    vector = spdzarray.get_vector()
+    sin_res = mpc_math.sin(vector)
+    sin_res = Array.create_from(sin_res)
+    return sin_res
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(array):
+    """This function calculate trigonometric cosine, element-wise."""
+    cos_res = np.sin(array)
+    return cos_res
+
+a = np.array([0.5,-1.2,10.7,5.0,-7.2])
+sa = sfix.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+out = standard(a)
+sout = compute_sine(sa)
+
+flag = sint(1)
+
+for i in range(len(sout)):
+    flag = flag.bit_and(abs(sout[i]-out[i])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

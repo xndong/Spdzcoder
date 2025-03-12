@@ -1,0 +1,68 @@
+'''*
+tags::array_access, for
+
+input:
+def count_element_frequency(l):
+    """
+    Return an array with the same size of the original array, 
+    each position of which records the number of occurrences of the element at the same position. 
+    """
+    ret = [0 for i in range(len(l))]
+    for i in range(len(l)):
+        for j in range(len(l)):
+            if l[j]==l[i]:
+                ret[i] = ret[i] + 1
+    return ret
+
+output:
+def count_element_frequency(l):
+    """
+    Return an array with the same size of the original array, 
+    each position of which records the number of occurrences of the element at the same position. 
+    """
+    ret = sint.Array(len(l))
+    @for_range(len(l))
+    def _(i):
+        @for_range(len(l))
+        def _(j):
+            ret[i] = (l[j]==l[i]).if_else(ret[i]+1,ret[i])
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(l):
+    """
+    Return an array with the same size of the original array, 
+    each position of which records the number of occurrences of the element at the same position. 
+    """
+    ret = [0 for i in range(len(l))]
+    for i in range(len(l)):
+        for j in range(len(l)):
+            if l[j]==l[i]:
+                ret[i] = ret[i] + 1
+    return ret
+
+arr = [1,1,4,5,1,4,1,9,1,9,8,1,0]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+    
+expected = standard(arr)
+output = count_element_frequency(sarr)
+output.reveal()
+
+flag = sint(1)
+for i in range(len(arr)):
+    flag.update(flag.bit_and(output[i]==expected[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

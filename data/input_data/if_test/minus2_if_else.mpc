@@ -1,0 +1,33 @@
+# 2023-09-04 09:34:00
+'''*
+tags::if_else
+
+input:
+def minus2_if_else(x):
+    """
+    Return x-2 if x-2 is no less than 0, otherwise return x
+    """
+    return x-2 if x-2>=0 else x
+
+output:
+def minus2_if_else(x):
+    """
+    Return x-2 if x-2 is no less than 0, otherwise return x
+    """
+    return (x-2>=0).if_else(x-2,x)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (minus2_if_else(sfix(1.2))==1.2).bit_and(minus2_if_else(sfix(7.3))==5.3).bit_and(minus2_if_else(sfix(-4))==-4).bit_and(minus2_if_else(sfix(2))==0).bit_and(minus2_if_else(sfix(5))==3).bit_and(minus2_if_else(sint(0))==0)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

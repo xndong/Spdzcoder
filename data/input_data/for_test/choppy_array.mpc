@@ -1,0 +1,65 @@
+'''*
+tags::for
+
+input:
+def choppy_array(arr):
+    """
+    Return whether or not the input array is a "choppy array".
+    A "choppy array" is the following array: 
+    The first element is the smallest, 
+    the second is the largest of the remaining, 
+    the third is the smallest of the remaining, 
+    the fourth is the largest of the remaining, etc.
+    """
+    for i in range(len(arr)):
+        for j in range(len(arr)-i):
+            if i%2 and arr[i+j]>arr[i]:
+                return False
+            if (not i%2) and arr[i+j]<arr[i]:
+                return False
+    return True
+
+output:
+def choppy_array(arr):
+    """
+    Return whether or not the input array is a "choppy array".
+    A "choppy array" is the following array: 
+    The first element is the smallest, 
+    the second is the largest of the remaining, 
+    the third is the smallest of the remaining, 
+    the fourth is the largest of the remaining, etc.
+    """
+    ret = sint(1)
+    @for_range(len(arr))
+    def outer(i):
+        @for_range(len(arr)-i)
+        def inner(j):
+            ret.update(((i%2).bit_and(arr[i+j]>arr[i])).if_else(False,ret))
+            ret.update(((i%2).bit_not().bit_and(arr[i+j]<arr[i])).if_else(False,ret))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [-3,60,1,50,10,33,12,20,20,20,20,20]
+arr2 = [-3,59,0,60,1,50,10,33,12,20]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+
+flag = choppy_array(sarr1).bit_and(choppy_array(sarr2).bit_not())
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

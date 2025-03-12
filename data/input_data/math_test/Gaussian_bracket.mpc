@@ -1,0 +1,36 @@
+'''*
+tags::math
+
+input:
+def Gaussian_bracket(x):
+    """
+    Return the value of Gaussian large bracket.
+    """
+    import math
+    x_int = math.floor(x)
+    return x - x_int
+
+output:
+def Gaussian_bracket(x):
+    """
+    Round x to the nearest integer. 
+    """
+    from Compiler import mpc_math
+    x_int = mpc_math.floor_fx(x)
+    return x - x_int
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (Gaussian_bracket(sfix(1.2))==0.2).bit_and(Gaussian_bracket(sfix(1))==0).bit_and(Gaussian_bracket(sfix(-1.7))==0.3).bit_and(Gaussian_bracket(sfix(-17))==0).bit_and(Gaussian_bracket(sfix(1145.79))==0.79)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

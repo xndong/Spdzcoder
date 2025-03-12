@@ -1,0 +1,54 @@
+Compiler.oram module
+====================
+
+This module contains an implementation of the tree-based oblivious RAM
+as proposed by Shi et al. as well as the straight-forward construction
+using linear scanning. Unlike "Array", this allows access by a secret
+index:
+
+   a = OptimalORAM(1000)
+   i = sint.get_input_from(0)
+   a[i] = sint.get_input_from(1)
+
+Compiler.oram.OptimalORAM(size, *args, **kwargs)
+
+   Create an ORAM instance suitable for the size based on experiments.
+
+   Parameters:
+      * **size** -- number of elements
+
+      * **value_type** -- "sint" (default) / "sg2fn" / "sfix"
+
+
+Compiler.sqrt_oram module
+=========================
+
+class Compiler.sqrt_oram.SqrtOram(data: ~Compiler.sqrt_oram.T | ~Compiler.types.MultiArray, entry_length: int = 1, value_type: ~typing.Type[~Compiler.sqrt_oram.T] = <class 'Compiler.types.sint'>, k: int = 0, period: int | None = None, initialize: bool = True, empty_data=False)
+
+   Oblivious RAM using the "Square-Root" algorithm.
+
+   Parameters:
+      * **data** (*MultiArray*) -- The data with which to initialize
+        the ORAM. One may provide a MultiArray such that every "block"
+        can hold multiple elements (an Array).
+
+      * **value_type** (*sint*) -- The secret type to use, defaults to
+        sint.
+
+      * **k** (*int*) -- Leave at 0, this parameter is used to
+        recursively pass down the depth of this ORAM.
+
+      * **period** (*int*) -- Leave at None, this parameter is used to
+        recursively pass down the top-level period.
+
+
+Compiler.sorting module
+=======================
+
+Compiler.sorting.radix_sort(k, D)
+
+   Sort in place according to key.
+
+   Parameters:
+      * **k** -- keys (vector or Array of sint or sfix)
+      * **D** -- Array or MultiArray to sort

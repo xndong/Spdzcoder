@@ -1,0 +1,59 @@
+'''*
+tags::for, if_else
+
+input:
+def exists_dominator(arr):
+    """
+    Check whether there exists a dominator in the given array, 
+    whose absolute value is strictly larger than the sum of the absolute values of all other elements. 
+    """
+    max = 0
+    sum = 0
+    for item in arr:
+        max = abs(item) if abs(item)>max else max
+        sum = sum + abs(item)
+    return 2*max > sum
+
+output:
+def exists_dominator(arr):
+    """
+    Check whether there exists a dominator in the given array, 
+    whose absolute value is strictly larger than the sum of the absolute values of all other elements. 
+    """
+    max = sfix(0)
+    sum = sfix(0)
+    @for_range(len(arr))
+    def _(i):
+        max.update((abs(arr[i])>max).if_else(abs(arr[i]),max))
+        sum.update(sum+abs(arr[i]))
+    return 2*max > sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [100,-90,-8,13]
+arr2 = [-654,47,2,142,65,65.3]
+arr3 = [1234,-4,9,16,8]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+sarr3 = sfix.Array(len(arr3))
+
+for i in range(len(arr1)):
+    sarr1[i] = sfix(arr1[i])
+for i in range(len(arr2)):
+    sarr2[i] = sfix(arr2[i])
+for i in range(len(arr3)):
+    sarr3[i] = sfix(arr3[i])
+
+flag = (exists_dominator(sarr1).bit_not()).bit_and(exists_dominator(sarr2)).bit_and(exists_dominator(sarr3))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

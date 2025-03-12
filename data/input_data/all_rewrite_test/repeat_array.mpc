@@ -1,0 +1,52 @@
+'''*
+tags::
+
+input:
+def repeat_array(c):
+    """
+    Repeat the input array by concatenating it to itself.
+    """
+    return c*2
+
+annotation:
+`c` is a list, this function return the list obtained by concatenating the input list to itself.
+
+output:
+def repeat_array(c):
+    """
+    Repeat the input array by concatenating it to itself.
+    """
+    return c.concat(c)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(c):
+    """
+    Repeat the input array by concatenating it to itself.
+    """
+    return c+c
+
+arr = [1,7]
+sarr = sfix.Array(2)
+sarr[0] = 1
+sarr[1] = 7
+
+expected = standard(arr)
+output = repeat_array(sarr)
+output.reveal()
+
+flag = len(output)==sint(4)
+for i in range(len(arr)):
+    flag.update(flag.bit_and(output[i]==expected[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

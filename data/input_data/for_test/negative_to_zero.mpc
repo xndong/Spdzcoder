@@ -1,0 +1,59 @@
+'''*
+tags::
+
+input:
+def negative_to_zero(array):
+    """
+    Turn the negative elements in the array to zero
+    """
+    for i in range(len(array)):
+        if array[i]>=0:
+            continue
+        array[i] = 0
+    return array
+
+output:
+def negative_to_zero(array):
+    """
+    Turn the negative elements in the array to zero
+    """
+    @for_range(len(array))
+    def _(i):
+        array[i] = (array[i]>=0).if_else(array[i],0)
+    return array
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(array):
+    """
+    Turn the negative elements in the array to zero
+    """
+    for i in range(len(array)):
+        if array[i]>=0:
+            continue
+        array[i] = 0
+    return array
+
+arr = [11,-4,5,-14,-191,-98,10]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+expected_arr = standard(arr)
+output_arr = negative_to_zero(sarr)
+
+flag = sint(1)
+for i in range(len(arr)):
+    flag.update(flag.bit_and(output_arr[i]==expected_arr[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

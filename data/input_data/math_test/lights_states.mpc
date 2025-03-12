@@ -1,0 +1,36 @@
+'''*
+tags::math
+
+input:
+def lights_states(num):
+    """
+    Given the number of lights (all different), compute the total number of possible states. 
+    (Each light has two states: on/off)
+    """
+    import math
+    return math.exp2(num)
+
+output:
+def lights_states(num):
+    """
+    Given the number of lights (all different), compute the total number of possible states. 
+    (Each light has two states: on/off)
+    """
+    from Compiler import mpc_math
+    return mpc_math.exp2_fx(num)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (lights_states(sfix(10))==1024).bit_and(lights_states(sfix(0))==1).bit_and(lights_states(sfix(6))==64)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,51 @@
+'''*
+tags::math
+
+input:
+def Heron(a,b,c):
+    """
+    Given the lengths of three sides of the triangle, compute its size with Heron's formula.
+    """
+    import math
+    p = (a+b+c)/2
+    return math.sqrt(p*(p-a)*(p-b)*(p-c))
+
+output:
+def Heron(a,b,c):
+    """
+    Given the lengths of three sides of the triangle, compute its size with Heron's formula.
+    """
+    from Compiler import mpc_math
+    p = (a+b+c)/2
+    return mpc_math.sqrt_simplified_fx(p*(p-a)*(p-b)*(p-c))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a,b,c):
+    """
+    Given the lengths of three sides of the triangle, compute its size with Heron's formula.
+    """
+    import math
+    p = (a+b+c)/2
+    return math.sqrt(p*(p-a)*(p-b)*(p-c))
+
+out1 = Heron(sfix(3),4,5)
+out2 = Heron(sfix(8),4,5)
+out3 = Heron(sfix(8),9,5)
+out1.reveal()
+out2.reveal()
+out3.reveal()
+
+flag = (abs((out1-standard(3,4,5))/standard(3,4,5))<0.01).bit_and(abs((out2-standard(8,4,5))/standard(8,4,5))<0.01).bit_and(abs((out3-standard(8,9,5))/standard(8,9,5))<0.01)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

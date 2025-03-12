@@ -1,0 +1,37 @@
+# 2023-09-07 11:53:21
+'''*
+tags::multi_if_else
+
+input:
+def clip_at_6(x):
+    """
+    Return x, and clip the return value into the range [-6,6]
+    """
+    if x > 6:
+        return 6
+    if x < -6:
+        return -6
+    return x
+
+output:
+def clip_at_6(x):
+    """
+    Return x, and clip the return value into the range [-6,6]
+    """
+    return (x>6).if_else(6,(x<-6).if_else(-6,x))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (clip_at_6(sfix(7.4))==6).bit_and(clip_at_6(sfix(117.4))==6).bit_and(clip_at_6(sfix(1.13))==1.13).bit_and(clip_at_6(sfix(-5.992))==-5.992).bit_and(clip_at_6(sfix(-6.3))==-6)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,65 @@
+'''*
+tags::
+
+input:
+def sum_but_skip_biggest(array):
+    """
+    Compute partial sum of the array but skip the biggest element in until now every time.
+    """
+    sum = 0
+    biggest = array[0]
+    for i in range(len(array)):
+        if array[i]>=biggest:
+            biggest = array[i]
+            continue
+        sum += array[i]
+    return sum
+
+output:
+def sum_but_skip_biggest(array):
+    """
+    Compute partial sum of the array but skip the biggest element in until now every time.
+    """
+    sum = sint(0)
+    biggest = array[0]
+    @for_range(len(array))
+    def _(i):
+        skip = array[i]>=biggest
+        biggest.update(skip.if_else(array[i],biggest))
+        sum.iadd(skip.if_else(0,array[i]))
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,1,-4,9,6]
+sarr1 = sint.Array(len(arr1))
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+
+arr2 = [1,2,3,88,100]
+sarr2 = sint.Array(len(arr2))
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+
+arr3 = [2,1,-8,88,10]
+sarr3 = sint.Array(len(arr3))
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+
+output1 = sum_but_skip_biggest(sarr1)
+output2 = sum_but_skip_biggest(sarr2)
+output3 = sum_but_skip_biggest(sarr3)
+
+flag = (output1==2).bit_and(output2==0).bit_and(output3==3)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

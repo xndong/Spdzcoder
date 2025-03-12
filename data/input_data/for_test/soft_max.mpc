@@ -1,0 +1,75 @@
+'''*
+tags::for, math
+
+input:
+def soft_max(arr):
+    """
+    Return the array of soft-max of the input array. 
+    """
+    import math
+    denominator = 0
+    for item in arr:
+        denominator = denominator + math.pow(math.e,item)
+    brr = arr
+    for i in range(len(arr)):
+        brr[i] = math.pow(math.e,arr[i])/denominator
+    return brr
+
+output:
+def soft_max(arr):
+    """
+    Return the array of soft-max of the input array. 
+    """
+    import math
+    from Compiler import mpc_math
+    denominator = sfix(0)
+    @for_range(len(arr))
+    def _(i):
+        denominator.update(denominator+mpc_math.pow_fx(math.e,arr[i]))
+    brr = arr
+    @for_range(len(arr))
+    def _(i):
+        brr[i] = mpc_math.pow_fx(math.e,arr[i])/denominator
+    return brr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Return the array of soft-max of the input array. 
+    """
+    import math
+    if len(arr) == 0:
+        raise ValueError("The array should not be empty!")
+    denominator = 0
+    for item in arr:
+        denominator = denominator + math.pow(math.e,item)
+    brr = arr
+    for i in range(len(arr)):
+        brr[i] = math.pow(math.e,arr[i])/denominator
+    return brr
+
+arr = [0.4,0.16,-0.999,7,-4,9]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = sfix(arr[i])
+
+out = standard(arr)
+sout = soft_max(sarr)
+sout.reveal()
+
+flag = sint(1)
+for i in range(len(arr)):
+    flag.update(flag.bit_and(abs(out[i]-sout[i])<0.001))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,45 @@
+# 2023-09-24 22:12:37
+'''*
+tags::math, multi_if_else
+
+input:
+def taxi_fare(m):
+    """
+    Compute the taxi fare given the miles it covers. 
+    The rule is the following:
+    Base fare: 5, which can cover the first 5 files.
+    The part in [5,10] is charged with 1.2 dollar per mile.
+    The part in [10,+INF] is charged with 1.5 dollar per mile. 
+    """
+    if m<=5:
+        return 5
+    if 5<=m<=10:
+        return 5 + 1.2*(m-5)
+    return 11 + 1.5*(m-10)
+
+output:
+def taxi_fare(m):
+    """
+    Compute the taxi fare given the miles it covers. 
+    The rule is the following:
+    Base fare: 5, which can cover the first 5 files.
+    The part in [5,10] is charged with 1.2 dollar per mile.
+    The part in [10,+INF] is charged with 1.5 dollar per mile. 
+    """
+    return (m<=5).if_else(5,(m<=10).if_else(5+sfix(1.2)*(m-5),11+sfix(1.5)*(m-10)))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (abs(taxi_fare(sfix(1.3))-5)<0.001).bit_and(abs(taxi_fare(sfix(4.88))-5)<0.001).bit_and(abs(taxi_fare(sfix(8))-8.6)<0.001).bit_and(abs(taxi_fare(sint(14))-17)<0.001).bit_and(abs(taxi_fare(sfix(22.4))-29.6)<0.001)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

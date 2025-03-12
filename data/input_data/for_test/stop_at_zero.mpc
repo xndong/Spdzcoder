@@ -1,0 +1,61 @@
+'''*
+tags::
+
+input:
+def stop_at_zero(array):
+    """
+    Add 1 to all elements in the array, but stop if found an element equal to 0
+    """
+    for i in range(len(array)):
+        if array[i]==0:
+            break
+        array[i] += 1
+    return array
+
+output:
+def stop_at_zero(array):
+    """
+    Add 1 to all elements in the array, but stop if found an element equal to 0
+    """
+    stop = sint(0)
+    @for_range(len(array))
+    def _(i):
+        stop.update(stop.bit_or(array[i]==0))
+        array[i] = array[i] + stop.if_else(0,1)
+    return array
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(array):
+    """
+    Add 1 to all elements in the array, but stop if found an element equal to 0
+    """
+    for i in range(len(array)):
+        if array[i]==0:
+            break
+        array[i] += 1
+    return array
+
+arr = [11,-4,5,-14,0,-191,-98,10]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+expected_arr = standard(arr)
+output_arr = stop_at_zero(sarr)
+
+flag = sint(1)
+for i in range(len(arr)):
+    flag.update(flag.bit_and(output_arr[i]==expected_arr[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

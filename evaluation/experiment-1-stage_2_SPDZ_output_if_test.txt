@@ -1,0 +1,85 @@
+sin_or_cos, True, True
+negative_relu, True, True
+is_close, True, True
+hardswish, True, True
+clip_at_6, True, True
+piecewise_function, False, False
+middle, False, False
+indicated_sin_or_cos, True, True
+minus2_if_else, True, True
+relu6, True, True
+exp_slide, True, False
+pass_or_not, True, True
+how_many_roots, False, False
+elu, False, False
+relu, True, True
+leaky_relu, True, True
+max, True, True
+bowl_shape, True, True
+rounded_kinetic_energy, True, False
+danger_test, True, True
+indicated_sum_or_multiply, True, True
+median, True, False
+add_upto_10, True, True
+taxi_fare, True, False
+round, True, True
+gpa_calculator, False, False
+sign, True, True
+sum_or_difference, True, True
+CNOT, True, True
+negative_plus1, True, True
+is_a_parallelogram, True, True
+min, True, True
+choice_of_the_knight, True, False
+max_sum_difference, True, True
+
+****************************************
+
+sin_or_cos                     True       True
+negative_relu                  True       True
+is_close                       True       True
+hardswish                      True       True
+clip_at_6                      True       True
+piecewise_function             False      False
+middle                         False      False
+indicated_sin_or_cos           True       True
+minus2_if_else                 True       True
+relu6                          True       True
+exp_slide                      True       False
+pass_or_not                    True       True
+how_many_roots                 False      False
+elu                            False      False
+relu                           True       True
+leaky_relu                     True       True
+max                            True       True
+bowl_shape                     True       True
+rounded_kinetic_energy         True       False
+danger_test                    True       True
+indicated_sum_or_multiply      True       True
+median                         True       False
+add_upto_10                    True       True
+taxi_fare                      True       False
+round                          True       True
+gpa_calculator                 False      False
+sign                           True       True
+sum_or_difference              True       True
+CNOT                           True       True
+negative_plus1                 True       True
+is_a_parallelogram             True       True
+min                            True       True
+choice_of_the_knight           True       False
+max_sum_difference             True       True
+
+****************************************
+
+# of test cases : 34
+# of first generation correct : 29
+# of second generation correct : 24
+
+p1_counter : 29
+p2_counter : 29
+average_p1_counter : 53
+
+p1_acc : 85.29%
+p2_acc : 85.29%
+ave_p1_acc : 77.94%

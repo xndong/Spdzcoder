@@ -1,0 +1,61 @@
+'''*
+tags::for
+
+input:
+def partial_sum(arr):
+    """
+    Compute the partial sum of the array. 
+    """
+    partial = 0
+    for i in range(len(arr)):
+        partial = partial + arr[i]
+        arr[i] = partial
+    return arr
+
+output:
+def partial_sum(arr):
+    """
+    Compute the partial sum of the array. 
+    """
+    partial = sfix(0)
+    @for_range(len(arr))
+    def _(i):
+        partial.update(partial+arr[i])
+        arr[i] = partial
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Compute the partial sum of the array. 
+    """
+    partial = 0
+    for i in range(len(arr)):
+        partial = partial + arr[i]
+        arr[i] = partial
+    return arr
+
+arr = [1,16,-9,7,-4,19]
+sarr = sint.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = sint(arr[i])
+
+out = standard(arr)
+sout = partial_sum(sarr)
+
+flag = sint(1)
+for i in range(len(arr)):
+    flag.update(flag.bit_and(out[i]==sout[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

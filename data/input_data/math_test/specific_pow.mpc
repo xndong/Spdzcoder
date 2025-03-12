@@ -1,0 +1,41 @@
+'''*
+tags::math
+
+input:
+def specific_pow(x):
+    """
+    Return x^(2.5).
+    """
+    import math
+    return math.pow(x,2.5)
+
+output:
+def specific_pow(x):
+    """
+    Return x^(2.5).
+    """
+    from Compiler import mpc_math
+    return mpc_math.pow_fx(x,sfix(2.5))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    Return x^(2.5).
+    """
+    import math
+    return math.pow(x,2.5)
+
+flag = (abs((specific_pow(sfix(1.2))-standard(1.2))/standard(1.2))<0.01).bit_and(abs((specific_pow(sfix(20))-standard(20))/standard(20))<0.01).bit_and(abs((specific_pow(sfix(10))-standard(10))/standard(10))<0.01)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

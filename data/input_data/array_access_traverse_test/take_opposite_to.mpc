@@ -1,0 +1,64 @@
+'''*
+tags::array_access
+
+input:
+def take_opposite_to(arr,index):
+    """
+    Take opposite to the element in the array with given index.
+    The input index is guaranteed to be legal.
+    """
+    arr[index] = -arr[index]
+    return arr
+
+output:
+def take_opposite_to(arr,index):
+    """
+    Take opposite to the element in the array with given index.
+    The input index is guaranteed to be legal.
+    """
+    @for_range(len(arr))
+    def _(i):
+        arr[i] = (i==index).if_else(-arr[i],arr[i])
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr,index):
+    """
+    Take opposite to the element in the array with given index.
+    The input index is guaranteed to be legal.
+    """
+    arr[index] = -arr[index]
+    return arr
+
+arr = [11,4,5,14,191,98,10]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+expected = standard(arr,4)
+# output = take_opposite_to(sarr,sint(4))
+output = take_opposite_to(sarr,4)
+
+try:
+    output.reveal()
+    flag = sint(1)
+    for i in range(len(arr)):
+        flag.update(flag.bit_and(output[i]==expected[i]))
+except Exception as e:
+    flag = sint(1)
+    for i in range(len(arr)):
+        flag.update(flag.bit_and(output[i].reveal()==expected[i]))
+
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

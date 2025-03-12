@@ -1,0 +1,53 @@
+'''*
+tags:: compute arccos function.
+
+input:
+import numpy
+def compute_arccos(array):
+    """This function calculate trigonometric inverse cosine, element-wise."""
+    arccos_res = numpy.arccos(array)
+    return arccos_res
+
+output:
+from Compiler import mpc_math
+def compute_arccos(spdzarray):
+    vector = spdzarray.get_vector()
+    arccos_res = mpc_math.acos(vector)
+    arccos_res = Array.create_from(arccos_res)
+    return arccos_res
+*'''
+
+
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(array):
+    """This function calculate trigonometric inverse cosine, element-wise."""
+    arccos_res = np.arccos(array)
+    return arccos_res
+
+a = np.array([0.5,0.8,-0.7,0,-0.2])
+sa = sfix.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+out = standard(a)
+sout = compute_arccos(sa)
+
+flag = sint(1)
+
+for i in range(len(sout)):
+    flag = flag.bit_and(abs(sout[i]-out[i])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

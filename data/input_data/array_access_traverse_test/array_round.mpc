@@ -1,0 +1,66 @@
+'''*
+tags::for, math, if_else
+
+input:
+def array_round(arr):
+    """
+    Round every element in the array to the nearest integer.
+    """
+    import math
+    ret = [0 for i in range(len(arr))]
+    for i in range(len(arr)):
+        int_part = math.floor(arr[i])
+        ret[i] = int_part if arr[i]-int_part<0.5 else int_part+1
+    return ret
+
+output:
+def array_round(arr):
+    """
+    Round every element in the array to the nearest integer.
+    """
+    from Compiler import mpc_math
+    ret = sfix.Array(len(arr))
+    @for_range(len(arr))
+    def _(i):
+        int_part = mpc_math.floor_fx(arr[i])
+        ret[i] = (arr[i]-int_part<0.5).if_else(int_part,int_part+1)
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Round every element in the array to the nearest integer.
+    """
+    import math
+    ret = [0 for i in range(len(arr))]
+    for i in range(len(arr)):
+        int_part = math.floor(arr[i])
+        ret[i] = int_part if arr[i]-int_part<0.5 else int_part+1
+    return ret
+
+array = [-7000,1.1,-45.1,4,0.01,-191.9,810]
+sarr = sfix.Array(len(array))
+
+for i in range(len(array)):
+    sarr[i] = array[i]
+
+output = array_round(sarr)
+expected = standard(array)
+output.reveal()
+
+flag = sint(1)
+for i in range(len(array)):
+    flag.update(flag.bit_and(output[i]==expected[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

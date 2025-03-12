@@ -1,0 +1,59 @@
+'''*
+tags::math
+
+input:
+def cube_and_square_root(x):
+    """
+    take cube to the input, then compute the square root of the outcome
+    """
+    import math
+    return math.sqrt(math.pow(x,3))
+
+output:
+def cube_and_square_root(x):
+    """
+    take cube to the input, then compute the square root of the outcome
+    """
+    from Compiler import mpc_math
+    return mpc_math.sqrt_simplified_fx(mpc_math.pow_fx(x,3))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    take cube to the input, then compute the square root of the outcome
+    """
+    import math
+    return math.sqrt(math.pow(x,3))
+
+flag = sint(1)
+
+numbers = [4,16,1,7,16,9]
+for number in numbers:
+    a = sfix(number)
+    a_outcome = cube_and_square_root(a)
+    a_expected = standard(number)
+    a_outcome.reveal()
+    result = abs(a_expected-a_outcome.reveal())/a_expected
+    
+    @if_e(result < 0.05)
+    def _():
+        pass
+    @else_
+    def _():
+        print_ln(number)
+        print_ln('%s',a_outcome.reveal())
+        print_ln(a_expected)
+        flag.update(sint(0))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

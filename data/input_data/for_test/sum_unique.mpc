@@ -1,0 +1,76 @@
+'''*
+tags::for, if_else
+
+input:
+def sum_unique(arr):
+    """
+    Return the sum of unique elements in the array.
+    """
+    sum = 0
+    for i in range(len(arr)):
+        unique = True
+        for j in range(len(arr)):
+            if arr[j]==arr[i] and j!=i:
+                unique = False
+                break
+        if unique:
+            sum = sum + arr[i]
+    return sum
+
+output:
+def sum_unique(arr):
+    """
+    Return the sum of unique elements in the array.
+    """
+    sum = sfix(0)
+    @for_range(len(arr))
+    def _(i):
+        unique = sint(1)
+        @for_range(len(arr))
+        def _(j):
+            unique.update(unique.bit_and(((arr[j]==arr[i]).bit_and(j!=i)).bit_not()))
+        sum.update(unique.if_else(sum+arr[i],sum))
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Return the sum of unique elements in the array.
+    """
+    sum = 0
+    for i in range(len(arr)):
+        unique = True
+        for j in range(len(arr)):
+            if arr[j]==arr[i] and j!=i:
+                unique = False
+                break
+        if unique:
+            sum = sum + arr[i]
+    return sum
+
+arr1 = [1,1,4,5,1,4,1,9,1,9,8,1,0]
+arr2 = [65,47,2,142,65,66]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+for i in range(len(arr1)):
+    sarr1[i] = sint(arr1[i])
+for i in range(len(arr2)):
+    sarr2[i] = sint(arr2[i])
+
+out1 = sum_unique(sarr1)
+out2 = sum_unique(sarr2)
+
+flag = (out1==standard(arr1)).bit_and(out2==standard(arr2))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

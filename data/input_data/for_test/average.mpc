@@ -1,0 +1,71 @@
+'''*
+tags::for
+
+input:
+def average(arr):
+    """
+    Compute the average value of the array.
+    """
+    sum = 0
+    length = len(arr)
+    for i in range(length):
+        sum = sum + arr[i]
+    ret = sum/length
+    return ret
+
+output:
+def average(arr):
+    """
+    Compute the average value of the array.
+    """
+    sum = sfix(0)
+    @for_range(length)
+    def add(i):
+        sum.update(sum+arr[i])
+    ret = sum/length
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Compute the average value of the array.
+    """
+    length = len(arr)
+    if length==0:
+        raise ValueError("The array is empty!")
+    sum = 0
+    for i in range(length):
+        sum = sum + arr[i]
+    ret = sum/length
+    return ret
+
+numbers = [4,16.7,1,7,1024.9,9]
+sfix_array = sfix.Array(6)
+for i in range(6):
+    sfix_array[i] = sfix(numbers[i])
+
+standard_output = standard(numbers)
+func_output = average(sfix_array)
+func_output.reveal()
+result = abs(func_output.reveal()-standard_output)/standard_output
+
+flag = sint(1)
+@if_e(result < 0.01)
+def _():
+    pass
+@else_
+def _():
+    flag.update(sint(0))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

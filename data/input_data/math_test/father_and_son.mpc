@@ -1,0 +1,35 @@
+'''*
+tags::math
+
+input:
+def father_and_son(father_age, son_age):
+    """
+    Given the age of father and son, 
+    return before how many years or after how many years, the age of father is twice as the age of son.
+    """
+    return abs(father_age-son_age*2)
+
+output:
+def father_and_son(father_age, son_age):
+    """
+    Given the age of father and son, 
+    return before how many years or after how many years, the age of father is twice as the age of son.
+    """
+    return abs(father_age-son_age*2)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+father_and_son(sint(30),10).reveal()
+flag = (father_and_son(sint(30),10)==10).bit_and(father_and_son(sint(30),20)==10).bit_and(father_and_son(sint(43),20)==3).bit_and(father_and_son(sint(42),21)==0)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

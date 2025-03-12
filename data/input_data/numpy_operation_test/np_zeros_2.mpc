@@ -1,0 +1,41 @@
+'''*
+tags::
+
+input:
+# plain text variables: n
+def zeros(n):
+    import numpy as np
+    return np.zeros(n)
+
+annotation:
+Create 1-dim all-zero array with length n.
+
+output:
+def zeros(n):
+    return Array(n, sint)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+
+spdzarray = zeros(10)
+spdzvec = spdzarray.get_vector()
+
+sintbit_vec = spdzvec.equal(sint.Array(10).get_vector()) # vector
+sintbit_arr = Array.create_from(sintbit_vec) # array
+
+flag = sint(1)
+@for_range(10)
+def _(i):
+    flag.update(flag.bit_and(sintbit_arr[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

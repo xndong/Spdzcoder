@@ -1,0 +1,65 @@
+'''*
+tags::for
+
+input:
+def elementwise_multiplication(a,b):
+    """
+    Compute the elementwise multiplication of the two input vectors. 
+    """
+    ret = [0 for i in range(len(a))]
+    for i in range(len(ret)):
+        ret[i] = a[i]*b[i]
+    return ret
+
+output:
+def elementwise_multiplication(a,b):
+    """
+    Compute the elementwise multiplication of the two input vectors. 
+    """
+    ret = sfix.Array(len(a))
+    @for_range(len(ret))
+    def _(i):
+        ret[i] = a[i]*b[i]
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a,b):
+    """
+    Compute the elementwise multiplication of the two input vectors. 
+    Check first whether the two vectors are of the same length. 
+    """
+    if len(a) != len(b):
+        raise ValueError("Two input vectors must be of the same length!")
+    ret = [0 for i in range(len(a))]
+    for i in range(len(ret)):
+        ret[i] = a[i]*b[i]
+    return ret
+
+arr1 = [1,12,3,1]
+arr2 = [-3,-3,2,-52]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+for i in range(len(arr1)):
+    sarr1[i] = sfix(arr1[i])
+    sarr2[i] = sfix(arr2[i])
+
+output = elementwise_multiplication(sarr1,sarr2)
+output.reveal()
+expected = standard(arr1,arr2)
+
+flag = sint(1)
+for i in range(len(output)):
+    flag.update(flag.bit_and(output[i]==expected[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

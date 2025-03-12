@@ -1,0 +1,56 @@
+'''*
+tags::
+
+input:
+def cross_entropy(y):
+    """
+    Compute the cross-entropy loss.
+    """
+    import numpy as np
+    return -np.sum(y * np.log(y))
+
+annotation:
+
+
+output:
+def cross_entropy(y):
+    """
+    Compute the cross-entropy loss.
+    """
+    import math
+    from Compiler import mpc_math
+    y_vec = y.get_vector()
+    return -sum(y_vec*mpc_math.log_fx(y_vec,math.e))
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(y):
+    """
+    Compute the cross-entropy loss.
+    """
+    import numpy as np
+    return -np.sum(y * np.log(y))
+
+arr = [2,3,4,5]
+sarr = sfix.Array(len(arr))
+for i in range(len(sarr)):
+    sarr[i] = arr[i]
+
+expected_out = standard(np.array(arr))
+out = cross_entropy(sarr)
+flag = abs(out-expected_out)<0.05
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

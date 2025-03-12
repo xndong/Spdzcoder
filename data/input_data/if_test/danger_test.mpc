@@ -1,0 +1,39 @@
+# 2023-09-07 11:53:17
+'''*
+tags::if_else
+
+input:
+def danger_test(origin,damage):
+    """
+    The Dragon Warrior is punched by his enemy! 
+    Given the Dragon Warrior's initial health and the damage he receives, 
+    decide whether the situation is dangerous. 
+    (If the health left is no more than 10, we say that the situation is dangerous)
+    """
+    return origin-damage<=10
+
+output:
+def danger_test(origin,damage):
+    """
+    The Dragon Warrior is punched by his enemy! 
+    Given the Dragon Warrior's initial health and the damage he receives, 
+    decide whether the situation is dangerous. 
+    (If the health left is no more than 10, we say that the situation is dangerous)
+    """
+    return origin-damage<=10
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (danger_test(sfix(13),sfix(3))).bit_and(danger_test(sfix(9),sfix(0.1))).bit_and(danger_test(sfix(99),sfix(98))).bit_and(danger_test(sfix(14),sfix(1)).bit_not())
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,59 @@
+# 2023-09-24 22:15:56
+'''*
+tags::if_else
+
+input:
+def choice_of_the_knight(x,y):
+    """
+    Use the pair with elements 0-7 to represent the position on the chess board. 
+    Here is a knight on position (x,y) of an empty chess board. 
+    You should return how many positions on the chess board the knight can reach. 
+    """
+    counter = 0
+    def legal(a,b):
+        return 0<=a<=7 and 0<=b<=7
+    counter = counter+1 if legal(x+1,y+2) else counter
+    counter = counter+1 if legal(x-1,y+2) else counter
+    counter = counter+1 if legal(x+1,y-2) else counter
+    counter = counter+1 if legal(x-1,y-2) else counter
+    counter = counter+1 if legal(x+2,y+1) else counter
+    counter = counter+1 if legal(x-2,y+1) else counter
+    counter = counter+1 if legal(x+2,y-1) else counter
+    counter = counter+1 if legal(x-2,y-1) else counter
+    return counter
+
+output:
+def choice_of_the_knight(x,y):
+    """
+    Use the pair with elements 0-7 to represent the position on the chess board. 
+    Here is a knight on position (x,y) of an empty chess board. 
+    You should return how many positions on the chess board the knight can reach. 
+    """
+    counter = sint(0)
+    def legal(a,b):
+        return (0<=a).bit_and(a<=7).bit_and(0<=b).bit_and(b<=7)
+    counter = legal(x+1,y+2).if_else(counter+1,counter)
+    counter = legal(x-1,y+2).if_else(counter+1,counter)
+    counter = legal(x+1,y-2).if_else(counter+1,counter)
+    counter = legal(x-1,y-2).if_else(counter+1,counter)
+    counter = legal(x+2,y+1).if_else(counter+1,counter)
+    counter = legal(x-2,y+1).if_else(counter+1,counter)
+    counter = legal(x+2,y-1).if_else(counter+1,counter)
+    counter = legal(x-2,y-1).if_else(counter+1,counter)
+    return counter
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (choice_of_the_knight(sint(0),sint(0))==2).bit_and(choice_of_the_knight(sint(2),sint(1))==6).bit_and(choice_of_the_knight(sint(3),sint(3))==8).bit_and(choice_of_the_knight(sint(7),sint(6))==3).bit_and(choice_of_the_knight(sint(6),sint(6))==4)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

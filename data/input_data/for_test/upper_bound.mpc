@@ -1,0 +1,57 @@
+'''*
+tags::for, multi_if_else
+
+input:
+def upper_bound(arr,x):
+    """
+    Return the index of the smallest element bigger than x in arr.
+    If such element does not exist, return -1.
+    """
+    ret = -1
+    distance = 0
+    found = False
+    for i in range(len(arr)):
+        if arr[i]>x:
+            if not found or arr[i]-x<distance:
+                ret = i
+                distance = arr[i]-x
+                found = True
+    return ret
+
+output:
+def upper_bound(arr,x):
+    """
+    Return the index of the smallest element bigger than x in arr.
+    If such element does not exist, return -1.
+    """
+    ret = sint(-1)
+    distance = sfix(0)
+    found = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        first_predicate = arr[i]>x
+        second_predicate = first_predicate.bit_and((found.bit_not()).bit_or(arr[i]-x<distance))
+        ret.update(second_predicate.if_else(i,ret))
+        distance.update(second_predicate.if_else(arr[i]-x,distance))
+        found.update(second_predicate.if_else(True,found))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = [1, 3, -7, 4.4, 6, 7]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = sfix(arr[i])
+
+flag = (upper_bound(sarr,7)==-1).bit_and(upper_bound(sarr,3)==3).bit_and(upper_bound(sarr,-5)==0).bit_and(upper_bound(sarr,-114)==2).bit_and(upper_bound(sarr,4.4)==4)
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

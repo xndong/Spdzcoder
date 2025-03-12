@@ -1,0 +1,48 @@
+'''*
+tags::math
+
+input:
+def sin_plus_cos(a):
+    """
+    Return sin(a)+cos(a)
+    """
+    import math
+    return math.sin(a) + math.cos(a)
+
+output:
+def sin_plus_cos(a):
+    """
+    Return sin(a)+cos(a)
+    """
+    from Compiler import mpc_math
+    return mpc_math.sin(a) + mpc_math.cos(a)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a):
+    """
+    Return sin(a)+cos(a)
+    """
+    import math
+    return math.sin(a) + math.cos(a)
+
+out1 = sin_plus_cos(sfix(1.5))
+out2 = sin_plus_cos(sfix(-0.7))
+out3 = sin_plus_cos(sfix(1))
+out1.reveal()
+out2.reveal()
+out3.reveal()
+
+flag = (abs((out1-standard(1.5))/standard(1.5))<0.01).bit_and(abs((out2-standard(-0.7))/standard(-0.7))<0.01).bit_and(abs((out3-standard(1))/standard(1))<0.01)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

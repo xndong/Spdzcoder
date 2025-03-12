@@ -1,0 +1,37 @@
+'''*
+tags::math
+
+input:
+def how_many_chickens(heads,legs):
+    """
+    Compute the number of chickens in the rabbit-chicken problem.
+    """
+    return heads-(legs-heads*2)//2
+
+output:
+def how_many_chickens(heads,legs):
+    """
+    Compute the number of chickens in the rabbit-chicken problem.
+    """
+    return heads-(legs-heads*2)/2
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+num1 = how_many_chickens(sint(10),sint(30))
+num2 = how_many_chickens(sint(102),sint(286))
+num1.reveal()
+num2.reveal()
+
+flag = (num1==5).bit_and(num2==61)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

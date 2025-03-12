@@ -1,0 +1,47 @@
+'''*
+tags::math
+
+input:
+def circle_area(r):
+    """
+    Return the area of the circle with given radius.
+    """
+    import math
+    return math.pi*r**2
+
+output:
+def circle_area(r):
+    """
+    Return the area of the circle with given radius.
+    """
+    import math
+    return math.pi*r**2
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(r):
+    """
+    Return the area of the circle with given radius.
+    """
+    import math
+    return math.pi*r**2
+
+flag = sint(1)
+
+numbers = [0.4,0.16,12,7,4,9]
+for number in numbers:
+    out = circle_area(sfix(number))
+    out.reveal()
+    flag.update(flag.bit_and(abs((standard(number)-out)/standard(number))<0.01))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

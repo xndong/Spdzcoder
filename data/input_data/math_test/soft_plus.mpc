@@ -1,0 +1,52 @@
+'''*
+tags::math
+
+input:
+def soft_plus(x):
+    """
+    Softplus function
+    """
+    import math
+    return math.log(1+math.pow(math.e,x),math.e)
+
+output:
+def soft_plus(x):
+    """
+    Softplus function
+    """
+    import math
+    from Compiler import mpc_math
+    return mpc_math.log_fx(1+mpc_math.pow_fx(math.e,x),math.e)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    Softplus function
+    """
+    import math
+    return math.log(1+math.pow(math.e,x),math.e)
+
+inputs = [-5,-4,-2,0,1.5,9,10]
+sinputs = sfix.Array(len(inputs))
+for i in range(len(inputs)):
+    sinputs[i] = inputs[i]
+
+flag = sint(1)
+
+for i in range(len(inputs)):
+    out = soft_plus(sinputs[i])
+    out.reveal()
+    flag.update(flag.bit_and(abs(out-standard(inputs[i]))<0.01))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

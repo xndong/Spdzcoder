@@ -1,0 +1,59 @@
+# 2023-09-05 10:37:30
+'''*
+tags::math, if_else
+
+input:
+def elu(x):
+    """
+    ELU function
+    """
+    import math
+    if x>0:
+        return x
+    else:
+        return math.pow(math.e,x)-1
+
+output:
+def elu(x):
+    """
+    ELU function
+    """
+    import math
+    from Compiler import mpc_math
+    return (x>0).if_else(x, mpc_math.pow_fx(math.e,x)-1)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    ELU function
+    """
+    import math
+    if x>0:
+        return x
+    else:
+        return math.pow(math.e,x)-1
+
+inputs = [-5,-4,-2,0,1.5,9,10]
+sinputs = sfix.Array(len(inputs))
+for i in range(len(inputs)):
+    sinputs[i] = inputs[i]
+
+flag = sint(1)
+
+for i in range(len(inputs)):
+    out = elu(sinputs[i])
+    out.reveal()
+    flag.update(flag.bit_and(abs(out-standard(inputs[i]))<0.01))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

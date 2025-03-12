@@ -1,0 +1,57 @@
+'''*
+tags::math
+
+input:
+def sigmoid(x):
+    """
+    sigmoid function
+    """
+    import math
+    return 1/(1+math.pow(math.e,-x))
+
+output:
+def sigmoid(x):
+    """
+    sigmoid function
+    """
+    import math
+    from Compiler import mpc_math
+    return 1/(1+mpc_math.pow_fx(math.e,-x))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    sigmoid function
+    """
+    import math
+    return 1/(1+math.pow(math.e,-x))
+
+flag = sint(1)
+
+numbers = [0.4,0.16,-0.999,7,-4,9]
+for number in numbers:
+    a = sfix(number)
+    a_outcome = sigmoid(a)
+    a_expected = standard(number)
+    a_outcome.reveal()
+    result = abs((a_expected-a_outcome.reveal())/a_expected)
+    
+    @if_e(result < 0.01)
+    def _():
+        pass
+    @else_
+    def _():
+        flag.update(sint(0))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

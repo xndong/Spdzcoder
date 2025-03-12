@@ -1,0 +1,35 @@
+# 2023-09-04 09:46:04
+'''*
+tags::if_else
+
+input:
+def add_upto_10(a,b):
+    """
+    Return the value of a+b, if the sum exceeds 10, clip it to 10.
+    """
+    if a+b > 10:
+        return 10
+    return a+b
+
+output:
+def add_upto_10(a,b):
+    """
+    Return the value of a+b, if the sum exceeds 10, clip it to 10.
+    """
+    return (a+b>10).if_else(10,a+b)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (add_upto_10(sfix(100), sfix(-93.2))==6.8).bit_and(add_upto_10(sfix(3), sfix(8.3))==10).bit_and(add_upto_10(sfix(-2), sfix(-17))==-19)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

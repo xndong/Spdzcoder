@@ -1,0 +1,72 @@
+'''*
+tags::
+
+input:
+def update_weights(m,A,X,Y):
+    """
+    Update the weights and return the difference.
+    """
+    import numpy as np
+    dw=(1/m)*np.dot(X,(A-Y))
+    return dw
+
+annotation:
+`A`, `X` and `Y` are all 2D matrices, and `m` is a constant scalar.
+
+output:
+def update_weights(m,A,X,Y):
+    """
+    Update the weights and return the difference.
+    """
+    ret_matrix = X.dot(A-Y)
+    ret_vec = ret_matrix.get_vector()
+    ret_vec = (1/m)*ret_vec
+    ret_matrix.assign_vector(ret_vec)
+    return ret_matrix
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(m,A,X,Y):
+    """
+    Update the weights and return the difference.
+    """
+    import numpy as np
+    dw=(1/m)*np.dot(X,(A-Y))
+    return dw
+
+A = [[2.0,3.0],[4.0,5.0]]
+X = [[1.0,2.0],[3.0,4.0]]
+Y = [[1.8,3.2],[4.3,2.0]]
+m = 5.0
+sA = sfix.Matrix(2,2)
+sX = sfix.Matrix(2,2)
+sY = sfix.Matrix(2,2)
+sm = sfix(5.0)
+for i in range(2):
+    for j in range(2):
+        sA[i][j] = A[i][j]
+        sX[i][j] = X[i][j]
+        sY[i][j] = Y[i][j]
+
+expected_out = standard(m,np.array(A),np.array(X),np.array(Y))
+out = update_weights(sm,sA,sX,sY)
+
+flag = sint(1)
+for i in range(2):
+    for j in range(2):
+        flag = flag.bit_and(abs(out[i][j]-expected_out[i][j])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

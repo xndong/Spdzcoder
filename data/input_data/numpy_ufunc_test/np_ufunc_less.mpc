@@ -1,0 +1,48 @@
+'''*
+tags:: compute element-wise comparison.
+
+input:
+import numpy
+def compute_less(arrayA, arrayB):
+    """This function calculate the element-wise comparison, i.e. whether arrayA is less than arrayB."""
+    less_res = numpy.less(arrayA, arrayB)
+    return less_res
+
+output:
+def compute_less(spdzarrayA, spdzarrayB):
+    vector_a = spdzarrayA.get_vector()
+    vector_b = spdzarrayB.get_vector()
+    less_res = vector_a < vector_b
+    less_res = Array.create_from(less_res)
+    return less_res
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+a = [1,2,12,4,-6,3]
+sa = sint.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+b = [1,2,11,5,-7,4]
+sb = sint.Array(len(b))
+for i in range(len(sb)):
+    sb[i] = b[i]
+
+sout = compute_less(sa,sb)
+
+flag = sint(1)
+
+for i in range(len(sout)):
+    flag = flag.bit_and(sout[i]==(sa[i]<sb[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

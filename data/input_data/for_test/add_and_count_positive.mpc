@@ -1,0 +1,69 @@
+'''*
+tags::for, if_else
+
+input:
+def add_and_count_positive(array,k):
+    """
+    Add k to all elements in the given array, and count the number of positive numbers in the output array. 
+    Return both the output array and the count. 
+    """
+    count = 0
+    for i in range(len(array)):
+        array[i] = array[i] + k
+        if array[i] > 0:
+            count = count + 1
+    return array, count
+
+output:
+def add_and_count_positive(array,k):
+    """
+    Add k to all elements in the given array, and count the number of positive numbers in the output array. 
+    Return both the output array and the count. 
+    """
+    count = sint(0)
+    @for_range(len(array))
+    def _(i):
+        array[i] = array[i] + k
+        count.update((array[i]>0).if_else(count+1,count))
+    return array, count
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(array,k):
+    """
+    Add k to all elements in the given array, and count the number of positive numbers in the output array. 
+    Return both the output array and the count. 
+    """
+    count = 0
+    for i in range(len(array)):
+        array[i] = array[i] + k
+        if array[i] > 0:
+            count = count + 1
+    return array, count
+
+arr = [11,4,5,14,191,98,10]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+expected_arr, expected_count = standard(arr,-14)
+output_arr, output_count = add_and_count_positive(sarr,sint(-14))
+output_arr.reveal()
+output_count.reveal()
+
+flag = (output_count==expected_count).bit_and(output_count==2)
+
+for i in range(len(arr)):
+    flag.update(flag.bit_and(output_arr[i]==expected_arr[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

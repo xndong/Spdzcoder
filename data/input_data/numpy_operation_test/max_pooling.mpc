@@ -1,0 +1,78 @@
+'''*
+tags::math
+
+input:
+# plain text variables: stride
+import numpy as np
+def max_pooling(x,stride):
+    """
+    Compute the max-max_pooling.
+    """
+    out = np.zeros([x.shape[0], x.shape[1]/stride, x.shape[2]/stride])
+    for b in range(x.shape[0]):
+        for i in range(0, x.shape[1], stride):
+            for j in range(0, x.shape[2], stride):
+                out[b, i / stride, j / stride] = np.max(x[b, i:i+stride, j:j+stride])
+    return out
+
+output:
+def max_pooling(x,stride):
+    """
+    Compute the max-max_pooling.
+    """
+    out = sfix.Tensor([x.shape[0], x.shape[1]//stride, x.shape[2]//stride])
+    @for_range_opt(x.shape[0])
+    def _(b):
+        @for_range_opt(0,x.shape[1],stride)
+        def _(i):
+            @for_range_opt(0, x.shape[2], stride)
+            def _(j):
+                max_ = x[b][i][j]
+                @for_range_opt(i,i+stride)
+                def _(p):
+                    @for_range_opt(j,j+stride)
+                    def _(q):
+                        max_.update(max_.max(x[b][p][q]))
+                out[b][i//stride][j//stride] = max_
+    return out
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+def standard(x,stride):
+    out = np.zeros([x.shape[0], x.shape[1]//stride, x.shape[2]//stride])
+    for b in range(x.shape[0]):
+        for i in range(0, x.shape[1], stride):
+            for j in range(0, x.shape[2], stride):
+                out[b, i // stride, j // stride] = np.max(x[b, i:i+stride, j:j+stride])
+    return out
+
+layer = np.array([[[1.0,2.0,1.5,-2.3],[2.0,-1.3,3.5,2.1],[0.0,0.3,10.5,0.2],[20.2,-99.2,0.0,0.0]],[[3.0,-4.0,-10.2,-4.5],[19.0,0.0,0.0,-7.2],[13.0,-4.0,-100.2,2.5],[11.0,-2.0,2.5,-7.2]]])
+slayer = sfix.Tensor(layer.shape)
+
+for i in range(layer.shape[0]):
+    for j in range(layer.shape[1]):
+        for k in range(layer.shape[2]):
+            slayer[i][j][k] = layer[i][j][k]
+
+expected_out = standard(layer,2)
+actual_out = max_pooling(slayer,2)
+
+flag = sint(1)
+for i in range(actual_out.shape[0]):
+    for j in range(actual_out.shape[1]):
+        for k in range(actual_out.shape[2]):
+            flag = flag.bit_and(abs(actual_out[i][j][k]-expected_out[i][j][k])<0.01)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

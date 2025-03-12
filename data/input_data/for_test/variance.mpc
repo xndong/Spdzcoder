@@ -1,0 +1,74 @@
+'''*
+tags::for, math
+
+input:
+def variance(arr):
+    """
+    Return the variance of the array. 
+    """
+    average = 0
+    variance = 0
+    for item in arr:
+        average = average+item/len(arr)
+    for item in arr:
+        variance = variance + (item-average)**2/len(arr)
+    return variance
+
+output:
+def variance(arr):
+    """
+    Return the variance of the array. 
+    """
+    average = sfix(0)
+    variance = sfix(0)
+    @for_range(len(arr))
+    def compute_average(i):
+        average.update(average+arr[i]/len(arr))
+    @for_range(len(arr))
+    def compute_variance(i):
+        variance.update(variance+(arr[i]-average)**2/len(arr))
+    return variance
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Return the variance of the array. 
+    """
+    average = 0
+    variance = 0
+    for item in arr:
+        average = average+item/len(arr)
+    for item in arr:
+        variance = variance + (item-average)**2/len(arr)
+    return variance
+
+arr1 = [-1,1,0,0.7]
+arr2 = [12,7,-9.2,16,44,7.11]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+
+out1 = variance(sarr1)
+out2 = variance(sarr2)
+
+import Compiler
+assert(isinstance(variance(sarr1), Compiler.types.sfix))
+
+flag = (abs((out1-standard(arr1))/standard(arr1))<0.001).bit_and(abs((out2-standard(arr2))/standard(arr2))<0.001)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

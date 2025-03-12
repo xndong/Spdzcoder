@@ -1,0 +1,28 @@
+'''*
+tags::
+
+input:
+"""Create 1-dim all-zero array with length 10."""
+n = 10
+a = np.zeros(n)
+
+output:
+n = 10
+a = sint.Array(n)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+
+flag = (sint(len(a))==10).bit_and(sint(a[0])==0).bit_and(sint(a[3])==0).bit_and(sint(a[9])==0)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

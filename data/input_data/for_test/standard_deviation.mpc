@@ -1,0 +1,77 @@
+# 2023-08-23 23:38:07
+'''*
+tags::for, math
+
+input:
+def standard_deviation(arr):
+    """
+    Return the standard deviation of the array. 
+    """
+    import math
+    average = 0
+    variance = 0
+    for item in arr:
+        average = average+item/len(arr)
+    for item in arr:
+        variance = variance + (item-average)**2/len(arr)
+    return math.sqrt(variance)
+
+output:
+def standard_deviation(arr):
+    """
+    Return the standard deviation of the array. 
+    """
+    from Compiler import mpc_math
+    average = sfix(0)
+    variance = sfix(0)
+    @for_range(len(arr))
+    def compute_average(i):
+        average.update(average+arr[i]/len(arr))
+    @for_range(len(arr))
+    def compute_variance(i):
+        variance.update(variance+(arr[i]-average)**2/len(arr))
+    return mpc_math.sqrt(variance)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Return the standard deviation of the array. 
+    """
+    import math
+    average = 0
+    variance = 0
+    for item in arr:
+        average = average+item/len(arr)
+    for item in arr:
+        variance = variance + (item-average)**2/len(arr)
+    return math.sqrt(variance)
+
+arr1 = [-1,1,0,0.7]
+arr2 = [12,7,-9.2,16,44,7.11]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+
+out1 = standard_deviation(sarr1)
+out2 = standard_deviation(sarr2)
+out1.reveal()
+out2.reveal()
+
+flag = (abs((out1-standard(arr1))/standard(arr1))<0.001).bit_and(abs((out2-standard(arr2))/standard(arr2))<0.001)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

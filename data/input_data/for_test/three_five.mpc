@@ -1,0 +1,59 @@
+'''*
+tags::for, if_else
+
+input:
+def three_five(arr):
+    """
+    If the input array contain both/neither 3 and/or 5, return True, 
+    otherwise return False. 
+    """
+    has3 = False
+    has5 = False
+    for item in arr:
+        has3 = has3 or item==3
+        has5 = has5 or item==5
+    return (has3 and has5) or ((not has3) and (not has5))
+
+output:
+def three_five(arr):
+    """
+    If the input array contain both/neither 3 and/or 5, return True, 
+    otherwise return False. 
+    """
+    has3 = sint(0)
+    has5 = sint(0)
+    @for_range(0,len(arr))
+    def _(i):
+        has3.update(has3.bit_or(arr[i]==3))
+        has5.update(has5.bit_or(arr[i]==5))
+    return (has3.bit_and(has5)).bit_or((has3.bit_not()).bit_and(has5.bit_not()))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,1,4,5,1,4]
+arr2 = [6,6,4,7,2]
+arr3 = [1,4,2,3,6,5,4,6,6,4]
+sarr1 = sint.Array(len(arr1))
+sarr2 = sint.Array(len(arr2))
+sarr3 = sint.Array(len(arr3))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+
+flag = (three_five(sarr1).bit_not()).bit_and(three_five(sarr2)).bit_and(three_five(sarr3))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

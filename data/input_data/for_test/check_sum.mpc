@@ -1,0 +1,51 @@
+'''*
+tags::for
+
+input:
+def check_sum(array,target):
+    """
+    Check whether the sum of the array equals the target value. 
+    """
+    sum = 0
+    for num in array:
+        sum = sum + num
+    return sum==target
+
+output:
+def check_sum(array,target):
+    """
+    Check whether the sum of the array equals the target value. 
+    """
+    sum = sint(0)
+    @for_range(len(array))
+    def add(i):
+        sum.update(sum+array[i])
+    return sum==target
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = sint.Array(5)
+arr1[0]=7
+arr1[1]=2
+arr1[2]=3
+arr1[3]=-1
+arr1[4]=6
+
+arr2 = sint.Array(100)
+@for_range(100)
+def _(i):
+    arr2[i] = i
+
+flag = (check_sum(arr1,17)).bit_and(check_sum(arr1,16).bit_not()).bit_and(check_sum(arr2,4950))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

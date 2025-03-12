@@ -1,0 +1,55 @@
+'''*
+tags::for
+
+input:
+def reverse_and_concat(a):
+    """
+    Reverse the input array and concatenate it to the original array. 
+    """
+    b = [a[len(a)-1-i] for i in range(len(a))]
+    return a+b
+
+output:
+def reverse_and_concat(a):
+    """
+    Reverse the input array and concatenate it to the original array. 
+    """
+    b = sfix.Array(len(a))
+    @for_range(len(a))
+    def _(i):
+        b[i] = a[len(a)-1-i]
+    return a.concat(b)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a):
+    """
+    Reverse the input array and concatenate it to the original array. 
+    """
+    b = [a[len(a)-1-i] for i in range(len(a))]
+    return a+b
+
+arr = [1,7,9]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+expected = standard(arr)
+output = reverse_and_concat(sarr)
+output.reveal()
+
+flag = len(output)==sint(len(arr)*2)
+for i in range(len(arr)):
+    flag.update(flag.bit_and(output[i]==expected[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

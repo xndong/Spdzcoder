@@ -1,0 +1,45 @@
+'''*
+tags::for
+
+input:
+def array_process(arr,func):
+    """
+    Process all elements in the input array with given function.
+    """
+    arr = [func(e) for e in arr]
+    return arr
+
+output:
+def array_process(arr,func):
+    """
+    Process all elements in the input array with given function.
+    """
+    lst = [func(e) for e in arr]
+    arr = Array.create_from(iter(lst))
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def p(x):
+    return x**2+1
+
+arr = [1,2,0,3]
+sarr = sint.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+out = array_process(sarr,p)
+out.reveal()
+flag = (out[0]==2).bit_and(out[1]==5).bit_and(out[2]==1).bit_and(out[3]==10)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

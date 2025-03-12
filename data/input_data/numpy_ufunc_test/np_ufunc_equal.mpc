@@ -1,0 +1,48 @@
+'''*
+tags:: compute element-wise comparison.
+
+input:
+import numpy
+def compute_equal(arrayA, arrayB):
+    """This function calculate the element-wise comparison, i.e. whether arrayA is equal to arrayB."""
+    eq = numpy.equal(arrayA, arrayB)
+    return eq
+
+output:
+def compute_equal(spdzarrayA, spdzarrayB):
+    vector_a = spdzarrayA.get_vector()
+    vector_b = spdzarrayB.get_vector()
+    eq = vector_a == vector_b
+    eq = Array.create_from(eq)
+    return eq
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+a = [1,-1,10,5,-7]
+sa = sint.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+b = [1,2,11,5,-7]
+sb = sint.Array(len(b))
+for i in range(len(sb)):
+    sb[i] = b[i]
+
+sout = compute_equal(sa,sb)
+
+flag = sint(1)
+
+for i in range(len(sout)):
+    flag = flag.bit_and(sout[i]==(sa[i]==sb[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

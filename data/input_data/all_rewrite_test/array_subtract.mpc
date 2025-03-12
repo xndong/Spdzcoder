@@ -1,0 +1,68 @@
+'''*
+tags::for, if_else
+
+input:
+def array_subtract(a,b):
+    """
+    Subtract the first array by the second one elementwise.
+    If one of the array is shorter than the other, it will be padded with 0.
+    """
+    pad = [0.0] * abs(len(a)-len(b))
+    if len(a)<len(b):
+        a = a + pad
+    else:
+        b = b + pad
+    ret = [ x-y for x,y in zip(a,b) ]
+    return ret
+
+output:
+def array_subtract(a,b):
+    """
+    Subtract the first array by the second one elementwise.
+    If one of the array is shorter than the other, it will be padded with 0.
+    """
+    if len(a)>len(b):
+        ret = sfix.Array(len(a))
+        @for_range(len(b))
+        def _(i):
+            ret[i] = a[i] - b[i]
+        @for_range(len(a)-len(b))
+        def _(i):
+            ret[len(b)+i] = a[len(b)+i]
+        return ret
+    else:
+        ret = sfix.Array(len(b))
+        @for_range(len(a))
+        def _(i):
+            ret[i] = a[i] - b[i]
+        @for_range(len(b)-len(a))
+        def _(i):
+            ret[len(a)+i] = -b[len(a)+i]
+        return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = sfix.Array(3)
+brr = sfix.Array(4)
+@for_range(3)
+def init(i):
+    arr[i] = i
+@for_range(4)
+def init(i):
+    brr[i] = i*20
+crr = array_subtract(brr,arr)
+crr.reveal()
+
+flag = (crr[0]==0).bit_and(crr[1]==19).bit_and(crr[2]==38).bit_and(crr[3]==60)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

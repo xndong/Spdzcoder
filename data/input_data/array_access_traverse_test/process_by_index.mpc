@@ -1,0 +1,66 @@
+'''*
+tags::array_access
+
+input:
+def process_by_index(arr,index,func):
+    """
+    Process the element in the input array with given index.
+    The input index is guaranteed to be legal.
+    """
+    arr[index] = func(arr[index])
+    return arr
+
+output:
+def process_by_index(arr,index,func):
+    """
+    Process the element in the input array with given index.
+    The input index is guaranteed to be legal.
+    """
+    @for_range(len(arr))
+    def _(i):
+        arr[i] = (index==i).if_else(func(arr[i]),arr[i])
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr,index,func):
+    """
+    Process the element in the input array with given index.
+    The input index is guaranteed to be legal.
+    """
+    arr[index] = func(arr[index])
+    return arr
+
+def p(x):
+    return x**3-41*x+31
+
+arr = [1,1,4,5,1,4]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+arr = standard(arr,3,p)
+# sarr = process_by_index(sarr,sint(3),p)
+sarr = process_by_index(sarr,3,p)
+
+try:
+    sarr.reveal()
+    flag = sint(1)
+    for i in range(len(arr)):
+        flag.update(flag.bit_and(sarr[i]==arr[i]))
+except Exception as e:
+    flag = sint(1)
+    for i in range(len(arr)):
+        flag.update(flag.bit_and(sarr[i].reveal()==arr[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

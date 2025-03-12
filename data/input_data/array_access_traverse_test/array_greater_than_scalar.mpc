@@ -1,0 +1,48 @@
+'''*
+tags::for, if_else
+
+input:
+def array_greater_than_scalar(arr, bound):
+    """
+    Given an input array and a bound, 
+    return an array indicating whether each element is greater than the bound. 
+    """
+    ret = [False for i in range(len(arr))]
+    for i in range(len(arr)):
+        ret[i] = arr[i]>bound
+    return ret
+
+output:
+def array_greater_than_scalar(arr, bound):
+    """
+    Given an input array and a bound, 
+    return an array indicating whether each element is greater than the bound. 
+    """
+    ret = sint.Array(len(arr))
+    @for_range(len(arr))
+    def _(i):
+        ret[i] = arr[i]>bound
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = [1.4,1,4,5,1]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+out = array_greater_than_scalar(sarr,sfix(1.2))
+out.reveal()
+flag = (out[0]).bit_and(out[1].bit_not()).bit_and(out[2]).bit_and(out[3]).bit_and(out[4].bit_not())
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

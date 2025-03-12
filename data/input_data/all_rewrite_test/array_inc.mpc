@@ -1,0 +1,40 @@
+'''*
+tags::for
+
+input:
+def array_inc(arr):
+    """
+    Increment all elements in the input array by 1
+    """
+    arr = [arr[i] + 1 for i in range(len(arr))]
+    return arr
+
+output:
+def array_inc(arr):
+    """
+    Increment all elements in the input array by 1
+    """
+    vec = arr.get_vector() + 1
+    arr.assin_vector(vec)
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = [1,4,-0.7,-3]
+sarr = sfix.Array(len(arr)).assign_vector(iter([sfix(e) for e in arr]))
+
+out = array_inc(sarr)
+out.reveal()
+flag = (out[0]==2).bit_and(out[1]==5).bit_and(out[2]==0.3).bit_and(out[3]==-2)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

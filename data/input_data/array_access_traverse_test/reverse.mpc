@@ -1,0 +1,59 @@
+'''*
+tags::for
+
+input:
+def reverse(arr):
+    """
+    Reverse the array. 
+    """
+    ret = [0 for i in range(len(arr))]
+    for i in range(len(arr)):
+        ret[i] = arr[len(arr)-1-i]
+    return ret
+
+output:
+def reverse(arr):
+    """
+    Reverse the array. 
+    """
+    ret = sfix.Array(len(arr))
+    @for_range(len(arr))
+    def _(i):
+        ret[i] = arr[len(arr)-1-i]
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Reverse the array. 
+    """
+    ret = [0 for i in range(len(arr))]
+    for i in range(len(arr)):
+        ret[i] = arr[len(arr)-1-i]
+    return ret
+
+array = [-7000,11,-451,4,-1919,810]
+sarr = sint.Array(len(array))
+for i in range(len(array)):
+    sarr[i] = array[i]
+
+output = reverse(sarr)
+expected = standard(array)
+output.reveal()
+
+flag = sint(1)
+for i in range(len(array)):
+    flag.update(flag.bit_and(output[i]==expected[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,37 @@
+'''*
+tags::
+
+input:
+"""Create a non-square 2-dim array with all one in diagonal."""
+m = 3
+n = 5
+a = np.eyes(m,n)
+
+output:
+m = 3
+n = 5
+k = min(m,n)
+a = sint.Tensor([m,n]) # a = MultiArray([m,n], sint)
+@for_range(k)
+def _(i):
+    a[i][i] = sint(1)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = sint(1)
+
+@for_range(3)
+def _(i):
+    flag.update(flag.bit_and(a[i][i]==1))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

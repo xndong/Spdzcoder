@@ -1,0 +1,42 @@
+'''*
+tags::
+
+input:
+def zeros(num):
+    """
+    Return the all-zero array with length num.
+    """
+    import numpy
+    array = numpy.zeros(num)
+    return array
+
+output:
+def zeros(num):
+    """
+    Return the all-zero array with length num.
+    """
+    ret = sfix.Array(num)
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+length = 14
+array = zeros(length)
+array.reveal()
+flag = sint(1)
+@for_range(length)
+def _(i):
+    flag.update(flag.bit_and((array[i]==0)))
+flag.update(flag.bit_and(len(array)==length))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

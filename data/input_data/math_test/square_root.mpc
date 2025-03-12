@@ -1,0 +1,48 @@
+'''*
+tags::math
+
+input:
+def square_root(a):
+    """
+    return the square root of the input. 
+    """
+    import math
+    return math.sqrt(a)
+
+output:
+def square_root(a):
+    """
+    return the square root of the input. 
+    """
+    from Compiler import mpc_math
+    return mpc_math.sqrt_simplified_fx(a)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a):
+    """
+    return the square root of the input. 
+    """
+    import math
+    return math.sqrt(a)
+
+out1 = square_root(sfix(10))
+out2 = square_root(sfix(73))
+out3 = square_root(sfix(1))
+out1.reveal()
+out2.reveal()
+out3.reveal()
+
+flag = (abs((out1-standard(10))/standard(10))<0.01).bit_and(abs((out2-standard(73))/standard(73))<0.01).bit_and(abs((out3-standard(1))/standard(1))<0.01)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,74 @@
+'''*
+tags::for, if_else
+
+input:
+def max_adjacent_product(arr):
+    """
+    Return the max product of adjacent elements in the array.
+    The input array is guaranteed to have length at least 2. 
+    """
+    cur = arr[0]*arr[1]
+    for i in range(len(arr)-1):
+        if arr[i]*arr[i+1] > cur:
+            cur = arr[i]*arr[i+1]
+    return cur
+
+output:
+def max_adjacent_product(arr):
+    """
+    Return the max product of adjacent elements in the array.
+    The input array is guaranteed to have length at least 2. 
+    """
+    cur = arr[0]*arr[1]
+    @for_range(len(arr)-1)
+    def _(i):
+        cur.update((arr[i]*arr[i+1]>cur).if_else(arr[i]*arr[i+1],cur))
+    return cur
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Return the max product of adjacent elements in the array.
+    The input array is guaranteed to have length at least 2. 
+    """
+    cur = arr[0]*arr[1]
+    for i in range(len(arr)-1):
+        if arr[i]*arr[i+1] > cur:
+            cur = arr[i]*arr[i+1]
+    return cur
+
+arr1 = [7,20,14,3,5,2,6,100,2]
+sarr1 = sfix.Array(len(arr1))
+arr2 = [11,-45,14,-19,198,-18]
+sarr2 = sfix.Array(len(arr2))
+arr3 = [3,2,1,5,2,6,-300]
+sarr3 = sfix.Array(len(arr3))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+
+out1 = max_adjacent_product(sarr1)
+out2 = max_adjacent_product(sarr2)
+out3 = max_adjacent_product(sarr3)
+out1.reveal()
+out2.reveal()
+out3.reveal()
+
+flag = (out1==standard(arr1)).bit_and(out2==standard(arr2)).bit_and(out3==standard(arr3))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

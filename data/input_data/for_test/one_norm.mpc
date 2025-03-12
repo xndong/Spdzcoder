@@ -1,0 +1,64 @@
+'''*
+tags::math, for
+
+input:
+def one_norm(vec):
+    """
+    Return the one-norm of the vector.
+    """
+    sum = 0
+    for item in vec:
+        sum = sum + abs(item)
+    return sum
+
+output:
+def one_norm(vec):
+    """
+    Return the one-norm of the vector.
+    """
+    sum = sfix(0)
+    @for_range(len(vec))
+    def _(i):
+        sum.update(sum+abs(vec[i]))
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(vec):
+    """
+    Return the one-norm of the vector.
+    """
+    sum = 0
+    for item in vec:
+        sum = sum + abs(item)
+    return sum
+
+numbers = [4,16,1,7,-222,11,191,0]
+sint_array = sint.Array(len(numbers))
+for i in range(len(numbers)):
+    sint_array[i] = sint(numbers[i])
+
+standard_output = standard(numbers)
+func_output = one_norm(sint_array)
+
+result = func_output==standard_output
+
+flag = sint(1)
+@if_e(result.reveal())
+def _():
+    pass
+@else_
+def _():
+    flag.update(sint(0))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

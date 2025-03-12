@@ -1,0 +1,70 @@
+'''*
+tags::for, if_else, multi_if_else
+
+input:
+def is_subarray(c,d):
+    """
+    Return wether the first array is a continuous subarray of the second array.
+    """
+    for i in range(len(d)):
+        if len(c)<=len(d)-i:
+            flag = True
+            for j in range(len(c)):
+                flag = flag and d[i+j]==c[j]
+            if flag:
+                return True
+    return False
+
+output:
+def is_subarray(c,d):
+    """
+    Return wether the first array is a continuous subarray of the second array.
+    """
+    ok = sint(0)
+    @for_range(len(d))
+    def _(i):
+        @if_e(len(c)<=len(d)-i)
+        def _():
+            flag = sint(1)
+            @for_range(len(c))
+            def _(j):
+                flag.update(flag.bit_and(d[i+j]==c[j]))
+            ok.update(ok.bit_or(flag))
+        @else_
+        def _():
+            pass
+    return ok
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = [1,1,4,5,1,4]
+test1 = [4,1]
+test2 = [4,5,1]
+test3 = [1,4]
+sarr = sfix.Array(len(arr))
+stest1 = sfix.Array(len(test1))
+stest2 = sfix.Array(len(test2))
+stest3 = sfix.Array(len(test3))
+
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+for i in range(len(test1)):
+    stest1[i] = test1[i]
+for i in range(len(test2)):
+    stest2[i] = test2[i]
+for i in range(len(test3)):
+    stest3[i] = test3[i]
+    
+flag = (is_subarray(stest1,sarr).bit_not()).bit_and(is_subarray(stest2,sarr)).bit_and(is_subarray(stest3,sarr))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

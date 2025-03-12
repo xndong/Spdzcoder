@@ -1,0 +1,49 @@
+'''*
+tags::math
+
+input:
+def interest_calculator(capital,ratio,months):
+    """
+    Given the initial capital, interest ratio and the number of months you deposit your money to the bank, 
+    calculate the interest you can get. 
+    """
+    import math
+    return (math.pow(1+ratio,months)-1)*capital
+
+output:
+def interest_calculator(capital,ratio,months):
+    """
+    Given the initial capital, interest ratio and the number of months you deposit your money to the bank, 
+    calculate the interest you can get. 
+    """
+    from Compiler import mpc_math
+    return (mpc_math.pow_fx(1+ratio,months)-1)*capital
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(capital,ratio,months):
+    """
+    Given the initial capital, interest ratio and the number of months you deposit your money to the bank, 
+    calculate the interest you can get. 
+    """
+    import math
+    return (math.pow(1+ratio,months)-1)*capital
+
+out1 = interest_calculator(3000,sfix(0.2),3)
+out2 = interest_calculator(5000,sfix(0.4),4)
+out1.reveal()
+out2.reveal()
+
+flag = (abs((out1-standard(3000,0.2,3))/standard(3000,0.2,3))<0.01).bit_and(abs((out2-standard(5000,0.4,4))/standard(5000,0.4,4))<0.01)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

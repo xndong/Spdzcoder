@@ -1,0 +1,43 @@
+'''*
+tags::array reshape
+
+input:
+import numpy as np
+def array_reshape(ndarray, m, n):
+    """
+    NumPy program to reshape a numpy array.
+    """
+    array = ndarray.reshape(m,n)
+    return array
+
+output:
+def array_reshape(spdzArray, m, n):
+    """
+    MP-SPDZ program to reshape a spdz Array.
+    """
+    vector = spdzArray[:]
+    array = sfix.Tensor([m,n])
+    array.assign(vector)
+    return array
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+a = sint.Array(6)
+for i in range(6):
+    a[i] = i
+
+b = array_reshape(a,2,3)
+
+flag = (b[0][0]==0).bit_and(b[0][1]==1).bit_and(b[0][2]==2).bit_and(b[1][0]==3).bit_and(b[1][1]==4).bit_and(b[1][2]==5)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

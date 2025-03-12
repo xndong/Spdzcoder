@@ -1,0 +1,67 @@
+'''*
+tags::
+
+input:
+def binary_cross_entropy(y_hat, y):
+    """
+    Compute the binary cross-entropy loss.
+    """
+    import numpy as np
+    y_hat[y_hat == 0] = 0.001
+    y_hat[y_hat == 1] = 1 - 0.001
+    loss = -np.mean(y*np.log2(y_hat) + (1-y)*np.log2(1 - y_hat))
+    return loss
+
+output:
+def binary_cross_entropy(y_hat, y):
+    """
+    Compute the binary cross-entropy loss.
+    """
+    from Compiler import mpc_math
+    y_hat_vec = y_hat.get_vector()
+    y_vec = y.get_vector()
+    y_hat_vec = (y_hat_vec==0).if_else(sfix(0.001),y_hat_vec)
+    y_hat_vec = (y_hat_vec==1).if_else(1-sfix(0.001),y_hat_vec)
+    y_vec = y_vec*mpc_math.log2_fx(y_hat_vec) + (1-y_vec)*mpc_math.log2_fx(1-y_hat_vec)
+    loss = -sum(y_vec)/len(y_vec)
+    return loss
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(y_hat, y):
+    """
+    Compute the binary cross-entropy loss.
+    """
+    import numpy as np
+    m = len(y_hat)
+    y_hat[y_hat == 0] = 0.001
+    y_hat[y_hat == 1] = 1 - 0.001
+    loss = -np.mean(y*np.log2(y_hat) + (1-y)*np.log2(1 - y_hat))
+    return loss
+
+arr1 = [1,0,0.3,0.8]
+arr2 = [0.7,0.1,0.9,1]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+for i in range(len(sarr1)):
+    sarr1[i] = arr1[i]
+    sarr2[i] = arr2[i]
+
+expected_out = standard(np.array(arr1),np.array(arr2))
+out = binary_cross_entropy(sarr1,sarr2)
+flag = abs(out-expected_out)<0.05
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

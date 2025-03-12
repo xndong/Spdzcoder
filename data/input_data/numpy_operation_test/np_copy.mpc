@@ -1,0 +1,45 @@
+'''*
+tags::
+
+input:
+def array_copy(ndarray):
+    array = ndarray.copy()
+    return array
+
+annotation:
+Return the copied version of the input array.
+
+output:
+def array_copy(spdzarray):
+    """
+    copy an array and return a new array.
+    """
+    array = spdzarray.get_part(base=0, size=len(spdzarray))
+    return array
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+spdzarray =sint.Array(10).assign(list(range(10,20)))
+
+copyarray = array_copy(spdzarray)
+copyvec = copyarray.get_vector()
+
+sintbit_vec = copyvec.equal(spdzarray.get_vector()) # vector
+sintbit_arr = Array.create_from(sintbit_vec) # array
+
+flag = sint(1)
+@for_range(10)
+def _(i):
+    flag.update(flag.bit_and(sintbit_arr[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

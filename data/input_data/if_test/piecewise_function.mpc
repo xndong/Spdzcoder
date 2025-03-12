@@ -1,0 +1,66 @@
+# 2023-09-24 22:13:25
+'''*
+tags::multi_if_else
+
+input:
+def piecewise_function(x):
+    """
+    A piecewise function. 
+    """
+    ret = 0
+    if x>1:
+        ret = x
+    elif x<-1:
+        ret = x
+    elif x>0:
+        ret = 1
+    elif x<0:
+        ret = -1
+    else:
+        ret = 0
+    return ret
+
+output:
+def piecewise_function(x):
+    """
+    A piecewise function. 
+    """
+    return (x>1).if_else(x,(x<-1).if_else(x,(x>0).if_else(1,(x<0).if_else(-1,0))))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    A piecewise function. 
+    """
+    ret = 0
+    if x>1:
+        ret = x
+    elif x<-1:
+        ret = x
+    elif x>0:
+        ret = 1
+    elif x<0:
+        ret = -1
+    else:
+        ret = 0
+    return ret
+
+numbers = [-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2]
+flag = sint(1)
+for number in numbers:
+    out = piecewise_function(sfix(number))
+    out.reveal()
+    flag.update(flag.bit_and(out==standard(number)))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

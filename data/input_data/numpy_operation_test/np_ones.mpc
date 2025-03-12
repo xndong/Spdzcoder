@@ -1,0 +1,28 @@
+'''*
+tags::
+
+input:
+"""Create 1-dim all-one array with length 10."""
+n = 10
+a = np.ones(10)
+
+output:
+n = 10
+a = Array(n, sint)
+a.assign_all(1)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (sint(len(a))==10).bit_and(sint(a[0])==1).bit_and(sint(a[3])==1).bit_and(sint(a[9])==1)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

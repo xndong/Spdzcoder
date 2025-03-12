@@ -1,0 +1,49 @@
+'''*
+tags::for
+
+input:
+def prod(array):
+    """
+    Multiply together all elements in the array. 
+    """
+    prod = 1
+    for num in array:
+        prod = prod * num
+    return prod
+
+output:
+def prod(array):
+    """
+    Multiply together all elements in the array. 
+    """
+    prod = sint(1)
+    @for_range(len(array))
+    def add(i):
+        prod.update(prod*array[i])
+    return prod
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = sint(1)
+
+arr = sint.Array(5)
+arr[0]=7
+arr[1]=2
+arr[2]=3
+arr[3]=-1
+arr[4]=6
+prod = prod(arr)
+
+flag = prod == -252
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

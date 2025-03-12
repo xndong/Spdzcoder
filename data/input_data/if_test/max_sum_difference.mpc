@@ -1,0 +1,35 @@
+# 2023-09-05 11:05:14
+'''*
+tags::if_else
+
+input:
+def max_sum_different(a,b):
+    """
+    Return the maximum value between a+b and a-b.
+    """
+    if a+b > a-b:
+        return a+b
+    return a-b
+
+output:
+def max_sum_different(a,b):
+    """
+    Return the maximum value between a+b and a-b.
+    """
+    return (a+b>a-b).if_else(a+b,a-b)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (max_sum_different(sfix(1),sfix(3))==4).bit_and(max_sum_different(sfix(4),sfix(-2))==6).bit_and(max_sum_different(sfix(-7),sfix(-2.3))==-4.7)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

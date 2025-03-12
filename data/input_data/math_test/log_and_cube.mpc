@@ -1,0 +1,54 @@
+'''*
+tags::math
+
+input:
+def log_and_cube(x):
+    """
+    take log (with base-2) to the input, then compute the cube of the outcome
+    """
+    import math
+    return math.pow(math.log(x,2),3)
+
+output:
+def log_and_cube(x):
+    """
+    take log (with base-2) to the input, then compute the cube of the outcome
+    """
+    from Compiler import mpc_math
+    return mpc_math.pow_fx(mpc_math.log_fx(x,2),3)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    import math
+    return math.pow(math.log(x,2),3)
+
+flag = sint(1)
+
+numbers = [4,16,1,7,1024,9]
+for number in numbers:
+    a = sfix(number)
+    a_outcome = log_and_cube(a)
+    a_expected = standard(number)
+    a_outcome.reveal()
+    result = abs(a_expected-a_outcome.reveal())/a_expected
+    
+    @if_e(result < 0.01)
+    def _():
+        pass
+    @else_
+    def _():
+        print_ln('%s',result)
+        flag.update(sint(0))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,44 @@
+'''*
+tags::for
+
+input:
+def array_inc(arr):
+    """
+    Increment all elements in the input array by 1
+    """
+    for i in range(len(arr)):
+        arr[i] = arr[i] + 1
+    return arr
+
+output:
+def array_inc(arr):
+    """
+    Increment all elements in the input array by 1
+    """
+    @for_range(len(arr))
+    def _(i):
+        arr[i] = arr[i] + 1 
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = [1,4,-0.7,-3]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+out = array_inc(sarr)
+out.reveal()
+flag = (out[0]==2).bit_and(out[1]==5).bit_and(out[2]==0.3).bit_and(out[3]==-2)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

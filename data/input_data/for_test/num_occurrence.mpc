@@ -1,0 +1,46 @@
+'''*
+tags::if_else, for
+
+input:
+def num_occurrence(arr, target):
+    """
+    Return the number of occurrence of the target in the given array.
+    """
+    count = 0
+    for item in arr:
+        if item == target:
+            count = count + 1
+    return count
+
+output:
+def num_occurrence(arr, target):
+    """
+    Return the number of occurrence of the target in the given array.
+    """
+    count = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        count.update((arr[i]==target).if_else(count+1,count))
+    return count
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = [1,1,4,5,1,4,1,9,1,9,8,1,0]
+sarr = sfix.Array(len(arr))
+
+for i in range(len(arr)):
+    sarr[i] = sfix(arr[i])
+
+flag = (num_occurrence(sarr,1)==6).bit_and(num_occurrence(sarr,4)==2).bit_and(num_occurrence(sarr,0)==1).bit_and(num_occurrence(sarr,11)==0)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,53 @@
+'''*
+tags::
+
+input:
+def find_nearest_index(array, value):
+    """
+    Return the index of nearest value in an array to the given value
+    """
+    import numpy as np
+    idx = (np.abs(array-value)).argmin()
+    return idx
+
+output:
+def find_nearest_index(array, value):
+    """
+    Return the index of nearest value in an array to the given value
+    """
+    distance = abs(value-array[0])
+    idx = sint(0)
+    @for_range(len(array))
+    def _(i):
+        new_distance = abs(array[i]-value)
+        smaller = new_distance < distance
+        distance.update(smaller.if_else(new_distance,distance))
+        idx.update(smaller.if_else(i,idx))
+    return idx
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,2,3,4,5]
+arr2 = [2,2.4,4.5,5,10]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+for i in range(len(sarr1)):
+    sarr1[i] = arr1[i]
+    sarr2[i] = arr2[i]
+value1 = sfix(3.2)
+value2 = sfix(7)
+
+flag = (find_nearest_index(sarr1,value1)==2).bit_and(find_nearest_index(sarr2,value2)==3)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

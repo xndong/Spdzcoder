@@ -1,0 +1,62 @@
+'''*
+tags::
+
+input:
+def sum_with_certain_element_skipped(array):
+    """
+    Compute partial sum of the array with all elements causing the partial sum to be in [5,10] skipped.
+    """
+    sum = 0
+    for i in range(len(array)):
+        if 5<=sum+array[i]<=10:
+            continue
+        sum += array[i]
+    return sum
+
+output:
+def sum_with_certain_element_skipped(array):
+    """
+    Compute partial sum of the array with all elements causing the partial sum to be in [5,10] skipped.
+    """
+    sum = sint(0)
+    @for_range(len(array))
+    def _(i):
+        temp = sum+array[i]
+        skip = (5<=sum+array[i]).bit_and(sum+array[i]<=10)
+        sum.iadd(skip.if_else(0,array[i]))
+    return sum
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [1,1,-4,7,12,5]
+sarr1 = sint.Array(len(arr1))
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+
+arr2 = [1,2,3,88,-81]
+sarr2 = sint.Array(len(arr2))
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+
+arr3 = [-1,2,3,3,3,3,3]
+sarr3 = sint.Array(len(arr3))
+for i in range(len(arr3)):
+    sarr3[i] = arr3[i]
+
+output1 = sum_with_certain_element_skipped(sarr1)
+output2 = sum_with_certain_element_skipped(sarr2)
+output3 = sum_with_certain_element_skipped(sarr3)
+
+flag = (output1==3).bit_and(output2==91).bit_and(output3==4)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,47 @@
+'''*
+tags::math
+
+input:
+def ball_volume(r):
+    """
+    Return the volume of the ball with given radius.
+    """
+    import math
+    return math.pi*r**3*4/3
+
+output:
+def ball_volume(r):
+    """
+    Return the volume of the ball with given radius.
+    """
+    import math
+    return math.pi*r**3*4/sfix(3)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(r):
+    """
+    Return the volume of the ball with given radius.
+    """
+    import math
+    return math.pi*r**3*4/3
+
+flag = sint(1)
+
+numbers = [4,8,12,7,4,9]
+for number in numbers:
+    out = ball_volume(sfix(number))
+    out.reveal()
+    flag.update(flag.bit_and(abs((standard(number)-out)/standard(number))<0.01))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

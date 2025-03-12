@@ -1,0 +1,67 @@
+'''*
+tags::for, if_else
+
+input:
+def array_greater_eq(arr,brr):
+    """
+    For the two input arrays arr and brr, return an array ret with the same size.
+    For index i, if arr[i]>b=rr[i], ret[i] will be set to 1, otherwise ret[i] will be set to 0.
+    The two input arrays are guaranteed to have the same length.
+    """
+    ret = [0 for i in range(len(arr))]
+    for i in range(len(arr)):
+        ret[i] = 1 if arr[i]>=brr[i] else 0
+    return ret
+
+output:
+def array_greater_eq(arr,brr):
+    """
+    For the two input arrays arr and brr, return an array ret with the same size.
+    For index i, if arr[i]>=brr[i], ret[i] will be set to 1, otherwise ret[i] will be set to 0.
+    The two input arrays are guaranteed to have the same length.
+    """
+    ret = sint.Array(len(arr))
+    arr_vector = arr.get_vector()
+    brr_vector = brr.get_vector()
+    ret.assign_vector(arr_vector >= brr_vector)
+    return ret
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr,brr):
+    """
+    For the two input arrays arr and brr, return an array ret with the same size.
+    For index i, if arr[i]>=brr[i], ret[i] will be set to 1, otherwise ret[i] will be set to 0.
+    The two input arrays are guaranteed to have the same length.
+    """
+    ret = [0 for i in range(len(arr))]
+    for i in range(len(arr)):
+        ret[i] = 1 if arr[i]>=brr[i] else 0
+    return ret
+
+array = [-7000,1.1,-45.1,4,0.01,-1919,810]
+brray = [20,0.8,-60,4,0.001,-1919,120]
+
+sarr = Array.create_from(iter([sfloat(e) for e in array]))
+sbrr = Array.create_from(iter([sfloat(e) for e in brray]))
+
+output = array_greater_eq(sarr,sbrr)
+expected = standard(array,brray)
+output.reveal()
+
+flag = sint(1)
+for i in range(len(array)):
+    flag.update(flag.bit_and(output[i]==expected[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

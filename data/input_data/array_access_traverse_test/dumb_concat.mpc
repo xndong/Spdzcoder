@@ -1,0 +1,61 @@
+'''*
+tags::for
+
+input:
+def dumb_concat(arr,brr):
+    """
+    Concatenate the second array to the first array in a dumb way.
+    """
+    length = len(arr) + len(brr)
+    ret = [0 for i in range(length)]
+    for i in range(len(arr)):
+        ret[i] = arr[i]
+    for j in range(len(brr)):
+        ret[len(arr)+j] = brr[j]
+    return ret
+
+output:
+def dumb_concat(arr,brr):
+    """
+    Concatenate the second array to the first array in a dumb way.
+    """
+    length = len(arr) + len(brr)
+    ret = sfix.Array(length)
+    @for_range(len(arr))
+    def _(i):
+        ret[i] = arr[i]
+    @for_range(len(brr))
+    def _(j):
+        ret[len(arr)+j] = brr[j]
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+sarr1 = sint.Array(3)
+sarr2 = sint.Array(2)
+sarr1[0] = 11
+sarr1[1] = 451
+sarr1[2] = 4
+sarr2[0] = 1919
+sarr2[1] = 810
+sarrout = dumb_concat(sarr1,sarr2)
+sarrout.reveal()
+
+flag = sint(1)
+flag = flag.bit_and(sarrout[0]==11)
+flag = flag.bit_and(sarrout[1]==451)
+flag = flag.bit_and(sarrout[2]==4)
+flag = flag.bit_and(sarrout[3]==1919)
+flag = flag.bit_and(sarrout[4]==810)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

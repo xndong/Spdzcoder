@@ -1,0 +1,60 @@
+'''*
+tags::for, if_else
+
+input:
+def dominate(a,b):
+    """
+    Return whether array a "dominates" array b, 
+    which means, every element in a is no smaller than the corresponding element in b. 
+    """
+    ret = True
+    for i in range(len(a)):
+        if a[i]<b[i]:
+            return False
+    return ret
+
+output:
+def dominate(a,b):
+    """
+    Return whether array a "dominates" array b, 
+    which means, every element in a is no smaller than the corresponding element in b. 
+    """
+    ret = sint(1)
+    @for_range(len(a))
+    def _(i):
+        ret.update((a[i]<b[i]).if_else(False,ret))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr1 = [11, 45, 14, 19.1, 98, 10]
+brr1 = [10, 45, -7, 19.1, 0, -900]
+arr2 = [11, 45, 14, 19.1, 98, 10]
+brr2 = [10, 70, -7, 18, 0, -900]
+sarr1 = sfix.Array(len(arr1))
+sbrr1 = sfix.Array(len(brr1))
+sarr2 = sfix.Array(len(arr2))
+sbrr2 = sfix.Array(len(brr2))
+
+for i in range(len(arr1)):
+    sarr1[i] = arr1[i]
+for i in range(len(brr1)):
+    sbrr1[i] = brr1[i]
+for i in range(len(arr2)):
+    sarr2[i] = arr2[i]
+for i in range(len(brr2)):
+    sbrr2[i] = brr2[i]
+
+flag = dominate(sarr1,sbrr1).bit_and(dominate(sarr2,sbrr2).bit_not())
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

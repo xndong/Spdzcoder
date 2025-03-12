@@ -1,0 +1,44 @@
+# 2023-09-04 09:41:46
+'''*
+tags::multi_if_else
+
+input:
+def bowl_shape(x):
+    """
+    Compute the bowl-shape function:
+    if x>1, return x-1;
+    if x<-1, return -x-1;
+    else, return 0.
+    """
+    if x>1:
+        return x-1
+    elif x<-1:
+        return -x-1
+    else:
+        return 0
+
+output:
+def bowl_shape(x):
+    """
+    Compute the bowl-shape function:
+    if x>1, return x-1;
+    if x<-1, return -x-1;
+    else, return 0.
+    """
+    return (x>1).if_else(x-1,(x<-1).if_else(-x-1,0))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (bowl_shape(sfix(1.5))==0.5).bit_and(bowl_shape(sfix(-0.747))==0).bit_and(bowl_shape(sfix(-4.747))==3.747)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

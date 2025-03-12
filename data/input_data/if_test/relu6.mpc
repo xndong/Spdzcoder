@@ -1,0 +1,59 @@
+# 2023-09-24 22:13:44
+'''*
+tags::multi_if_else
+
+input:
+def relu6(x):
+    """
+    ReLU6 function.
+    """
+    if x<0:
+        return 0
+    elif x>6:
+        return 6
+    else:
+        return x
+
+output:
+def relu6(x):
+    """
+    ReLU6 function.
+    """
+    return (x<0).if_else(0,(x>6).if_else(6,x))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    ReLU6 function.
+    """
+    if x<0:
+        return 0
+    elif x>6:
+        return 6
+    else:
+        return x
+
+inputs = [-5,-4,-2,0,1.5,9,10]
+sinputs = sfix.Array(len(inputs))
+for i in range(len(inputs)):
+    sinputs[i] = inputs[i]
+
+flag = sint(1)
+
+for i in range(len(inputs)):
+    out = relu6(sinputs[i])
+    out.reveal()
+    flag.update(flag.bit_and(abs(out-standard(inputs[i]))<0.01))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

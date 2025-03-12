@@ -1,0 +1,49 @@
+'''*
+tags::for
+
+input:
+def array_indicator(arr,predicator):
+    """
+    Return an array with the same size of the input array.
+    For each element in the input array,
+    the corresponding value in the returned array is set to be the value of the predicator.
+    """
+    ret = [predicator(e) for e in arr]
+    return ret
+
+output:
+def array_indicator(arr,predicator):
+    """
+    Return an array with the same size of the input array.
+    For each element in the input array,
+    the corresponding value in the returned array is set to be the value of the predicator.
+    """
+    lst = [predicator(e) for e in arr]
+    ret = Array.create_from(iter(lst))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def p(x):
+    return (x%2).bit_and(x>1)
+
+arr = [1,2,0,9]
+sarr = sint.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+out = array_indicator(sarr,p)
+out.reveal()
+flag = (out[0].bit_not()).bit_and(out[1].bit_not()).bit_and(out[2].bit_not()).bit_and(out[3])
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

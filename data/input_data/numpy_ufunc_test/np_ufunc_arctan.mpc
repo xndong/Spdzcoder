@@ -1,0 +1,51 @@
+'''*
+tags:: compute arctan function.
+
+input:
+import numpy
+def compute_arctan(array):
+    """This function calculate trigonometric inverse tangent, element-wise."""
+    arctan_res = numpy.arctan(array)
+    return arctan_res
+
+output:
+from Compiler import mpc_math
+def compute_arctan(spdzarray):            # sfix
+    vector = spdzarray.get_vector()
+    arctan_res = mpc_math.atan(vector)
+    arctan_res = Array.create_from(arctan_res)
+    return arctan_res
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(array):
+    """This function calculate trigonometric inverse cosine, element-wise."""
+    arccos_res = np.arctan(array)
+    return arccos_res
+
+a = np.array([0.5,0.8,-0.7,0,-0.2])
+sa = sfix.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+out = standard(a)
+sout = compute_arctan(sa)
+
+flag = sint(1)
+
+for i in range(len(sout)):
+    flag = flag.bit_and(abs(sout[i]-out[i])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

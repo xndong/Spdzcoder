@@ -1,0 +1,68 @@
+'''*
+tags::array_access
+
+input:
+def remove_by_index(arr,index):
+    """
+    Remove the element in the array by index and return the remaining array. 
+    The input index is guaranteed to be legal. 
+    """
+    ret = [0 for i in range(len(arr)-1)]
+    for i in range(len(arr)-1):
+        if i<index:
+            ret[i] = arr[i]
+        else:
+            ret[i] = arr[i+1]
+    return ret
+
+output:
+def remove_by_index(arr,index):
+    """
+    Remove the element in the array by index and return the remaining array. 
+    The input index is guaranteed to be legal. 
+    """
+    ret = sfix.Array(len(arr))
+    @for_range(len(arr)-1)
+    def _(i):
+        ret[i] = (i<index).if_else(arr[i],arr[i+1])
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr,index):
+    """
+    Remove the element in the array by index and return the remaining array. 
+    The input index is guaranteed to be legal. 
+    """
+    ret = [0 for i in range(len(arr)-1)]
+    for i in range(len(arr)-1):
+        if i<index:
+            ret[i] = arr[i]
+        else:
+            ret[i] = arr[i+1]
+    return ret
+
+arr = [0,1,2,3,1.14]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+expected = standard(arr,4)
+out = remove_by_index(sarr,sint(4))
+out.reveal()
+
+flag = sint(1)
+for i in range(len(arr)-1):
+    flag.update(flag.bit_and(out[i]==expected[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

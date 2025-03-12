@@ -1,0 +1,71 @@
+'''*
+tags::for, if_else
+
+input:
+def min_element(a):
+    """
+    Return the max value of an array. 
+    """
+    current = a[0]
+    for item in a:
+        current = current if current<=item else item
+    
+    return current
+
+output:
+def min_element(a):
+    """
+    Return the max value of an array. 
+    """
+    current = a[0]
+    @for_range(len(a))
+    def compare_and_save(i):
+        current.update((current<=a[i]).if_else(current,a[i]))
+    
+    return current
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a):
+    """
+    Return the max value of an array. 
+    Check first whether the array is empty
+    """
+    if len(a)==0:
+        raise ValueError("The length of the array is 0!")
+    current = a[0]
+    for item in a:
+        current = current if current<=item else item
+    
+    return current
+
+
+numbers = [4,16.7,1,7,1024.9,9]
+sfix_array = sfix.Array(6)
+for i in range(6):
+    sfix_array[i] = sfix(numbers[i])
+
+standard_output = standard(numbers)
+func_output = min_element(sfix_array)
+func_output.reveal()
+result = abs((func_output.reveal()-standard_output)/standard_output)
+
+flag = sint(1)
+@if_e(result < 0.01)
+def _():
+    pass
+@else_
+def _():
+    flag.update(sint(0))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

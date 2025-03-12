@@ -1,0 +1,51 @@
+'''*
+tags::for
+
+input:
+def divide_and_plus(x):
+    """
+    Repeat the following to the input for 4 times:
+    divide by 2, then plus 1
+    """
+    for i in range(4):
+        x = x/2
+        x = x + 1
+    return x
+
+output:
+def divide_and_plus(x):
+    """
+    Repeat the following to the input for 4 times:
+    divide by 2, then plus 1
+    """
+    @for_range(4)
+    def _(i):
+        x.update(x/sfix(2))
+        x.update(x+1)
+    return x
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    Repeat the following to the input for 4 times:
+    divide by 2, then plus 1
+    """
+    for i in range(4):
+        x = x/2
+        x = x + 1
+    return x
+
+flag = (abs(divide_and_plus(sfix(3))-standard(3))<0.01).bit_and(abs(divide_and_plus(sfix(4))-standard(4))<0.01).bit_and(abs(divide_and_plus(sfix(10.2))-standard(10.2))<0.01)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

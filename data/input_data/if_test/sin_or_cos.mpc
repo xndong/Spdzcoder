@@ -1,0 +1,46 @@
+# 2023-09-04 09:27:04
+'''*
+tags::if_else, math
+
+input:
+def sin_or_cos(x):
+    """
+    If x is nonnegative, return sin(x), otherwise return cos(x).
+    """
+    import math
+    if x >= 0:
+        return math.sin(x)
+    return math.cos(x)
+
+output:
+def sin_or_cos(x):
+    """
+    If x is nonnegative, return sin(x), otherwise return cos(x).
+    """
+    from Compiler import mpc_math
+    return (x>=0).if_else(mpc_math.sin(x),mpc_math.cos(x))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(x):
+    """
+    If x is nonnegative, return sin(x), otherwise return cos(x).
+    """
+    import math
+    if x >= 0:
+        return math.sin(x)
+    return math.cos(x)
+
+flag = (abs(sin_or_cos(sfix(1.2))-standard(1.2))<0.005).bit_and(abs(sin_or_cos(sfix(0))-standard(0))<0.005).bit_and(abs(sin_or_cos(sfix(-1.3))-standard(-1.3))<0.005)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

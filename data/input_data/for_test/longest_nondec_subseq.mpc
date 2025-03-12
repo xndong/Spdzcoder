@@ -1,0 +1,92 @@
+'''*
+tags::for, if_else
+
+input:
+def longest_nondec_subseq(a):
+    """
+    Return the length of the longest non-deceasing subsequence in the input array.
+    """
+    max_length = 0
+    cur_length = 0
+    for i in range(len(a)):
+        if i==0:
+            cur_length = 1
+            continue
+        if a[i] >= a[i-1]:
+            cur_length = cur_length + 1
+        else:
+            max_length = max_length if max_length>=cur_length else cur_length
+            cur_length = 1
+    max_length = max_length if max_length>=cur_length else cur_length
+    return max_length
+
+output:
+def longest_nondec_subseq(a):
+    """
+    Return the length of the longest non-deceasing subsequence in the input array.
+    """
+    max_length = sint(0)
+    cur_length = sint(0)
+    @for_range(len(a))
+    def _(i):
+        @if_e(i==0)
+        def _():
+            cur_length.update(1)
+        @else_
+        def _():
+            max_length.update((a[i] >= a[i-1]).if_else(max_length,(max_length>=cur_length).if_else(max_length,cur_length)))
+            cur_length.update((a[i] >= a[i-1]).if_else(cur_length+1,1))
+    max_length.update((max_length>=cur_length).if_else(max_length,cur_length))
+    return max_length
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a):
+    """
+    Return the length of the longest non-deceasing subsequence in the input array.
+    """
+    max_length = 0
+    cur_length = 0
+    for i in range(len(a)):
+        if i==0:
+            cur_length = 1
+            continue
+        if a[i] >= a[i-1]:
+            cur_length = cur_length + 1
+        else:
+            max_length = max_length if max_length>=cur_length else cur_length
+            cur_length = 1
+    max_length = max_length if max_length>=cur_length else cur_length
+    return max_length
+
+arr1 = [2,3,-4,5,6,199,233]
+arr2 = []
+arr3 = [4,3,-2]
+arr4 = [4,3,-2,45,11]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+sarr3 = sfix.Array(len(arr3))
+sarr4 = sfix.Array(len(arr4))
+
+for i in range(len(arr1)):
+    sarr1[i] = sfix(arr1[i])
+for i in range(len(arr2)):
+    sarr2[i] = sfix(arr2[i])
+for i in range(len(arr3)):
+    sarr3[i] = sfix(arr3[i])
+for i in range(len(arr4)):
+    sarr4[i] = sfix(arr4[i])
+
+flag = (longest_nondec_subseq(sarr1)==standard(arr1)).bit_and(longest_nondec_subseq(sarr2)==standard(arr2)).bit_and(longest_nondec_subseq(sarr3)==standard(arr3)).bit_and(longest_nondec_subseq(sarr4)==standard(arr4))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

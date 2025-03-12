@@ -1,0 +1,76 @@
+'''*
+tags::for, if_else
+
+input:
+def stock_predicator(days):
+    """
+    Given the stock price in the next few days (at least 3 days).
+    Use dynamic programming to find to days, 
+    such that buying on the earlier day and selling on the later day is the most profitable
+    If all choices causes negative profits, you should return 0.
+    """
+    lowest = [0 for i in range(len(days))]
+    partial_max = [0 for i in range(len(days))]
+    lowest[0] = days[0]
+    for i in range(1,len(days)):
+        lowest[i] = lowest[i-1] if lowest[i-1]<=days[i] else days[i]
+        partial_max[i] = partial_max[i-1] if partial_max[i-1]>=days[i]-lowest[i-1] else days[i]-lowest[i-1]
+    return partial_max[len(days)-1]
+
+output:
+def stock_predicator(days):
+    """
+    Given the stock price in the next few days (at least 3 days).
+    Use dynamic programming to find to days, 
+    such that buying on the earlier day and selling on the later day is the most profitable
+    If all choices causes negative profits, you should return 0.
+    """
+    lowest = sfix.Array(len(days))
+    partial_max = sfix.Array(len(days))
+    lowest[0] = days[0]
+    @for_range(1,len(days))
+    def _(i):
+        lowest[i] = (lowest[i-1]<=days[i]).if_else(lowest[i-1],days[i])
+        partial_max[i] = (partial_max[i-1]>=days[i]-lowest[i-1]).if_else(partial_max[i-1], days[i]-lowest[i-1])
+    return partial_max[len(days)-1]
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(days):
+    """
+    Given the stock price in the next few days (at least 3 days).
+    Use dynamic programming to find to days, 
+    such that buying on the earlier day and selling on the later day is the most profitable
+    If all choices causes negative profits, you should return 0.
+    """
+    lowest = [0 for i in range(len(days))]
+    partial_max = [0 for i in range(len(days))]
+    lowest[0] = days[0]
+    for i in range(1,len(days)):
+        lowest[i] = lowest[i-1] if lowest[i-1]<=days[i] else days[i]
+        partial_max[i] = partial_max[i-1] if partial_max[i-1]>=days[i]-lowest[i-1] else days[i]-lowest[i-1]
+    return partial_max[len(days)-1]
+
+days1 = [16, 7.2, 3, 2.4, 1, 0.8]
+sdays1 = sfix.Array(len(days1))
+days2 = [10000,8,900,2,88,41,90]
+sdays2 = sfix.Array(len(days2))
+
+for i in range(len(days1)):
+    sdays1[i] = days1[i]
+for i in range(len(days2)):
+    sdays2[i] = days2[i]
+
+flag = (stock_predicator(sdays1)==standard(days1)).bit_and(stock_predicator(sdays2)==standard(days2))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

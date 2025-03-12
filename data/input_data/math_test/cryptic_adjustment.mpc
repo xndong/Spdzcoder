@@ -1,0 +1,51 @@
+'''*
+tags::math
+
+input:
+def cryptic_adjustment(origin):
+    """
+    The professor want to adjust the pessimistic score of his students mid-term exam. 
+    The adjustment formula is 10*sqrt(10*sqrt(origin))
+    """
+    import math
+    return 10*math.sqrt(10*math.sqrt(origin))
+
+output:
+def cryptic_adjustment(origin):
+    """
+    The professor want to adjust the pessimistic score of his students mid-term exam. 
+    The adjustment formula is 10*sqrt(10*sqrt(origin))
+    """
+    from Compiler import mpc_math
+    return 10*mpc_math.sqrt_simplified_fx(10*mpc_math.sqrt_simplified_fx(origin))
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(origin):
+    """
+    The professor want to adjust the pessimistic score of his students mid-term exam. 
+    The adjustment formula is 10*sqrt(10*sqrt(origin))
+    """
+    import math
+    return 10*math.sqrt(10*math.sqrt(origin))
+
+out1 = cryptic_adjustment(sfix(10))
+out2 = cryptic_adjustment(sfix(73))
+out3 = cryptic_adjustment(sfix(1))
+out1.reveal()
+out2.reveal()
+out3.reveal()
+
+flag = (abs((out1-standard(10))/standard(10))<0.01).bit_and(abs((out2-standard(73))/standard(73))<0.01).bit_and(abs((out3-standard(1))/standard(1))<0.01)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

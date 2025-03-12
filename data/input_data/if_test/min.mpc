@@ -1,0 +1,36 @@
+# 2023-09-04 09:57:18
+'''*
+tags::if_else
+
+input:
+def min(a,b):
+    """
+    Return the minimum value of the two inputs.
+    """
+    if a<=b:
+        return a
+    else:
+        return b
+
+output:
+def min(a,b):
+    """
+    Return the minimum value of the two inputs.
+    """
+    return (a<=b).if_else(a,b)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (min(sfix(1.5),1.4)==1.4).bit_and(min(sfix(-1.5),1.4)==-1.5).bit_and(min(sfix(15),124)==15)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

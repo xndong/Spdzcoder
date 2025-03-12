@@ -1,0 +1,51 @@
+'''*
+tags:: absolute value
+
+input:
+import numpy
+def obtain_absolute(array):
+    """This function computes the absolute values in a numpy array."""
+    array = numpy.absolute(array)
+    return array
+
+output:
+from Compiler import mpc_math
+def obtain_absolute(spdzarray):
+    abs_res = abs(spdzarray.get_vector())
+    array = Array.create_from(abs_res)
+    return array
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(array):
+    """This function computes the absolute values in a numpy array."""
+    array = np.absolute(array)
+    return array
+
+a = np.array([0.5,-1.2,10.7,5.0,-7.2])
+sa = sfix.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+out = standard(a)
+sout = obtain_absolute(sa)
+
+flag = sint(1)
+
+for i in range(len(sout)):
+    flag = flag.bit_and(abs(sout[i]-out[i])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

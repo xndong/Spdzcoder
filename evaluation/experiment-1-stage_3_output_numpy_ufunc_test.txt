@@ -1,0 +1,85 @@
+cross_entropy_loss, True, True
+np_ufunc_square_sqrt, True, True
+logsumexp, True, True
+binary_cross_entropy_loss, True, True
+np_ufunc_less_equal, True, True
+RMS_prop_step, True, True
+entropy, False, False
+np_ufunc_exp, True, True
+tanh, True, True
+np_ufunc_tan, True, True
+np_ufunc_greater, False, True
+np_ufunc_maximum, True, True
+np_ufunc_log2, True, True
+np_ufunc_absolute, True, True
+np_ufunc_arctan, True, True
+np_ufunc_log, True, True
+np_ufunc_not_equal, True, True
+np_ufunc_equal, True, True
+np_ufunc_true_divide, True, True
+np_ufunc_greater_equal, True, True
+np_ufunc_negative, True, False
+np_ufunc_power, True, True
+np_ufunc_exp2, True, True
+cross_entropy_loss_class, True, True
+np_ufunc_arccos, True, True
+r2_score, True, True
+np_ufunc_arcsin, True, True
+np_ufunc_true_divide2, True, True
+square_error_loss, True, True
+np_ufunc_less, True, True
+np_ufunc_cos, True, True
+np_ufunc_sin, True, True
+update_weights, True, True
+toy_layer, False, False
+
+****************************************
+
+cross_entropy_loss             True       True      
+np_ufunc_square_sqrt           True       True      
+logsumexp                      True       True      
+binary_cross_entropy_loss      True       True      
+np_ufunc_less_equal            True       True      
+RMS_prop_step                  True       True      
+entropy                        False      False     
+np_ufunc_exp                   True       True      
+tanh                           True       True      
+np_ufunc_tan                   True       True      
+np_ufunc_greater               False      True      
+np_ufunc_maximum               True       True      
+np_ufunc_log2                  True       True      
+np_ufunc_absolute              True       True      
+np_ufunc_arctan                True       True      
+np_ufunc_log                   True       True      
+np_ufunc_not_equal             True       True      
+np_ufunc_equal                 True       True      
+np_ufunc_true_divide           True       True      
+np_ufunc_greater_equal         True       True      
+np_ufunc_negative              True       False     
+np_ufunc_power                 True       True      
+np_ufunc_exp2                  True       True      
+cross_entropy_loss_class       True       True      
+np_ufunc_arccos                True       True      
+r2_score                       True       True      
+np_ufunc_arcsin                True       True      
+np_ufunc_true_divide2          True       True      
+square_error_loss              True       True      
+np_ufunc_less                  True       True      
+np_ufunc_cos                   True       True      
+np_ufunc_sin                   True       True      
+update_weights                 True       True      
+toy_layer                      False      False     
+
+****************************************
+
+# of test cases : 34
+# of first generation correct : 31
+# of second generation correct : 31
+
+p1_counter : 31
+p2_counter : 32
+average_p1_counter : 62
+
+p1_acc : 91.18%
+p2_acc : 94.12%
+ave_p1_acc : 91.18%

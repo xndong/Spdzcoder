@@ -1,0 +1,44 @@
+'''*
+tags::for
+
+input:
+def array_double(arr):
+    """
+    Double all elements in the input array.
+    """
+    for i in range(len(arr)):
+        arr[i] = arr[i] * 2
+    return arr
+
+output:
+def array_double(arr):
+    """
+    Double all elements in the input array.
+    """
+    @for_range(len(arr))
+    def _(i):
+        arr[i] = arr[i] * 2 
+    return arr
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+arr = [1,4,-0.7,-3]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+out = array_double(sarr)
+out.reveal()
+flag = (out[0]==2).bit_and(out[1]==8).bit_and(out[2]==-1.4).bit_and(out[3]==-6)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

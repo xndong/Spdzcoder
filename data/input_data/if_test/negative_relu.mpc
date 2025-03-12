@@ -1,0 +1,33 @@
+# 2023-09-04 09:27:15
+'''*
+tags::if_else
+
+input:
+def negative_relu(input):
+    """
+    Negative ReLU: if the input is less than 0, return the input, otherwise retrun 0.
+    """
+    return input if input<0 else 0
+
+output:
+def negative_relu(input):
+    """
+    Negative ReLU: if the input is less than 0, return the input, otherwise retrun 0.
+    """
+    return (input<0).if_else(input,0)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+flag = (negative_relu(sfix(0))==0).bit_and(negative_relu(sfix(3.14))==0).bit_and(negative_relu(sfix(-1.7))==-1.7).bit_and(negative_relu(sfix(-0.9))==-0.9)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

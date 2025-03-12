@@ -1,0 +1,85 @@
+sin_or_cos, True, True
+negative_relu, True, True
+is_close, True, True
+hardswish, True, True
+clip_at_6, True, True
+piecewise_function, True, True
+middle, True, False
+indicated_sin_or_cos, True, True
+minus2_if_else, True, True
+relu6, True, True
+exp_slide, True, False
+pass_or_not, True, True
+how_many_roots, True, True
+elu, True, False
+relu, True, True
+leaky_relu, True, True
+max, True, True
+bowl_shape, True, True
+rounded_kinetic_energy, True, False
+danger_test, True, True
+indicated_sum_or_multiply, True, True
+median, True, False
+add_upto_10, True, True
+taxi_fare, True, True
+round, True, True
+gpa_calculator, True, True
+sign, True, True
+sum_or_difference, True, True
+CNOT, True, True
+negative_plus1, True, True
+is_a_parallelogram, True, True
+min, True, True
+choice_of_the_knight, True, True
+max_sum_difference, True, True
+
+****************************************
+
+sin_or_cos                     True       True      
+negative_relu                  True       True      
+is_close                       True       True      
+hardswish                      True       True      
+clip_at_6                      True       True      
+piecewise_function             True       True      
+middle                         True       False     
+indicated_sin_or_cos           True       True      
+minus2_if_else                 True       True      
+relu6                          True       True      
+exp_slide                      True       False     
+pass_or_not                    True       True      
+how_many_roots                 True       True      
+elu                            True       False     
+relu                           True       True      
+leaky_relu                     True       True      
+max                            True       True      
+bowl_shape                     True       True      
+rounded_kinetic_energy         True       False     
+danger_test                    True       True      
+indicated_sum_or_multiply      True       True      
+median                         True       False     
+add_upto_10                    True       True      
+taxi_fare                      True       True      
+round                          True       True      
+gpa_calculator                 True       True      
+sign                           True       True      
+sum_or_difference              True       True      
+CNOT                           True       True      
+negative_plus1                 True       True      
+is_a_parallelogram             True       True      
+min                            True       True      
+choice_of_the_knight           True       True      
+max_sum_difference             True       True      
+
+****************************************
+
+# of test cases : 34
+# of first generation correct : 34
+# of second generation correct : 29
+
+p1_counter : 34
+p2_counter : 34
+average_p1_counter : 63
+
+p1_acc : 100.00%
+p2_acc : 100.00%
+ave_p1_acc : 92.65%

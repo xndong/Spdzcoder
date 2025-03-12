@@ -1,0 +1,67 @@
+'''*
+tags::for
+
+input:
+def reverse_order_pair(arr):
+    """
+    Count the number of reverse order pairs in the array.
+    """
+    import numpy
+    count = 0
+    cmparr = numpy.array(arr)
+    for i in range(len(arr)):
+        ndarray = numpy.full(len(arr)-i, arr[i])
+        count += numpy.sum(ndarray > cmparr[i:])
+    return count
+
+annotation:
+Count the number of reverse order pairs in the array.
+
+output:
+def reverse_order_pair(arr):
+    """
+    Count the number of reverse order pairs in the array.
+    """
+    num = sint(0)
+    @for_range(len(arr))
+    def _(i):
+        @for_range(i+1,len(arr))
+        def _(j):
+            num.update((arr[i]>arr[j]).if_else(num+1,num))
+    return num
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(arr):
+    """
+    Count the number of reverse order pairs in the array.
+    """
+    num = 0
+    for i in range(len(arr)):
+        for j in range(i+1,len(arr)):
+            if arr[i]>arr[j]:
+                num = num + 1
+    return num
+
+arr = [1,7,1,18.88,9,7.8,10]
+sarr = sfix.Array(len(arr))
+for i in range(len(arr)):
+    sarr[i] = arr[i]
+
+expected = standard(arr)
+output = reverse_order_pair(sarr)
+output.reveal()
+
+flag = output==expected
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

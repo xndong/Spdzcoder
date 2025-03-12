@@ -1,0 +1,48 @@
+'''*
+tags:: compute element-wise comparison.
+
+input:
+import numpy
+def compute_maximum(arrayA, arrayB):
+    """Element-wise maximum of array elements."""
+    max_ones = numpy.maximum(arrayA, arrayB)
+    return max_ones
+
+output:
+def compute_maximum(spdzarrayA, spdzarrayB):
+    vector_a = spdzarrayA.get_vector()
+    vector_b = spdzarrayB.get_vector()
+    max_ones = (vector_a > vector_b).if_else(vector_a, vector_b)
+    max_ones = Array.create_from(max_ones)
+    return max_ones
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+a = [1,2,12,4,-6,3]
+sa = sint.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+b = [1,2,11,5,-7,4]
+sb = sint.Array(len(b))
+for i in range(len(sb)):
+    sb[i] = b[i]
+
+sout = compute_maximum(sa,sb)
+
+flag = sint(1)
+
+for i in range(len(sout)):
+    flag = flag.bit_and(sout[i]==(sa[i]>=sb[i]).if_else(sa[i],sb[i]))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

@@ -1,0 +1,72 @@
+'''*
+tags::for, math
+
+input:
+def Manhattan_distance(a,b):
+    """
+    Compute the Manhattan distance of the two vectors.
+    """
+    ret = 0
+    for i in range(len(a)):
+        ret = ret + abs(a[i]-b[i])
+    return ret
+
+output:
+def Manhattan_distance(a,b):
+    """
+    Compute the Manhattan distance of the two vectors.
+    """
+    ret = sfix(0)
+    @for_range(len(a))
+    def _(i):
+        ret.update(ret+abs(a[i]-b[i]))
+    return ret
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(a,b):
+    """
+    Compute the Manhattan distance of the two vectors.
+    You should check first whether the vectors have the same length and whether the vectors are empty.
+    """
+    if len(a)!=len(b):
+        raise ValueError("The vectors should have the same size!")
+    if len(a)==0 or len(b)==0:
+        raise ValueError("The input vectors should not be empty!")
+    ret = 0
+    for i in range(len(a)):
+        ret = ret + abs(a[i]-b[i])
+    return ret
+
+arr1 = [1,12.4,3,1.5]
+arr2 = [-3,-3.6,2,-5.7]
+sarr1 = sfix.Array(len(arr1))
+sarr2 = sfix.Array(len(arr2))
+for i in range(len(arr1)):
+    sarr1[i] = sfix(arr1[i])
+    sarr2[i] = sfix(arr2[i])
+
+standard_output = standard(arr1,arr2)
+func_output = Manhattan_distance(sarr1,sarr2)
+func_output.reveal()
+result = abs((func_output.reveal()-standard_output)/standard_output)
+
+flag = sint(1)
+@if_e(result < 0.01)
+def _():
+    pass
+@else_
+def _():
+    flag.update(sint(0))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

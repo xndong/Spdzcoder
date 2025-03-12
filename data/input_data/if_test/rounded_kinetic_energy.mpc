@@ -1,0 +1,55 @@
+# 2023-09-24 22:09:10
+'''*
+tags::math, if_else
+
+input:
+def rounded_kinetic_energy(m,v):
+    """
+    Compute the kinetic energy, and round the outcome to the nearest integer. 
+    """
+    import math
+    k = m*v**2/2
+    k_int = math.floor(k)
+    return k_int if (k-k_int)<0.5 else k_int+1
+
+output:
+def rounded_kinetic_energy(m,v):
+    """
+    Compute the kinetic energy, and round the outcome to the nearest integer. 
+    """
+    from Compiler import mpc_math
+    k = m*v**2/sfix(2)
+    k_int = mpc_math.floor_fx(k)
+    return ((k-k_int)<0.5).if_else(k_int,k_int+1)
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+def standard(m,v):
+    """
+    Compute the kinetic energy, and round the outcome to the nearest integer. 
+    """
+    import math
+    k = m*v**2/2
+    k_int = math.floor(k)
+    return k_int if (k-k_int)<0.5 else k_int+1
+
+out1 = rounded_kinetic_energy(sfix(2),1.5)
+out2 = rounded_kinetic_energy(sfix(3),2)
+out3 = rounded_kinetic_energy(sfix(3),11.5)
+out1.reveal()
+out2.reveal()
+out3.reveal()
+
+flag = (out1==standard(2,1.5)).bit_and(out2==standard(3,2)).bit_and(out3==standard(3,11.5))
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

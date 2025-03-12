@@ -1,0 +1,51 @@
+'''*
+tags:: compute 2^exponential
+
+input:
+import numpy
+def compute_exp2(array):
+    """This function calculate 2**p for all p in the input array."""
+    exp = numpy.exp2(array)
+    return exp
+
+output:
+from Compiler import mpc_math
+def compute_exp2(spdzarray):
+    exp = mpc_math.exp2_fx(spdzarray.get_vector())
+    exp = Array.create_from(exp)
+    return exp
+
+*'''
+
+####################################################################
+
+# insert here #
+
+####################################################################
+
+import numpy as np
+
+def standard(array):
+    """This function calculate 2**p for all p in the input array."""
+    exp = np.exp2(array)
+    return exp
+
+a = np.array([0.5,-1.2,10.7,5.0,-7.2])
+sa = sfix.Array(len(a))
+for i in range(len(sa)):
+    sa[i] = a[i]
+
+out = standard(a)
+sout = compute_exp2(sa)
+
+flag = sint(1)
+
+for i in range(len(sout)):
+    flag = flag.bit_and(abs(sout[i]-out[i])<0.05)
+
+@if_e(flag.reveal())
+def _():
+    print_ln("Pass the test")
+@else_
+def _():
+    pass

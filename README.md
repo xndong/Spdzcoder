@@ -1,7 +1,5 @@
-# ICSE_code
-We make artifacts available to the program committee in ICSE 2026 1st Cycle.
-
-We release the main component of our code: inference, evaluation and analysis
+# SPDZCoder Code Repo
+We make artifacts available to the reviewers, and we appreciate the reviewers' time and effort to evaluate our work. We provide the following artifacts: inference, evaluation and analysis.
 
 ## Preparation
 ### 1. Create Environment for the Experiments
